@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
+    'dashboard.apps.DashboardConfig'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -124,3 +125,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'TruthBot/static/',
 ]
+
+LOGIN_URL = 'login'
