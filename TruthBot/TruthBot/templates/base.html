@@ -40,6 +40,9 @@
                 <li><a href="{% url 'logout' %}">Log Out</a></li>
               </ul>
             </li>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary navbar-btn">Log in</a>
+            <a href="{% url 'register' %}" class="btn btn-success navbar-btn">Register</a>
             {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->
