@@ -3,8 +3,20 @@ from django.db import models
 # Create your models here.
 
 class WebPage(models.Model):
-	page_title = models.CharField(max_length=250, blank=False)
-	page_url = models.CharField(max_length=2083, blank=False)
+	title = models.CharField(max_length=250, blank=False)
+	url = models.CharField(max_length=2083, blank=False)
 
-	def __unicode__(self):
-		return self.page_title
+	def __str__(self):
+		return self.title
+
+class OrganizationURL(models.Model):
+	url = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.url
+
+class Organization(models.Model):
+	name = models.CharField(max_length=300, blank=False)
+	info_url = models.CharField(max_length=2083, blank=False)
+	site_urls = models.ManyToManyField('OrganizationURL')
+	child_organizations = models.ManyToManyField('Organization', blank=True)
