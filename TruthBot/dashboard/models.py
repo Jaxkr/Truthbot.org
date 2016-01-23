@@ -20,3 +20,6 @@ class Organization(models.Model):
 	info_url = models.CharField(max_length=2083, blank=False)
 	site_urls = models.ManyToManyField('OrganizationURL')
 	child_organizations = models.ManyToManyField('Organization', blank=True)
+
+	def __str__(self):
+		return self.name
