@@ -17,6 +17,7 @@ class OrganizationURL(models.Model):
 
 class Organization(models.Model):
 	name = models.CharField(max_length=300, blank=False)
+	logo = models.ImageField()
 	info_url = models.CharField(max_length=2083, blank=False)
 	site_urls = models.ManyToManyField('OrganizationURL')
 	child_organizations = models.ManyToManyField('Organization', blank=True)
