@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from .models import *
+import pprint
 
 # Create your views here.
 
@@ -16,7 +18,8 @@ def organization_new(request):
 		form = NewOrganization(request.POST, request.FILES)
 		
 		if form.is_valid():
-			return HttpResponse('nice job dude')
+			org = Organization(name=form.cleaned_data['name'], info_url=form.cleaned_data['info_url'])
+			org.save()
 		else:
 			return render(request, 'dashboard/organization_new.html', {'form': form})
 

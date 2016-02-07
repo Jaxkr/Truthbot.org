@@ -4,7 +4,7 @@
 <h1>Add a new organization</h1>
 <div class="row">
   <div class="col-md-7">
-    <form action="{% url "organizationnew" %}" method="post">
+    <form action="{% url "organizationnew" %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% if form.non_field_errors %}
       <div class="alert alert-danger">
@@ -33,7 +33,7 @@
         {% endif %}
         {{ form.logo }}
       </div>
-
+      <p>You will be able to add URLs and child organization after organization creation.</p>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
