@@ -4,7 +4,7 @@
 <h1>Current domains for {{ org.name }}:</h1>
 <ul>
 	{% for domain in domains %}
-	<li>{{ domain.domain }} <a href="{% url "deletedomain" domain.pk %}"><i class="fa fa-times"></i></a></li>
+	<li>{{ domain.domain }} <a href="{% url "organizationdeletedomain" domain.pk %}"><i class="fa fa-times"></i></a></li>
 	{% endfor %}
 </ul>
 <div class="row">

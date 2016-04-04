@@ -63,5 +63,5 @@ def organization_delete_domain(request, domain_pk):
 	domain = OrganizationDomain.objects.get(pk=domain_pk)
 	if request.method == 'POST':
 		domain.delete()
-		return HttpResponseRedirect(reverse('organizationdomains', args=[domain.organization.pk]))
+		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[domain.organization.pk]))
 	return render(request, 'dashboard/generic/confirm_remove_domain.html', {'domain': domain})
