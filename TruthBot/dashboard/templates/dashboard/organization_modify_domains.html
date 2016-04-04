@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+<h1>Current domains for {{ org.name }}:</h1>
+<ul>
+{% for domain in org.site_domains.all %}
+<li>{{ domain.domain }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

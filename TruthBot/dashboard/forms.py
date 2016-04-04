@@ -7,3 +7,6 @@ class NewOrganization(forms.Form):
 	name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=300)
 	logo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
 	info_url = forms.CharField(validators=[url_validator], widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=2083)
+
+class AddDomain(forms.Form):
+	domain = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=150)

@@ -9,8 +9,8 @@ class WebPage(models.Model):
 	def __str__(self):
 		return self.title
 
-class OrganizationHost(models.Model):
-	url = models.CharField(max_length=200)
+class OrganizationDomain(models.Model):
+	domain = models.CharField(max_length=200)
 
 	def __str__(self):
 		return self.url
@@ -20,7 +20,7 @@ class Organization(models.Model):
 	description = models.CharField(max_length=1000, blank=False)
 	logo = models.ImageField()
 	url = models.CharField(max_length=2083, blank=False)
-	site_urls = models.ManyToManyField('OrganizationHost')
+	site_domains = models.ManyToManyField('OrganizationDomain')
 	child_organizations = models.ManyToManyField('Organization', blank=True)
 
 	def __str__(self):

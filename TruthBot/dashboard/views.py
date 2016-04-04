@@ -29,9 +29,15 @@ def organization_new(request):
 
 	form = NewOrganization()
 	return render(request, 'dashboard/organization_new.html', {'form': form})
-	
+
 @login_required
 def organization_info(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 
 	return render(request, 'dashboard/organization_info.html', {'org': org})
+
+@login_required
+def organization_modify_domains(request, organization_pk):
+	org = Organization.objects.get(pk=organization_pk)
+
+	return render(request, 'dashboard/organization_modify_domains.html', {'org': org})
