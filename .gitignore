@@ -58,6 +58,8 @@ target/
 
 
 db.sqlite3
+migrations/
+media/
 
 # cache files for sublime text
 *.tmlanguage.cache

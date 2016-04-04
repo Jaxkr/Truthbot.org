@@ -9,7 +9,7 @@ class WebPage(models.Model):
 	def __str__(self):
 		return self.title
 
-class OrganizationURL(models.Model):
+class OrganizationHost(models.Model):
 	url = models.CharField(max_length=200)
 
 	def __str__(self):
@@ -19,7 +19,7 @@ class Organization(models.Model):
 	name = models.CharField(max_length=300, blank=False)
 	logo = models.ImageField()
 	info_url = models.CharField(max_length=2083, blank=False)
-	site_urls = models.ManyToManyField('OrganizationURL')
+	site_urls = models.ManyToManyField('OrganizationHost')
 	child_organizations = models.ManyToManyField('Organization', blank=True)
 
 	def __str__(self):
