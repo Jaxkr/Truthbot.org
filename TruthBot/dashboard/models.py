@@ -11,16 +11,16 @@ class WebPage(models.Model):
 
 class OrganizationDomain(models.Model):
 	domain = models.CharField(max_length=200)
+	organization = models.ForeignKey('Organization')
 
 	def __str__(self):
-		return self.url
+		return self.domain
 
 class Organization(models.Model):
 	name = models.CharField(max_length=300, blank=False)
 	description = models.CharField(max_length=1000, blank=False)
 	logo = models.ImageField()
 	url = models.CharField(max_length=2083, blank=False)
-	site_domains = models.ManyToManyField('OrganizationDomain')
 	child_organizations = models.ManyToManyField('Organization', blank=True)
 
 	def __str__(self):

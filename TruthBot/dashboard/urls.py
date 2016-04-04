@@ -7,4 +7,6 @@ urlpatterns = [
     url(r'new-organization/$', views.organization_new, name='organizationnew'),
     url(r'organization/(?P<organization_pk>\d+)/$', views.organization_info, name='organizationinfo'),
     url(r'organization-domains/(?P<organization_pk>\d+)/$', views.organization_modify_domains, name='organizationdomains'),
+    url(r'delete-domain/(?P<domain_pk>\d+)/$', views.organization_delete_domain, name='deletedomain'),
+    
 ]

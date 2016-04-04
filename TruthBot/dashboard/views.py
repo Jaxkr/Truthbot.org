@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 import pprint
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.views.generic.edit import DeleteView
 
 
 # Create your views here.
@@ -20,7 +21,7 @@ def organization_new(request):
 		form = NewOrganization(request.POST, request.FILES)
 		
 		if form.is_valid():
-			org = Organization(name=form.cleaned_data['name'], info_url=form.cleaned_data['info_url'], logo=form.cleaned_data['logo'])
+			org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], logo=form.cleaned_data['logo'])
 			org.save()
 			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 
@@ -39,5 +40,28 @@ def organization_info(request, organization_pk):
 @login_required
 def organization_modify_domains(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
+	domains = OrganizationDomain.objects.filter(organization=org)
 
-	return render(request, 'dashboard/organization_modify_domains.html', {'org': org})
+	if request.method == 'POST':
+		form = AddDomain(request.POST)
+		if form.is_valid():
+			new_domain = OrganizationDomain(domain=form.cleaned_data['domain'], organization=org)
+			new_domain.save()
+		else:
+			return render(request, 'dashboard/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
+
+
+	form = AddDomain()
+	return render(request, 'dashboard/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
+
+'''why am I not using class-based views for this? Because I don't really understand them or how they interact with decorators
+and permissions and I don't really want to take the time to figure it out
+so let it be known... TODO: reimplement these functions with class based or generic views if it would be better'''
+
+@login_required
+def organization_delete_domain(request, domain_pk):
+	domain = OrganizationDomain.objects.get(pk=domain_pk)
+	if request.method == 'POST':
+		domain.delete()
+		return HttpResponseRedirect(reverse('organizationdomains', args=[domain.organization.pk]))
+	return render(request, 'dashboard/generic/confirm_remove_domain.html', {'domain': domain})
