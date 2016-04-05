@@ -2,11 +2,15 @@
 
 {% block maincontent %}
 <h1>Current domains for {{ org.name }}:</h1>
-<ul>
-	{% for domain in domains %}
-	<li>{{ domain.domain }} <a href="{% url "organizationdeletedomain" domain.pk %}"><i class="fa fa-times"></i></a></li>
-	{% endfor %}
-</ul>
+<div class="row">
+	<div class="col-md-7">
+		<ul class="list-group">
+			{% for domain in domains %}
+			<li class="list-group-item">{{ domain.domain }} <a class="btn btn-danger btn-xs" href="{% url "organizationdeletedomain" domain.pk %}"><i class="fa fa-times"></i></a></li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
 <div class="row">
 	<div class="col-md-7">
 		<form action="" method="post">
@@ -17,10 +21,10 @@
 			</div>
 			{% endif %}
 			<div class="alert alert-info">
-			<i class="fa fa-exclamation-triangle"></i> <b>Note</b>: a domain name is different from a URL!<br>
-			An example of a URL is "http://google.com/etc/"<br>
-			An example of a domain name is "google.com".<br>
-			Please only input a domain name in the form below.
+				<i class="fa fa-exclamation-triangle"></i> <b>Note</b>: a domain name is different from a URL!<br>
+				An example of a URL is "http://google.com/etc/"<br>
+				An example of a domain name is "google.com".<br>
+				Please only input a domain name in the form below.
 			</div>
 			<div class="form-group">
 				<label for="{{ form.domain.id_for_label }}">Domain to add</label>

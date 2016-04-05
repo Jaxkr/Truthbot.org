@@ -4,9 +4,10 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.dash_index, name='dashboard'),
+    url(r'organizations/$', views.organization_root, name='organizationroot'),
     url(r'new-organization/$', views.organization_new, name='organizationnew'),
     url(r'organization/(?P<organization_pk>\d+)/$', views.organization_info, name='organizationinfo'),
     url(r'organization-domains/(?P<organization_pk>\d+)/$', views.organization_modify_domains, name='organizationmodifydomains'),
     url(r'delete-domain/(?P<domain_pk>\d+)/$', views.organization_delete_domain, name='organizationdeletedomain'),
-    
+    url(r'organization-search/$', views.organization_search, name='organizationsearch'),
 ]

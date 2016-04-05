@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 import pprint
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic.edit import DeleteView
 
@@ -12,8 +13,35 @@ from django.views.generic.edit import DeleteView
 
 @login_required
 def dash_index(request):
-
 	return render(request, 'dashboard/index.html')
+
+@login_required
+def organization_search(request):
+	search_form = OrganizationSearch(request.GET)
+	search_term = search_form.data['search_term']
+
+	#now that's what i call a search engine
+	organizations = Organization.objects.filter(name__istartswith=search_term)
+
+
+	return render(request, 'dashboard/organization_search.html', {'form': search_form, 'term': search_term, 'organizations': organizations})
+
+@login_required
+def organization_root(request):  
+	organizations_list = Organization.objects.all()
+	paginator = Paginator(organizations_list, 25)
+	page = request.GET.get('page')
+	search_form = OrganizationSearch()
+
+	try:
+		organizations = paginator.page(page)
+	except PageNotAnInteger:
+		organizations = paginator.page(1)
+	except EmptyPage:
+		organizations = paginator.page(paginator.num_pages)
+
+	return render(request, 'dashboard/organization_root.html', {'organizations': organizations, 'form': search_form})
+
 
 @login_required
 def organization_new(request):
