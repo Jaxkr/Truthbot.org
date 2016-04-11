@@ -49,7 +49,7 @@ def organization_new(request):
 		form = NewOrganization(request.POST, request.FILES)
 		
 		if form.is_valid():
-			org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], logo=form.cleaned_data['logo'])
+			org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], logo=form.cleaned_data['logo'], description=form.cleaned_data['description'])
 			org.save()
 			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 

@@ -20,7 +20,14 @@
         {{ form.name }}
       </div>
       <div class="form-group">
-        <label for="{{ form.info_url.id_for_label }}">Organization Info URL</label>
+        <label for="{{ form.description.id_for_label }}">Description</label>
+        {% if form.description.errors %}
+          <span class="form-error">{{ form.description.errors.as_text }}</span>
+        {% endif %}
+        {{ form.description }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.info_url.id_for_label }}">Organization URL</label>
         {% if form.info_url.errors %}
           <span class="form-error">{{ form.info_url.errors.as_text }}</span>
         {% endif %}
