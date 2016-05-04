@@ -82,6 +82,18 @@ def organization_modify_domains(request, organization_pk):
 	form = AddDomain()
 	return render(request, 'dashboard/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
 
+@login_required
+def organization_modify_children(request, organization_pk):
+	search_form = OrganizationSearch()
+
+	organization = Organization.objects.get(pk=organization_pk)
+	organization_children = organization.child_organizations.all()
+
+	pprint.pprint(organization_children)
+
+	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
+
+
 '''why am I not using class-based views for this? Because I don't really understand them or how they interact with decorators
 and permissions and I don't really want to take the time to figure it out
 so let it be known... TODO: reimplement these functions with class based or generic views if it would be better'''

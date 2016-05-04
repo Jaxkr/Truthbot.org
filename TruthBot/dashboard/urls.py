@@ -7,7 +7,8 @@ urlpatterns = [
     url(r'organizations/$', views.organization_root, name='organizationroot'),
     url(r'new-organization/$', views.organization_new, name='organizationnew'),
     url(r'organization/(?P<organization_pk>\d+)/$', views.organization_info, name='organizationinfo'),
-    url(r'organization-domains/(?P<organization_pk>\d+)/$', views.organization_modify_domains, name='organizationmodifydomains'),
+    url(r'organization/(?P<organization_pk>\d+)/domains', views.organization_modify_domains, name='organizationmodifydomains'),
     url(r'delete-domain/(?P<domain_pk>\d+)/$', views.organization_delete_domain, name='organizationdeletedomain'),
     url(r'organization-search/$', views.organization_search, name='organizationsearch'),
+    url(r'organization/(?P<organization_pk>\d+)/edit-children/$', views.organization_modify_children, name='organizationmodifychildren')
 ]

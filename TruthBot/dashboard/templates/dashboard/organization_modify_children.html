@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+<h1>Editing child organizations for <b>{{ organization.name }}</b></h1>
+<h2>Current child organizations:</h2>
+{% for organization in organization_children %}
+<li class="list-group-item">
+	<div class="row">
+		<div class="col-sm-6">
+			<h4>{{ organization.name }}</h4>
+			<p><a href="{{ organization.url }}" target="_blank">{{ organization.url }} <i class="fa fa-external-link"></i></a><br>{{ organization.description }}</p>
+		</div>
+		<div class="col-sm-6">
+			<img src="{{ organization.logo.url }}" style="max-width: 100%">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<a href="{% url "organizationinfo" organization.pk %}" class="btn btn-default"><i class="fa fa-info-circle"></i> View/Edit Info</a>
+		</div>
+	</div>
+</li>
+{% endfor %}<br>
+<p>You can search for and add organizations using the form below.</p>
+<h2>Search results for "{{ term }}":</h2>
+<form action="" method="get">
+	<div class="input-group">
+		{{ form.search_term }}
+		<span class="input-group-btn">
+			<button style="height: 50px" class="btn btn-default" type="submit">Search</button>
+		</span>
+	</div>
+	<p>This search box only searches for organizations with names that <b>start</b> with your query.</p>
+</form><br>
+{% for organization in organization_search_results %}
+<li class="list-group-item">
+	<div class="row">
+		<div class="col-sm-6">
+			<h4>{{ organization.name }}</h4>
+			<p><a href="{{ organization.url }}" target="_blank">{{ organization.url }} <i class="fa fa-external-link"></i></a><br>{{ organization.description }}</p>
+		</div>
+		<div class="col-sm-6">
+			<img src="{{ organization.logo.url }}" style="max-width: 100%">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<a href="{% url "organizationinfo" organization.pk %}" class="btn btn-default"><i class="fa fa-info-circle"></i> View/Edit Info</a>
+			<a href="{% url "organizationmodifydomains" organization.pk %}" class="btn btn-default"><i class="fa fa-plus"></i> Add a domain</a>
+		</div>
+	</div>
+</li>
+{% endfor %}
+{% endblock %}
