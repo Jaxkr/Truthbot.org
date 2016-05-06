@@ -3,20 +3,21 @@
 {% block maincontent %}
 <h1>Editing child organizations for <b>{{ organization.name }}</b></h1>
 <h2>Current child organizations:</h2>
-{% for organization in organization_children %}
+{% for childorganization in organization_children %}
 <li class="list-group-item">
 	<div class="row">
 		<div class="col-sm-6">
-			<h4>{{ organization.name }}</h4>
-			<p><a href="{{ organization.url }}" target="_blank">{{ organization.url }} <i class="fa fa-external-link"></i></a><br>{{ organization.description }}</p>
+			<h4>{{ childorganization.name }}</h4>
+			<p><a href="{{ childorganization.url }}" target="_blank">{{ childorganization.url }} <i class="fa fa-external-link"></i></a><br>{{ childorganization.description }}</p>
 		</div>
 		<div class="col-sm-6">
-			<img src="{{ organization.logo.url }}" style="max-width: 100%">
+			<img src="{{ childorganization.logo.url }}" style="max-width: 100%">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<a href="{% url "organizationinfo" organization.pk %}" class="btn btn-default"><i class="fa fa-info-circle"></i> View/Edit Info</a>
+			<a href="{% url "organizationinfo" childorganization.pk %}" class="btn btn-default"><i class="fa fa-info-circle"></i> View/Edit Info</a>
+			<a class="btn btn-danger" href="{% url "organizationremovechild" organization.pk %}?childid={{ childorganization.pk }}"><i class="fa fa-times"></i> Remove child</a>
 		</div>
 	</div>
 </li>

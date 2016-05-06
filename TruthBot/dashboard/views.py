@@ -89,7 +89,6 @@ def organization_modify_children(request, organization_pk):
 	organization = Organization.objects.get(pk=organization_pk)
 	organization_children = organization.child_organizations.all()
 
-	pprint.pprint(organization_children)
 
 	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
 
@@ -99,9 +98,25 @@ and permissions and I don't really want to take the time to figure it out
 so let it be known... TODO: reimplement these functions with class based or generic views if it would be better'''
 
 @login_required
-def organization_delete_domain(request, domain_pk):
+def organization_delete_domain(request, organization_pk):
+	domain_pk = request.GET['domainid']
 	domain = OrganizationDomain.objects.get(pk=domain_pk)
 	if request.method == 'POST':
 		domain.delete()
 		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[domain.organization.pk]))
 	return render(request, 'dashboard/generic/confirm_remove_domain.html', {'domain': domain})
+
+@login_required
+def organization_remove_child(request, organization_pk):
+
+	parent_organization = Organization.objects.get(pk=organization_pk)
+	child_organization_pk = request.GET['childid']
+	child_organization = Organization.objects.get(pk=child_organization_pk)
+
+	if request.method == 'POST':
+		parent_organization.child_organizations.remove(child_organization)
+		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_pk]))
+	
+
+	return render(request, 'dashboard/generic/confirm_remove_child.html', {'organization': parent_organization, 'childorg': child_organization})
+
