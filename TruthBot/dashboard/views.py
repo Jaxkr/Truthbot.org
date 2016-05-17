@@ -6,8 +6,6 @@ from .models import *
 import pprint
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.views.generic.edit import DeleteView
-
 
 # Create your views here.
 
@@ -93,10 +91,11 @@ def organization_modify_children(request, organization_pk):
 	if 'search_term' in search_form.data:
 		search_term = search_form.data['search_term']
 		organization_search_results = Organization.objects.filter(name__istartswith=search_term)
+		return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children, 'organization_search_results': organization_search_results})
 
 
 
-	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children, 'organization_search_results': organization_search_results})
+	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
 
 
 '''why am I not using class-based views for this? Because I don't really understand them or how they interact with decorators
