@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(WebPage)
 admin.site.register(OrganizationDomain)
 admin.site.register(Organization)
+admin.site.register(LoggedOrganizationEdit)

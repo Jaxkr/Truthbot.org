@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -33,7 +34,7 @@ class Organization(models.Model):
 
 class LoggedOrganizationEdit(models.Model):
 	organization_old_json = JSONField()
-
+	user = models.ForeignKey(User)
 	organization = models.ForeignKey('Organization')
 	edit_time = models.DateTimeField(auto_now=True)
 

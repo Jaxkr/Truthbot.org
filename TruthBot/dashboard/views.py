@@ -6,6 +6,8 @@ from .models import *
 import pprint
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.core import serializers
+import json
 
 # Create your views here.
 
@@ -99,9 +101,45 @@ def organization_modify_children(request, organization_pk):
 
 def organization_modify(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
-	form = OrganizationForm(initial={'name': org.name, 'logo': org.logo, 'description': org.description, 'info_url': org.url})
+	if request.method == 'POST':
+		form = OrganizationEditForm(request.POST, request.FILES)
+		if form.is_valid():
+			#check if there are any changes
+			if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['info_url'] != org.url)):
+				serialized_data = serializers.serialize("json", [org])
+				organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
+				organization_old.save()
 
-	return render(request, 'dashboard/organization_new.html', {'form': form})
+				org.name = form.cleaned_data['name']
+				org.description = form.cleaned_data['description']
+				org.url = form.cleaned_data['info_url']
+				org.save()
+				return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
+			else:
+				return render(request, 'dashboard/organization_modify.html', {'form': form, 'nochanges': True})
+		else:
+			return render(request, 'dashboard/organization_modify.html', {'form': form})
+
+
+
+	form = OrganizationEditForm(initial={'name': org.name, 'logo': org.logo, 'description': org.description, 'info_url': org.url})
+
+	return render(request, 'dashboard/organization_modify.html', {'form': form})
+
+def organization_edit_history(request, organization_pk):
+	org = Organization.objects.get(pk=organization_pk)
+	logged_edits = LoggedOrganizationEdit.objects.filter(organization=org)[:20]
+	logged_edit_objects = []
+
+	for edit in logged_edits:
+		logged_edit_objects.append({'old_object': json.loads(edit.organization_old_json)[0]['fields'], 'edit': edit})
+
+
+	return render(request, 'dashboard/organization_edit_history.html', {'logged_edits': logged_edit_objects, 'org': org})
+
+def organization_confirm_rollback(request, edit_pk):
+	pass
+
 
 def webpage_view(request, webpage_id):
 	pass
