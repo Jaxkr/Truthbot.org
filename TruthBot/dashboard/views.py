@@ -97,11 +97,6 @@ def organization_modify_children(request, organization_pk):
 
 	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
 
-
-'''why am I not using class-based views for this? Because I don't really understand them or how they interact with decorators
-and permissions and I don't really want to take the time to figure it out
-so let it be known... TODO: reimplement these functions with class based or generic views if it would be better'''
-
 @login_required
 def organization_delete_domain(request, organization_pk):
 	domain_pk = request.GET['domainid']
