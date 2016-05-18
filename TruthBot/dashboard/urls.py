@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'organization/(?P<organization_pk>\d+)/domains/$', views.organization_modify_domains, name='organizationmodifydomains'),
     url(r'organization-search/$', views.organization_search, name='organizationsearch'),
     url(r'organization/(?P<organization_pk>\d+)/edit-children/$', views.organization_modify_children, name='organizationmodifychildren'),
-
+    url(r'organization/(?P<organization_pk>\d+)/edit$', views.organization_modify, name='organizationmodify'),
 
 
     #removal functions

@@ -44,7 +44,7 @@ def organization_root(request):
 @login_required
 def organization_new(request):
 	if request.method == 'POST':
-		form = NewOrganization(request.POST, request.FILES)
+		form = OrganizationForm(request.POST, request.FILES)
 		
 		if form.is_valid():
 			org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], logo=form.cleaned_data['logo'], description=form.cleaned_data['description'])
@@ -54,7 +54,7 @@ def organization_new(request):
 		else:
 			return render(request, 'dashboard/organization_new.html', {'form': form})
 
-	form = NewOrganization()
+	form = OrganizationForm()
 	return render(request, 'dashboard/organization_new.html', {'form': form})
 
 @login_required
@@ -96,6 +96,12 @@ def organization_modify_children(request, organization_pk):
 
 
 	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
+
+def organization_modify(request, organization_pk):
+	org = Organization.objects.get(pk=organization_pk)
+	form = OrganizationForm(initial={'name': org.name, 'logo': org.logo, 'description': org.description, 'info_url': org.url})
+
+	return render(request, 'dashboard/organization_new.html', {'form': form})
 
 def webpage_view(request, webpage_id):
 	pass
