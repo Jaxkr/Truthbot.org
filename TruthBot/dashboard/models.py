@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
 
@@ -25,3 +26,17 @@ class Organization(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
+
+#logging actions for revision history
+
+class LoggedOrganizationEdit(models.Model):
+	organization_old_json = JSONField()
+
+	organization = models.ForeignKey('Organization')
+	edit_time = models.DateTimeField(auto_now=True)
+
+
+class LoggedOrganzationDomainEdit(models.Model):
+	pass

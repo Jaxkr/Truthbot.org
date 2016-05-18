@@ -12,9 +12,10 @@
 	<div class="col-md-6">
 		<h1>{{ org.name }}</h1>
 		<p class="lead"><a href="{{ org.url }}" target="_blank">{{ org.url }} <i class="fa fa-external-link"></i></a></p>
-		<div class="well">
+		<a class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Organization</a>
+		<p>
 		{{ org.description|markdownhtml|safe }}
-		</div>
+		</p>
 	</div>
 	<div class="col-md-6">
 		<img src="{{ org.logo.url }}" style="max-width: 100%">

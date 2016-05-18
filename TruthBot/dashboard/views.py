@@ -97,6 +97,9 @@ def organization_modify_children(request, organization_pk):
 
 	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
 
+def webpage_view(request, webpage_id):
+	pass
+
 @login_required
 def organization_delete_domain(request, organization_pk):
 	domain_pk = request.GET['domainid']
