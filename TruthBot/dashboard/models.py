@@ -39,5 +39,14 @@ class LoggedOrganizationEdit(models.Model):
 	edit_time = models.DateTimeField(auto_now=True)
 
 
-class LoggedOrganzationDomainEdit(models.Model):
-	pass
+class LoggedOrganizationDomainRemoval(models.Model):
+	domain_old_json = JSONField()
+	organization = models.ForeignKey('Organization')
+	user = models.ForeignKey(User)
+	edit_time = models.DateTimeField(auto_now=True)
+
+class LoggedOrganizationDomainAddition(models.Model):
+	domain = models.ForeignKey('OrganizationDomain')
+	organization = models.ForeignKey('Organization')
+	user = models.ForeignKey(User)
+	edit_time = models.DateTimeField(auto_now=True)
