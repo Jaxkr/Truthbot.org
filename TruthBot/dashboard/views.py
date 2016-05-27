@@ -126,6 +126,7 @@ def organization_modify(request, organization_pk):
 
 	return render(request, 'dashboard/organization_modify.html', {'form': form})
 
+@login_required
 def organization_edit_history(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 	logged_edits = LoggedOrganizationEdit.objects.filter(organization=org)[:20]
