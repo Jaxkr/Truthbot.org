@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Register as a Contributor{% endblock %}
+
+{% block maincontent %}
+<h2>Join the Truthbot team of contributors</h2>
+<div class="row">
+  <div class="col-md-7">
+    <form action="{% url "register" %}" method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {% if form.username.errors %}
+          <span class="form-error">{{ form.username.errors.as_text }}</span>
+        {% endif %}
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">Email</label>
+        {% if form.email.errors %}
+          <span class="form-error">{{ form.email.errors.as_text }}</span>
+        {% endif %}
+        {{ form.email }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.password1.id_for_label }}">Password</label>
+        {% if form.password1.errors %}
+          <span class="form-error">{{ form.password1.errors.as_text }}</span>
+        {% endif %}
+        {{ form.password1 }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.password2.id_for_label }}">Password (again)</label>
+        {% if form.password2.errors %}
+          <span class="form-error">{{ form.password2.errors.as_text }}</span>
+        {% endif %}
+        {{ form.password2 }}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

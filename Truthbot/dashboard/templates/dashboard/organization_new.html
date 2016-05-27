@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+<h1>Add a new organization</h1>
+<div class="row">
+  <div class="col-md-7">
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Organization name</label>
+        {% if form.name.errors %}
+          <span class="form-error">{{ form.name.errors.as_text }}</span>
+        {% endif %}
+        {{ form.name }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.description.id_for_label }}">Description</label>
+        {% if form.description.errors %}
+          <span class="form-error">{{ form.description.errors.as_text }}</span>
+        {% endif %}
+        {{ form.description }}
+        <p>Markdown is allowed</p>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.info_url.id_for_label }}">Organization URL</label>
+        {% if form.info_url.errors %}
+          <span class="form-error">{{ form.info_url.errors.as_text }}</span>
+        {% endif %}
+        {{ form.info_url }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.logo.id_for_label }}">Logo</label>
+        {% if form.logo.errors %}
+          <span class="form-error">{{ form.logo.errors.as_text }}</span>
+        {% endif %}
+        {{ form.logo }}
+      </div>
+      <p>You will be able to add URLs and child organization after organization creation.</p>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
