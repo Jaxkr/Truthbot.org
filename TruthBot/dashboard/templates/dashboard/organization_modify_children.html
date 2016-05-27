@@ -33,21 +33,21 @@
 	</div>
 	<p>This search box only searches for organizations with names that <b>start</b> with your query.</p>
 </form><br>
-{% for organization in organization_search_results %}
+{% for result_organization in organization_search_results %}
 <li class="list-group-item">
 	<div class="row">
 		<div class="col-sm-6">
-			<h4>{{ organization.name }}</h4>
-			<p><a href="{{ organization.url }}" target="_blank">{{ organization.url }} <i class="fa fa-external-link"></i></a><br>{{ organization.description }}</p>
+			<h4>{{ result_organization.name }}</h4>
+			<p><a href="{{ result_organization.url }}" target="_blank">{{ result_organization.url }} <i class="fa fa-external-link"></i></a><br>{{ result_organization.description }}</p>
 		</div>
 		<div class="col-sm-6">
-			<img src="{{ organization.logo.url }}" style="max-width: 100%">
+			<img src="{{ result_organization.logo.url }}" style="max-width: 100%">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<a href="{% url "organizationinfo" organization.pk %}" class="btn btn-default"><i class="fa fa-info-circle"></i> View/Edit Info</a>
-			<a href="{% url "organizationmodifydomains" organization.pk %}" class="btn btn-default"><i class="fa fa-plus"></i> Add a domain</a>
+			<a href="{% url "organizationinfo" result_organization.pk %}" class="btn btn-default"><i class="fa fa-info-circle"></i> View/Edit Info</a>
+			<a href="{% url "organizationaddchild" organization.pk result_organization.pk %}" class="btn btn-default"><i class="fa fa-plus"></i> Add as child</a>
 		</div>
 	</div>
 </li>

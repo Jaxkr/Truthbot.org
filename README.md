@@ -1,2 +1,2 @@
-# TruthBot.org
-Django app that powers TruthBot.org and REST API.
+# Truthbot.org
+Django app that powers Truthbot.org and REST API.

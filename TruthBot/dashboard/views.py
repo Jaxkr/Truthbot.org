@@ -162,9 +162,28 @@ def organization_remove_child(request, organization_pk):
 	child_organization = Organization.objects.get(pk=child_organization_pk)
 
 	if request.method == 'POST':
+		serialized_data = serializers.serialize("json", [org])
+		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
+		organization_old.save()
 		parent_organization.child_organizations.remove(child_organization)
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_pk]))
 	
 
 	return render(request, 'dashboard/generic/confirm_remove_child.html', {'organization': parent_organization, 'childorg': child_organization})
+
+@login_required
+def organization_add_child(request, organization_parent_pk, organization_child_pk):
+
+	child_organization = Organization.objects.get(pk=organization_child_pk)
+	parent_organization = Organization.objects.get(pk=organization_parent_pk)
+
+	if request.method == 'POST':
+		serialized_data = serializers.serialize("json", [parent_organization])
+		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
+		organization_old.save()
+		parent_organization.child_organizations.add(child_organization)
+		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_parent_pk]))
+
+	return render(request, 'dashboard/generic/confirm_add_child.html', {'organization': parent_organization, 'childorg': child_organization})
+
 
