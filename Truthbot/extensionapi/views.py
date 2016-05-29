@@ -7,7 +7,8 @@ from dashboard.models import *
 
 
 def get_site_info(request):
-	data = {'test': 'test'}
+	requested_domain = request.GET['domain']
+	data = {'asdf': requested_domain}
 	response = JsonResponse(data)
 	response['Access-Control-Allow-Origin'] = '*'
 	return response
