@@ -75,6 +75,8 @@ def organization_modify_domains(request, organization_pk):
 		if form.is_valid():
 			new_domain = OrganizationDomain(domain=form.cleaned_data['domain'], organization=org)
 			new_domain.save()
+			logged_domain_addition = LoggedOrganizationDomainAddition(domain=new_domain, organization=org, user=request.user)
+			logged_domain_addition.save()
 		else:
 			return render(request, 'dashboard/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
 
@@ -149,7 +151,11 @@ def webpage_view(request, webpage_id):
 def organization_delete_domain(request, organization_pk):
 	domain_pk = request.GET['domainid']
 	domain = OrganizationDomain.objects.get(pk=domain_pk)
+	org = domain.organization
 	if request.method == 'POST':
+		serialized_data = serializers.serialize("json", [domain])
+		logged_domain_deletion = LoggedOrganizationDomainRemoval(domain_old_json=serialized_data, organization=org, user=request.user)
+		logged_domain_deletion.save()
 		domain.delete()
 		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[domain.organization.pk]))
 	return render(request, 'dashboard/generic/confirm_remove_domain.html', {'domain': domain})
@@ -162,8 +168,8 @@ def organization_remove_child(request, organization_pk):
 	child_organization = Organization.objects.get(pk=child_organization_pk)
 
 	if request.method == 'POST':
-		serialized_data = serializers.serialize("json", [org])
-		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
+		serialized_data = serializers.serialize("json", [parent_organization])
+		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
 		organization_old.save()
 		parent_organization.child_organizations.remove(child_organization)
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_pk]))
