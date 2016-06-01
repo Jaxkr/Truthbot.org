@@ -3,14 +3,6 @@ from django.contrib.postgres.fields import JSONField
 from django.contrib.auth.models import User
 
 # Create your models here.
-
-class WebPage(models.Model):
-	title = models.CharField(max_length=250, blank=False)
-	url = models.CharField(max_length=2083, blank=False)
-
-	def __str__(self):
-		return self.title
-
 class OrganizationDomain(models.Model):
 	domain = models.CharField(max_length=200, unique=True)
 	organization = models.ForeignKey('Organization')

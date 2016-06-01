@@ -15,12 +15,13 @@ def get_site_info(request):
 	domain = OrganizationDomain.objects.get(domain=requested_domain)
 	org = domain.organization
 	org_dict = serializers.serialize("python", [org])
+	parent_organizations = org.parent_organizations.all()
+	parent_organizations_dict = serializers.serialize("python", parent_organizations)
 
-	data_to_return_dict = {'organization': org_dict}
+
+
+	data_to_return_dict = {'organization': org_dict, 'first_parent_organizations': parent_organizations_dict}
 	data_to_return = json.dumps(data_to_return_dict)
-
-	pprint(org.parent_organizations.all())
-
 	response = HttpResponse(data_to_return, content_type='application/json')
 	response['Access-Control-Allow-Origin'] = '*'
 	return response
