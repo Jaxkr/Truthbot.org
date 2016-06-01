@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 from django.core import serializers
 from pprint import pprint
 
-from dashboard.models import *
+from organizations.models import *
 # Create your views here.
 
 

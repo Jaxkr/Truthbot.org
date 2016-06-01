@@ -13,7 +13,7 @@ import json
 
 @login_required
 def dash_index(request):
-	return render(request, 'dashboard/index.html')
+	return render(request, 'organizations/index.html')
 
 @login_required
 def organization_search(request):
@@ -24,7 +24,7 @@ def organization_search(request):
 	organizations = Organization.objects.filter(name__istartswith=search_term)
 
 
-	return render(request, 'dashboard/organization_search.html', {'form': search_form, 'term': search_term, 'organizations': organizations})
+	return render(request, 'organizations/organization_search.html', {'form': search_form, 'term': search_term, 'organizations': organizations})
 
 @login_required
 def organization_root(request):  
@@ -40,7 +40,7 @@ def organization_root(request):
 	except EmptyPage:
 		organizations = paginator.page(paginator.num_pages)
 
-	return render(request, 'dashboard/organization_root.html', {'organizations': organizations, 'form': search_form})
+	return render(request, 'organizations/organization_root.html', {'organizations': organizations, 'form': search_form})
 
 
 @login_required
@@ -54,16 +54,16 @@ def organization_new(request):
 			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 
 		else:
-			return render(request, 'dashboard/organization_new.html', {'form': form})
+			return render(request, 'organizations/organization_new.html', {'form': form})
 
 	form = OrganizationForm()
-	return render(request, 'dashboard/organization_new.html', {'form': form})
+	return render(request, 'organizations/organization_new.html', {'form': form})
 
 @login_required
 def organization_info(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 
-	return render(request, 'dashboard/organization_info.html', {'org': org})
+	return render(request, 'organizations/organization_info.html', {'org': org})
 
 @login_required
 def organization_modify_domains(request, organization_pk):
@@ -78,11 +78,11 @@ def organization_modify_domains(request, organization_pk):
 			logged_domain_addition = LoggedOrganizationDomainAddition(domain=new_domain, organization=org, user=request.user)
 			logged_domain_addition.save()
 		else:
-			return render(request, 'dashboard/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
+			return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
 
 
 	form = AddDomain()
-	return render(request, 'dashboard/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
+	return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
 
 @login_required
 def organization_modify_children(request, organization_pk):
@@ -95,11 +95,11 @@ def organization_modify_children(request, organization_pk):
 	if 'search_term' in search_form.data:
 		search_term = search_form.data['search_term']
 		organization_search_results = Organization.objects.filter(name__istartswith=search_term)
-		return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children, 'organization_search_results': organization_search_results})
+		return render(request, 'organizations/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children, 'organization_search_results': organization_search_results})
 
 
 
-	return render(request, 'dashboard/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
+	return render(request, 'organizations/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
 
 def organization_modify(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
@@ -118,15 +118,15 @@ def organization_modify(request, organization_pk):
 				org.save()
 				return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 			else:
-				return render(request, 'dashboard/organization_modify.html', {'form': form, 'nochanges': True})
+				return render(request, 'organizations/organization_modify.html', {'form': form, 'nochanges': True})
 		else:
-			return render(request, 'dashboard/organization_modify.html', {'form': form})
+			return render(request, 'organizations/organization_modify.html', {'form': form})
 
 
 
 	form = OrganizationEditForm(initial={'name': org.name, 'logo': org.logo, 'description': org.description, 'info_url': org.url})
 
-	return render(request, 'dashboard/organization_modify.html', {'form': form})
+	return render(request, 'organizations/organization_modify.html', {'form': form})
 
 @login_required
 def organization_edit_history(request, organization_pk):
@@ -138,7 +138,7 @@ def organization_edit_history(request, organization_pk):
 		logged_edit_objects.append({'old_object': json.loads(edit.organization_old_json)[0]['fields'], 'edit': edit})
 
 
-	return render(request, 'dashboard/organization_edit_history.html', {'logged_edits': logged_edit_objects, 'org': org})
+	return render(request, 'organizations/organization_edit_history.html', {'logged_edits': logged_edit_objects, 'org': org})
 
 def organization_confirm_rollback(request, edit_pk):
 	pass
@@ -158,7 +158,7 @@ def organization_delete_domain(request, organization_pk):
 		logged_domain_deletion.save()
 		domain.delete()
 		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[domain.organization.pk]))
-	return render(request, 'dashboard/generic/confirm_remove_domain.html', {'domain': domain})
+	return render(request, 'organizations/generic/confirm_remove_domain.html', {'domain': domain})
 
 @login_required
 def organization_remove_child(request, organization_pk):
@@ -175,7 +175,7 @@ def organization_remove_child(request, organization_pk):
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_pk]))
 	
 
-	return render(request, 'dashboard/generic/confirm_remove_child.html', {'organization': parent_organization, 'childorg': child_organization})
+	return render(request, 'organizations/generic/confirm_remove_child.html', {'organization': parent_organization, 'childorg': child_organization})
 
 @login_required
 def organization_add_child(request, organization_parent_pk, organization_child_pk):
@@ -190,6 +190,6 @@ def organization_add_child(request, organization_parent_pk, organization_child_p
 		parent_organization.child_organizations.add(child_organization)
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_parent_pk]))
 
-	return render(request, 'dashboard/generic/confirm_add_child.html', {'organization': parent_organization, 'childorg': child_organization})
+	return render(request, 'organizations/generic/confirm_add_child.html', {'organization': parent_organization, 'childorg': child_organization})
 
 

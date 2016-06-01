@@ -15,7 +15,7 @@ def user_is_not_logged_in(user):
 
 # Create your views here.
 
-@user_passes_test(user_is_not_logged_in, login_url='dashboard', redirect_field_name=None)
+@user_passes_test(user_is_not_logged_in, login_url='organizationroot', redirect_field_name=None)
 def register(request):
 
     if request.method == 'POST':
@@ -26,7 +26,7 @@ def register(request):
                 user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password1'])
                 user_auth = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
                 auth_login(request, user_auth)
-                return HttpResponseRedirect(reverse('dashboard'))
+                return HttpResponseRedirect(reverse('organizationroot'))
             except:
                 form.add_error('username', 'Username already taken!')
                 return render(request, 'login/register.html', {'form': form})
@@ -38,7 +38,7 @@ def register(request):
     form = RegistrationForm()
     return render(request, 'login/register.html', {'form': form})
 
-@user_passes_test(user_is_not_logged_in, login_url='dashboard', redirect_field_name=None)
+@user_passes_test(user_is_not_logged_in, login_url='organizationroot', redirect_field_name=None)
 def login(request):
 
     if request.method == 'POST':
@@ -47,7 +47,7 @@ def login(request):
             user_auth = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user_auth is not None:
                 auth_login(request, user_auth)
-                return HttpResponseRedirect(reverse('dashboard'))
+                return HttpResponseRedirect(reverse('organizationroot'))
             else:
                 form.add_error(None, 'Username or password incorrect.')
                 return render(request, 'login/login.html', {'form': form})
