@@ -12,10 +12,6 @@ import json
 # Create your views here.
 
 @login_required
-def dash_index(request):
-	return render(request, 'organizations/index.html')
-
-@login_required
 def organization_search(request):
 	search_form = OrganizationSearch(request.GET)
 	search_term = search_form.data['search_term']
@@ -49,7 +45,7 @@ def organization_new(request):
 		form = OrganizationForm(request.POST, request.FILES)
 		
 		if form.is_valid():
-			org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], logo=form.cleaned_data['logo'], description=form.cleaned_data['description'])
+			org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], description=form.cleaned_data['description'])
 			org.save()
 			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 
@@ -124,7 +120,7 @@ def organization_modify(request, organization_pk):
 
 
 
-	form = OrganizationEditForm(initial={'name': org.name, 'logo': org.logo, 'description': org.description, 'info_url': org.url})
+	form = OrganizationEditForm(initial={'name': org.name, 'description': org.description, 'info_url': org.url})
 
 	return render(request, 'organizations/organization_modify.html', {'form': form})
 
@@ -141,11 +137,7 @@ def organization_edit_history(request, organization_pk):
 	return render(request, 'organizations/organization_edit_history.html', {'logged_edits': logged_edit_objects, 'org': org})
 
 def organization_confirm_rollback(request, edit_pk):
-	pass
-
-
-def webpage_view(request, webpage_id):
-	pass
+	return HttpResponse('d')
 
 @login_required
 def organization_delete_domain(request, organization_pk):

@@ -1,0 +1,12 @@
+amqp==1.4.9
+anyjson==0.3.3
+beautifulsoup4==4.4.1
+billiard==3.3.0.23
+celery==3.1.23
+Django==1.9.2
+kombu==3.0.35
+Markdown==2.6.6
+Pillow==3.1.1
+psycopg2==2.6.1
+pytz==2016.4
+redis==2.10.5

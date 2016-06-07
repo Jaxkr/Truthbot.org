@@ -5,7 +5,6 @@ url_validator = URLValidator()
 
 class OrganizationForm(forms.Form):
 	name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=300)
-	logo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
 	description = forms.CharField(validators=[MaxLengthValidator(1000)], widget=forms.Textarea(attrs={'class': 'form-control'}), max_length=1000)
 	info_url = forms.CharField(validators=[url_validator], widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=2083)
 

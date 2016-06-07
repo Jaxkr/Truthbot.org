@@ -13,7 +13,6 @@ class OrganizationDomain(models.Model):
 class Organization(models.Model):
 	name = models.CharField(max_length=300, blank=False)
 	description = models.CharField(max_length=1000, blank=False)
-	logo = models.ImageField()
 	url = models.CharField(max_length=2083, blank=False)
 	child_organizations = models.ManyToManyField('Organization', blank=True, related_name='parent_organizations')
 

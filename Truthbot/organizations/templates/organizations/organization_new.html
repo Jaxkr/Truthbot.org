@@ -34,13 +34,6 @@
         {% endif %}
         {{ form.info_url }}
       </div>
-      <div class="form-group">
-        <label for="{{ form.logo.id_for_label }}">Logo</label>
-        {% if form.logo.errors %}
-          <span class="form-error">{{ form.logo.errors.as_text }}</span>
-        {% endif %}
-        {{ form.logo }}
-      </div>
       <p>You will be able to add URLs and child organization after organization creation.</p>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
