@@ -4,11 +4,12 @@ from celery import task
 import urllib.parse, json
 import urllib.request
 from bs4 import BeautifulSoup
+from newspaper import Article
 
 @shared_task
 def create_organization(domain):
 	base_wikipedia_url = 'https://en.wikipedia.org/w/api.php?'
-	params = urllib.parse.urlencode({'action':'query','titles':domain, 'prop': 'revisions', 'rvprop': 'content', 'format': 'json', 'redirects': '1'})
+	params = urllib.parse.urlencode({'action':'query','titles': domain, 'prop': 'revisions', 'rvprop': 'content', 'format': 'json', 'redirects': '1'})
 	url = base_wikipedia_url + params
 	response = urllib.request.urlopen(create_request(url))
 	response_str = response.read().decode('utf-8')
@@ -26,6 +27,12 @@ def create_organization(domain):
 	soup = BeautifulSoup(markup, 'html.parser')
 
 	print(soup.prettify())
+
+
+@shared_task
+def get_article_info(url):
+	pass
+
 
 
 

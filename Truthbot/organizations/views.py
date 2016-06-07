@@ -137,7 +137,21 @@ def organization_edit_history(request, organization_pk):
 	return render(request, 'organizations/organization_edit_history.html', {'logged_edits': logged_edit_objects, 'org': org})
 
 def organization_confirm_rollback(request, edit_pk):
-	return HttpResponse('d')
+	logged_edit = LoggedOrganizationEdit.objects.get(pk=edit_pk)
+
+	if request.method == 'POST':
+		org = logged_edit.organization
+		old_organization_fields = json.loads(logged_edit.organization_old_json)[0]['fields']
+		org.name = old_organization_fields['name']
+		org.description = old_organization_fields['description']
+		org.url = old_organization_fields['url']
+		org.child_organizations = old_organization_fields['child_organizations']
+		org.save()
+		return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
+
+	return render(request, 'organizations/generic/confirm_rollback.html')
+
+
 
 @login_required
 def organization_delete_domain(request, organization_pk):

@@ -24,4 +24,4 @@ urlpatterns = [
     url(r'^', include('login.urls')),
     url(r'^organizations/', include('organizations.urls')),
     url(r'^api/', include('extensionapi.urls'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

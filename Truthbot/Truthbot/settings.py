@@ -133,9 +133,6 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = 'login'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media/'
-
 
 # CELERY CONFIG
 BROKER_URL = 'redis://localhost:6379'

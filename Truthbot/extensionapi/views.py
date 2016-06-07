@@ -12,7 +12,7 @@ from extensionapi.tasks import create_organization
 # Create your views here.
 
 
-def get_page_info(request):
+def get_owner_info(request):
 	requested_url = request.GET['url']
 	requested_domain = urlparse(requested_url).netloc
 	try:
@@ -21,13 +21,14 @@ def get_page_info(request):
 		org_dict = serializers.serialize("python", [org])
 		parent_organizations = org.parent_organizations.all()
 		parent_organizations_dict = serializers.serialize("python", parent_organizations)
-
-		data_to_return_dict = {'organization': org_dict, 'parent_organizations': parent_organizations_dict}
+		data_to_return_dict = {'status': 'success', 'organization': org_dict, 'parent_organizations': parent_organizations_dict, 'domain': requested_domain}
 		return api_response(data_to_return_dict)
 	except OrganizationDomain.DoesNotExist:
-		create_organization.delay(requested_domain)
 		return api_response({'status': 'first'})
 
+
+def get_article_info(request):
+	pass
 
 
 
