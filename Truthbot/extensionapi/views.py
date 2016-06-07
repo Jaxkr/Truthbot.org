@@ -28,7 +28,9 @@ def get_owner_info(request):
 
 
 def get_article_info(request):
-	pass
+	requested_url = request.GET['url']
+	
+	return api_response({'status': 'first'})
 
 
 

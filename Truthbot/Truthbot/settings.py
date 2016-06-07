@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
     'organizations.apps.OrganizationsConfig',
-    'extensionapi.apps.ExtensionapiConfig'
+    'articles.apps.ArticlesConfig',
+    'extensionapi.apps.ExtensionapiConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
