@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markdown_filter %}
 
 {% block maincontent %}
 <div class="row">
@@ -15,7 +14,7 @@
 		<a href="{% url "organizationmodify" org.pk %}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Organization</a>
 		<a href="{% url "organizationedithistory" org.pk %}" class="btn btn-default btn-sm">View Edit History</a>
 		<p>
-		{{ org.description|markdownhtml|safe }}
+		{{ org.description }}
 		</p>
 	</div>
 </div>
