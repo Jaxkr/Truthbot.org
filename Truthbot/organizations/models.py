@@ -15,6 +15,7 @@ class Organization(models.Model):
 	description = models.CharField(max_length=1000, blank=False)
 	url = models.CharField(max_length=2083, blank=False)
 	child_organizations = models.ManyToManyField('Organization', blank=True, related_name='parent_organizations')
+	wiki_url = models.CharField(max_length=2083, blank=False)
 
 	def __str__(self):
 		return self.name

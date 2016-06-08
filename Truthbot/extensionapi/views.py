@@ -36,6 +36,8 @@ def get_article_info(request):
 		article = Article.objects.get(url=requested_url)
 		article_dict = serializers.serialize("python", [article])
 		article_dict = {'status': 'success', 'article': article_dict}
+		if (article_dict['article'][0]['fields']['date']):
+			article_dict['article'][0]['fields']['date'] = article_dict['article'][0]['fields']['date'].strftime("%Y-%m-%d %H:%M:%S")
 		return api_response(article_dict)
 	except Article.DoesNotExist:
 		parse_article.delay(requested_url)
