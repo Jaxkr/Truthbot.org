@@ -20,9 +20,10 @@ def get_owner_info(request):
 		domain = OrganizationDomain.objects.get(domain=requested_domain)
 		org = domain.organization
 		org_dict = serializers.serialize("python", [org])
-		parent_organizations = org.parent_organizations.all()
-		parent_organizations_dict = serializers.serialize("python", parent_organizations)
-		data_to_return_dict = {'status': 'success', 'organization': org_dict, 'parent_organizations': parent_organizations_dict, 'domain': requested_domain}
+		global parents
+		parents = []
+		recursive_get_parents(org)
+		data_to_return_dict = {'status': 'success', 'organization': org_dict, 'domain': requested_domain, 'parents': parents}
 		return api_response(data_to_return_dict)
 	except OrganizationDomain.DoesNotExist:
 		create_organization.delay(requested_url)
@@ -47,3 +48,10 @@ def api_response(data_dict):
 	response = HttpResponse(data_to_return, content_type='application/json')
 	response['Access-Control-Allow-Origin'] = '*'
 	return response
+
+def recursive_get_parents(organization):
+	global parents
+	if organization.parent_organizations.all().count() > 0:
+		org = organization.parent_organizations.all()[0]
+		parents.append(serializers.serialize("python", [org]))
+		recursive_get_parents(org)
