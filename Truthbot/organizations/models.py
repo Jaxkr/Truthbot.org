@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField, ArrayField
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -20,9 +20,22 @@ class Organization(models.Model):
 	def __str__(self):
 		return self.name
 
+class OrganizationComment(models.Model):
+	POSITIVE_TONE = 'P'
+	NEUTRAL_TONE = 'N'
+	CRITICAL_TONE = 'C'
 
+	COMMENT_TONE_CHOICES = (
+		(POSITIVE_TONE, 'Positive'),
+		(NEUTRAL_TONE, 'Neutral'),
+		(CRITICAL_TONE, 'Critical')
+		)
 
+	tone = models.CharField(max_length=1, choices=COMMENT_TONE_CHOICES, default=NEUTRAL_TONE)
+	text = models.CharField(max_length=300)
+	sources = ArrayField(models.CharField(max_length=2083), blank=True)
 
+	
 #logging actions for revision history
 
 class LoggedOrganizationEdit(models.Model):
