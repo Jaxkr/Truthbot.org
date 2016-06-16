@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('login.urls')),
     url(r'^organizations/', include('organizations.urls')),
-    url(r'^api/', include('extensionapi.urls'))
+    url(r'^api/', include('extensionapi.urls')),
+    url(r'alerts/', include('alerts.urls'))
 ]
