@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'organizations.apps.OrganizationsConfig',
     'articles.apps.ArticlesConfig',
-    'alerts.apps.AlertsConfig',
-    'extensionapi.apps.ExtensionapiConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
