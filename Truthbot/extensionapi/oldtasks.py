@@ -11,6 +11,7 @@ from articles.models import Article as ArticleModel
 import re
 import tldextract
 
+
 base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 @shared_task
 def create_organization(url): #this assumes that this organization doesn't exist, but makes NO assumptions about the existence of the parent organizations
@@ -272,4 +273,3 @@ def create_request(url):
         'User-Agent': 'Truthbot Web Scraper/1.0 (https://github.com/Jaxkr/Truthbot.org; jacksonroberts25@gmail.com) urllib/Python3'
     	}
 	)
-
