@@ -50,9 +50,3 @@ class LoggedOrganizationDomainRemoval(models.Model):
 	organization = models.ForeignKey('Organization')
 	user = models.ForeignKey(User)
 	edit_time = models.DateTimeField(auto_now=True)
-
-class LoggedOrganizationDomainAddition(models.Model):
-	domain = models.ForeignKey('OrganizationDomain')
-	organization = models.ForeignKey('Organization')
-	user = models.ForeignKey(User)
-	edit_time = models.DateTimeField(auto_now=True)

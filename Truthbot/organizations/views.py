@@ -66,22 +66,24 @@ def organization_modify_domains(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 	domains = OrganizationDomain.objects.filter(organization=org)
 	removed_domains_history = LoggedOrganizationDomainRemoval.objects.filter(organization=org).order_by('-edit_time')[:25]
-	added_domains_history = LoggedOrganizationDomainAddition.objects.filter(organization=org).order_by('-edit_time')[:25]
 
 	if request.method == 'POST':
 		form = AddDomain(request.POST)
 		if form.is_valid():
 			new_domain = OrganizationDomain(domain=form.cleaned_data['domain'], organization=org)
 			new_domain.save()
-			logged_domain_addition = LoggedOrganizationDomainAddition(domain=new_domain, organization=org, user=request.user)
 			logged_domain_addition.save()
 		else:
 			return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
 	if 'domainrestoreid' in request.GET:
-		return HttpResponse('asdf')
+		domain_to_restore = LoggedOrganizationDomainRemoval.objects.get(pk=request.GET['domainrestoreid'])
+		new_domain = OrganizationDomain(domain=domain_to_restore.domain_old_json[0]['fields']['domain'], organization=org)
+		new_domain.save()
+		domain_to_restore.delete()
+		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[org.pk]))
 
 	form = AddDomain()
-	return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form, 'domain_removals': removed_domains_history, 'domain_additions': added_domains_history})
+	return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form, 'domain_removals': removed_domains_history})
 
 
 @login_required
