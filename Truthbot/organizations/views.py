@@ -65,6 +65,8 @@ def organization_info(request, organization_pk):
 def organization_modify_domains(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 	domains = OrganizationDomain.objects.filter(organization=org)
+	removed_domains_history = LoggedOrganizationDomainRemoval.objects.filter(organization=org).order_by('-edit_time')[:25]
+	added_domains_history = LoggedOrganizationDomainAddition.objects.filter(organization=org).order_by('-edit_time')[:25]
 
 	if request.method == 'POST':
 		form = AddDomain(request.POST)
@@ -75,10 +77,12 @@ def organization_modify_domains(request, organization_pk):
 			logged_domain_addition.save()
 		else:
 			return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
-
+	if 'domainrestoreid' in request.GET:
+		return HttpResponse('asdf')
 
 	form = AddDomain()
-	return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
+	return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form, 'domain_removals': removed_domains_history, 'domain_additions': added_domains_history})
+
 
 @login_required
 def organization_modify_children(request, organization_pk):
@@ -104,7 +108,7 @@ def organization_modify(request, organization_pk):
 		if form.is_valid():
 			#check if there are any changes
 			if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['info_url'] != org.url)):
-				serialized_data = serializers.serialize("json", [org])
+				serialized_data = serializers.serialize("python", [org])
 				organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
 				organization_old.save()
 
@@ -131,7 +135,7 @@ def organization_edit_history(request, organization_pk):
 	logged_edit_objects = []
 
 	for edit in logged_edits:
-		logged_edit_objects.append({'old_object': json.loads(edit.organization_old_json)[0]['fields'], 'edit': edit})
+		logged_edit_objects.append({'old_object': edit.organization_old_json[0]['fields'], 'edit': edit})
 
 
 	return render(request, 'organizations/organization_edit_history.html', {'logged_edits': logged_edit_objects, 'org': org})
@@ -141,7 +145,7 @@ def organization_confirm_rollback(request, edit_pk):
 
 	if request.method == 'POST':
 		org = logged_edit.organization
-		old_organization_fields = json.loads(logged_edit.organization_old_json)[0]['fields']
+		old_organization_fields = logged_edit.organization_old_json[0]['fields']
 		org.name = old_organization_fields['name']
 		org.description = old_organization_fields['description']
 		org.url = old_organization_fields['url']
@@ -159,7 +163,7 @@ def organization_delete_domain(request, organization_pk):
 	domain = OrganizationDomain.objects.get(pk=domain_pk)
 	org = domain.organization
 	if request.method == 'POST':
-		serialized_data = serializers.serialize("json", [domain])
+		serialized_data = serializers.serialize("python", [domain])
 		logged_domain_deletion = LoggedOrganizationDomainRemoval(domain_old_json=serialized_data, organization=org, user=request.user)
 		logged_domain_deletion.save()
 		domain.delete()
@@ -174,7 +178,7 @@ def organization_remove_child(request, organization_pk):
 	child_organization = Organization.objects.get(pk=child_organization_pk)
 
 	if request.method == 'POST':
-		serialized_data = serializers.serialize("json", [parent_organization])
+		serialized_data = serializers.serialize("python", [parent_organization])
 		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
 		organization_old.save()
 		parent_organization.child_organizations.remove(child_organization)
@@ -190,7 +194,7 @@ def organization_add_child(request, organization_parent_pk, organization_child_p
 	parent_organization = Organization.objects.get(pk=organization_parent_pk)
 
 	if request.method == 'POST':
-		serialized_data = serializers.serialize("json", [parent_organization])
+		serialized_data = serializers.serialize("python", [parent_organization])
 		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
 		organization_old.save()
 		parent_organization.child_organizations.add(child_organization)

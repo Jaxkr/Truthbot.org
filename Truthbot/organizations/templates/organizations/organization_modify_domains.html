@@ -12,7 +12,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-7">
+	<div class="col-md-4">
 		<form action="" method="post">
 			{% csrf_token %}
 			{% if form.non_field_errors %}
@@ -35,6 +35,19 @@
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
+	</div>
+	<div class="col-md-4">
+		<p class="lead">Recent domain removals:</p>
+		<ul class="list-group">
+			{% for domain in domain_removals %}
+			<li class="list-group-item">{{ domain.domain_old_json.0.fields.domain }} <a class="btn btn-default btn-xs" href="?domainrestoreid=">Restore</a>
+			<p>By user <b>{{ domain.user.username }}</b></p>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="col-md-4">
+		<p class="lead">Recent domain additions:</p>
 	</div>
 </div>
 {% endblock %}

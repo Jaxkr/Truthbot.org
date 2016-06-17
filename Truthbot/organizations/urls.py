@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'organization/(?P<organization_pk>\d+)/edit$', views.organization_modify, name='organizationmodify'),
     url(r'organization/(?P<organization_pk>\d+)/edit-history$', views.organization_edit_history, name='organizationedithistory'),
 
+
     #confirmation functions
     url(r'organization/(?P<organization_pk>\d+)/domains/remove/$', views.organization_delete_domain, name='organizationdeletedomain'),
     url(r'organization/(?P<organization_pk>\d+)/edit-children/remove/$', views.organization_remove_child, name='organizationremovechild'),
