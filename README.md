@@ -1,2 +1,2 @@
 # Truthbot.org
-Django app that powers Truthbot.org.
+Django project that powers Truthbot.org.
