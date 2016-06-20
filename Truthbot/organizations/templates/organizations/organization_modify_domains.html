@@ -6,7 +6,7 @@
 	<div class="col-md-7">
 		<ul class="list-group">
 			{% for domain in domains %}
-			<li class="list-group-item">{{ domain.domain }} <a class="btn btn-danger btn-xs" href="{% url "organizationdeletedomain" org.pk %}?domainid={{ domain.pk }}"><i class="fa fa-times"></i></a></li>
+			<li class="list-group-item">{{ domain.domain }} <a class="btn btn-danger btn-xs" href="{% url "organizationdeletedomain" org.pk %}?domainid={{ domain.pk }}"><i class="fa fa-times"></i> Remove domain</a></li>
 			{% endfor %}
 		</ul>
 	</div>
@@ -41,7 +41,7 @@
 		<p class="lead">Recent domain removals:</p>
 		<ul class="list-group">
 			{% for domain in domain_removals %}
-			<li class="list-group-item">{{ domain.domain_old_json.0.fields.domain }} <a class="btn btn-default btn-xs" href="?domainrestoreid={{ domain.pk }}">Restore</a>
+			<li class="list-group-item">{{ domain.domain_old_json.0.fields.domain }} <a class="btn btn-default btn-xs" href="{% url 'organizationmodifydomains' org.pk %}?domainrestoreid={{ domain.pk }}">Restore</a>
 				<p>By user <b>{{ domain.user.username }}</b></p>
 			</li>
 			{% endfor %}
