@@ -3,7 +3,7 @@
 {% block maincontent %}
 <h1>Write a comment</h1>
 <div class="row">
-  <div class="col-md-7">
+  <div class="col-md-6">
     <form action="" method="post">
       {% csrf_token %}
       {% if form.non_field_errors %}
@@ -28,6 +28,9 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+  </div>
+  <div class="col-md-6">
+  <h2>Preview:</h2>
   </div>
 </div>
 {% endblock %}
