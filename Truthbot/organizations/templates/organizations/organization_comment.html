@@ -34,4 +34,22 @@
     <div id="preview"> </div>
   </div>
 </div>
+<script src="{% static 'js/remarkable.min.js' %}"></script>
+<script>
+  var md = new Remarkable();
+  md.set({
+    html: false,
+    breaks: true,
+    linkify: true,
+  });
+  md.block.ruler.enable([
+    'footnote',
+    ]);
+  area = document.getElementById('editor');
+  preview = document.getElementById('preview');
+  area.addEventListener('input', function() {
+    preview.innerHTML = md.render(area.value)
+    console.log(md.render(area.value))
+  }, true);
+</script>
 {% endblock %}
