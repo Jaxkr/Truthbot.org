@@ -9,7 +9,7 @@ class OrganizationForm(forms.Form):
 	info_url = forms.CharField(validators=[url_validator], widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=2083)
 
 class NewComment(forms.Form):
-	comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+	comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'editor'}))
 	POSITIVE_TONE = 'P'
 	NEUTRAL_TONE = 'N'
 	CRITICAL_TONE = 'C'

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block maincontent %}
 <h1>Write a comment</h1>
 <div class="row">
@@ -15,14 +15,14 @@
       <div class="form-group">
         <label for="{{ form.comment.id_for_label }}">Comment</label>
         {% if form.comment.errors %}
-          <span class="form-error">{{ form.comment.errors.as_text }}</span>
+        <span class="form-error">{{ form.comment.errors.as_text }}</span>
         {% endif %}
         {{ form.comment }}
       </div>
       <div class="form-group">
         <label for="{{ form.tone.id_for_label }}">Tone</label>
         {% if form.tone.errors %}
-          <span class="form-error">{{ form.tone.errors.as_text }}</span>
+        <span class="form-error">{{ form.tone.errors.as_text }}</span>
         {% endif %}
         {{ form.tone }}
       </div>
@@ -30,7 +30,8 @@
     </form>
   </div>
   <div class="col-md-6">
-  <h2>Preview:</h2>
+    <h2>Preview:</h2>
+    <div id="preview"> </div>
   </div>
 </div>
 {% endblock %}
