@@ -33,7 +33,6 @@ class OrganizationComment(models.Model):
 
 	tone = models.CharField(max_length=1, choices=COMMENT_TONE_CHOICES, default=NEUTRAL_TONE)
 	text = models.CharField(max_length=300)
-	sources = ArrayField(models.CharField(max_length=2083), blank=True)
 
 	
 #logging actions for revision history

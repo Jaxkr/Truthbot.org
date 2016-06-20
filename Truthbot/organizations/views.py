@@ -58,8 +58,13 @@ def organization_new(request):
 @login_required
 def organization_info(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
-
 	return render(request, 'organizations/organization_info.html', {'org': org})
+
+@login_required
+def organization_create_comment(request, organization_pk):
+
+	form = NewComment()
+	return render(request, 'organizations/organization_comment.html', {'form' : form})
 
 @login_required
 def organization_modify_domains(request, organization_pk):
@@ -106,7 +111,7 @@ def organization_modify_children(request, organization_pk):
 def organization_modify(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 	if request.method == 'POST':
-		form = OrganizationEditForm(request.POST, request.FILES)
+		form = OrganizationForm(request.POST, request.FILES)
 		if form.is_valid():
 			#check if there are any changes
 			if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['info_url'] != org.url)):
@@ -126,7 +131,7 @@ def organization_modify(request, organization_pk):
 
 
 
-	form = OrganizationEditForm(initial={'name': org.name, 'description': org.description, 'info_url': org.url})
+	form = OrganizationForm(initial={'name': org.name, 'description': org.description, 'info_url': org.url})
 
 	return render(request, 'organizations/organization_modify.html', {'form': form})
 
