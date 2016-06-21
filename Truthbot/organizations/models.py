@@ -33,6 +33,8 @@ class OrganizationReview(models.Model):
 
 	tone = models.CharField(max_length=1, choices=REVIEW_TONE_CHOICES, default=NEUTRAL_TONE)
 	text = models.CharField(max_length=3000)
+	organization = models.ForeignKey('Organization')
+	user = models.ForeignKey(User)
 
 	
 #logging actions for revision history

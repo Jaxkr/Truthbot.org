@@ -58,13 +58,24 @@ def organization_new(request):
 @login_required
 def organization_info(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
-	return render(request, 'organizations/organization_info.html', {'org': org})
+	reviews = OrganizationReview.objects.filter(organization=org)
+	return render(request, 'organizations/organization_info.html', {'org': org, 'reviews': reviews})
 
 @login_required
 def organization_create_review(request, organization_pk):
+	org = Organization.objects.get(pk=organization_pk)
 
+	if request.method == 'POST':
+		form = NewReview(request.POST)
+		if form.is_valid():
+			new_review = OrganizationReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], user=request.user, organization=org)
+			new_review.save()
+			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
+		else:
+			print('EFEFEF')
+			return render(request, 'organizations/organization_review.html', {'form': form, 'org': org})
 	form = NewReview()
-	return render(request, 'organizations/organization_review.html', {'form' : form})
+	return render(request, 'organizations/organization_review.html', {'form' : form, 'org': org})
 
 @login_required
 def organization_modify_domains(request, organization_pk):

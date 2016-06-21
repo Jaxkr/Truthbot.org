@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load markdown_parser %}
 {% block maincontent %}
 <div class="row">
 	<div class="col-md-12">
@@ -8,7 +8,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-5">
 		<h1>{{ org.name }}</h1>
 		<p class="lead"><a href="{{ org.url }}" target="_blank">{{ org.url }} <i class="fa fa-external-link"></i></a></p>
 		<p>
@@ -19,8 +19,17 @@
 			{{ org.description }}
 		</p>
 	</div>
-	<div class="col-md-6">
-		<h2>Info on {{ org.name }}:</h2>
+	<div class="col-md-7">
+		<h2>Reviews of {{ org.name }}:</h2>
+		{% for review in reviews %}
+		<div class="panel panel-default">
+			<div class="panel-body">
+				{{ review.text|parsemarkdown|safe }}
+				<hr>
+				<b>Written by {{ review.user.username }}</b>
+			</div>
+		</div>
+		{% endfor %}
 		<a href="{% url 'organizationcreatereview' org.pk %}" class="btn btn-primary btn-lg"><i class="fa fa-pencil" aria-hidden="true"></i> Write a review</a>
 	</div>
 </div>
