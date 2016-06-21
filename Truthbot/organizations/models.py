@@ -20,18 +20,18 @@ class Organization(models.Model):
 	def __str__(self):
 		return self.name
 
-class OrganizationComment(models.Model):
+class OrganizationReview(models.Model):
 	POSITIVE_TONE = 'P'
 	NEUTRAL_TONE = 'N'
 	CRITICAL_TONE = 'C'
 
-	COMMENT_TONE_CHOICES = (
+	REVIEW_TONE_CHOICES = (
 		(POSITIVE_TONE, 'Positive'),
 		(NEUTRAL_TONE, 'Neutral'),
 		(CRITICAL_TONE, 'Critical')
 		)
 
-	tone = models.CharField(max_length=1, choices=COMMENT_TONE_CHOICES, default=NEUTRAL_TONE)
+	tone = models.CharField(max_length=1, choices=REVIEW_TONE_CHOICES, default=NEUTRAL_TONE)
 	text = models.CharField(max_length=3000)
 
 	

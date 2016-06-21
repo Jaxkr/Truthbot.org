@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block maincontent %}
-<h1>Write a comment</h1>
+<h1>Write a review</h1>
 <div class="row">
   <div class="col-md-6">
     <form action="" method="post">
@@ -13,11 +13,11 @@
       {% endif %}
 
       <div class="form-group">
-        <label for="{{ form.comment.id_for_label }}">Comment</label>
-        {% if form.comment.errors %}
-        <span class="form-error">{{ form.comment.errors.as_text }}</span>
+        <label for="{{ form.review.id_for_label }}">Review</label>
+        {% if form.review.errors %}
+        <span class="form-error">{{ form.review.errors.as_text }}</span>
         {% endif %}
-        {{ form.comment }}
+        {{ form.review }}
       </div>
       <div class="form-group">
         <label for="{{ form.tone.id_for_label }}">Tone</label>

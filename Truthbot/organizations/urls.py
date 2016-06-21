@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'organization/(?P<organization_pk>\d+)/edit-children/$', views.organization_modify_children, name='organizationmodifychildren'),
     url(r'organization/(?P<organization_pk>\d+)/edit/$', views.organization_modify, name='organizationmodify'),
     url(r'organization/(?P<organization_pk>\d+)/edit-history/$', views.organization_edit_history, name='organizationedithistory'),
-    url(r'organization/(?P<organization_pk>\d+)/new-comment/$', views.organization_create_comment, name='organizationcreatecomment'),
+    url(r'organization/(?P<organization_pk>\d+)/new-review/$', views.organization_create_review, name='organizationcreatereview'),
 
     #confirmation functions
     url(r'organization/(?P<organization_pk>\d+)/domains/remove/$', views.organization_delete_domain, name='organizationdeletedomain'),

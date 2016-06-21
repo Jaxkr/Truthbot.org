@@ -8,17 +8,17 @@ class OrganizationForm(forms.Form):
 	description = forms.CharField(validators=[MaxLengthValidator(1000)], widget=forms.Textarea(attrs={'class': 'form-control'}), max_length=1000)
 	info_url = forms.CharField(validators=[url_validator], widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=2083)
 
-class NewComment(forms.Form):
-	comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'editor'}))
+class NewReview(forms.Form):
+	review = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'editor'}))
 	POSITIVE_TONE = 'P'
 	NEUTRAL_TONE = 'N'
 	CRITICAL_TONE = 'C'
-	COMMENT_TONE_CHOICES = (
+	REVIEW_TONE_CHOICES = (
 		(POSITIVE_TONE, 'Positive'),
 		(NEUTRAL_TONE, 'Neutral'),
 		(CRITICAL_TONE, 'Critical')
 		)
-	tone = forms.ChoiceField(choices=COMMENT_TONE_CHOICES, required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+	tone = forms.ChoiceField(choices=REVIEW_TONE_CHOICES, required=True, widget=forms.Select(attrs={'class': 'form-control'}))
 
 valid_domain_validator = RegexValidator('^(([a-zA-Z]{1})|([a-zA-Z]{1}[a-zA-Z]{1})|([a-zA-Z]{1}[0-9]{1})|([0-9]{1}[a-zA-Z]{1})|([a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$', 'The input must be a valid domain.')
 class AddDomain(forms.Form):

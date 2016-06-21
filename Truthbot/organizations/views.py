@@ -61,10 +61,10 @@ def organization_info(request, organization_pk):
 	return render(request, 'organizations/organization_info.html', {'org': org})
 
 @login_required
-def organization_create_comment(request, organization_pk):
+def organization_create_review(request, organization_pk):
 
-	form = NewComment()
-	return render(request, 'organizations/organization_comment.html', {'form' : form})
+	form = NewReview()
+	return render(request, 'organizations/organization_review.html', {'form' : form})
 
 @login_required
 def organization_modify_domains(request, organization_pk):
