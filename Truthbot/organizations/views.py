@@ -89,8 +89,11 @@ def organization_review_confirm_rollback(request, edit_pk):
 	if request.method == 'POST':
 		review = logged_edit.review
 		serialized_data = serializers.serialize("python", [review])
-		review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
-		review_old.save()
+		try:
+			review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
+			review_old.save()
+		except:
+			pass
 		old_review_fields = logged_edit.review_old_json[0]['fields']
 		review.text = old_review_fields['text']
 		review.tone = old_review_fields['tone']
@@ -110,8 +113,11 @@ def organization_edit_review(request, review_pk):
 		if form.is_valid():
 			if ((form.cleaned_data['review'] != review.text) or (form.cleaned_data['tone'] != review.tone)):
 				serialized_data = serializers.serialize("python", [review])
-				review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
-				review_old.save()
+				try:
+					review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
+					review_old.save()
+				except:
+					pass
 				review.text = form.cleaned_data['review']
 				review.tone = form.cleaned_data['tone']
 				review.save()
@@ -171,8 +177,11 @@ def organization_modify(request, organization_pk):
 			#check if there are any changes
 			if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['info_url'] != org.url)):
 				serialized_data = serializers.serialize("python", [org])
-				organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
-				organization_old.save()
+				try:
+					organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
+					organization_old.save()
+				except:
+					pass
 
 				org.name = form.cleaned_data['name']
 				org.description = form.cleaned_data['description']
@@ -208,8 +217,11 @@ def organization_confirm_rollback(request, edit_pk):
 	if request.method == 'POST':
 		org = logged_edit.organization
 		serialized_data = serializers.serialize("python", [org])
-		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
-		organization_old.save()
+		try:
+			organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
+			organization_old.save()
+		except:
+			pass
 		old_organization_fields = logged_edit.organization_old_json[0]['fields']
 		org.name = old_organization_fields['name']
 		org.description = old_organization_fields['description']
@@ -229,8 +241,11 @@ def organization_delete_domain(request, organization_pk):
 	org = domain.organization
 	if request.method == 'POST':
 		serialized_data = serializers.serialize("python", [domain])
-		logged_domain_deletion = LoggedOrganizationDomainRemoval(domain_old_json=serialized_data, organization=org, user=request.user)
-		logged_domain_deletion.save()
+		try:
+			logged_domain_deletion = LoggedOrganizationDomainRemoval(domain_old_json=serialized_data, organization=org, user=request.user)
+			logged_domain_deletion.save()
+		except:
+			pass
 		domain.delete()
 		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[domain.organization.pk]))
 	return render(request, 'organizations/generic/confirm_remove_domain.html', {'domain': domain})
@@ -244,8 +259,11 @@ def organization_remove_child(request, organization_pk):
 
 	if request.method == 'POST':
 		serialized_data = serializers.serialize("python", [parent_organization])
-		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
-		organization_old.save()
+		try:
+			organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
+			organization_old.save()
+		except:
+			pass
 		parent_organization.child_organizations.remove(child_organization)
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_pk]))
 	
@@ -260,8 +278,11 @@ def organization_add_child(request, organization_parent_pk, organization_child_p
 
 	if request.method == 'POST':
 		serialized_data = serializers.serialize("python", [parent_organization])
-		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
-		organization_old.save()
+		try:
+			organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
+			organization_old.save()
+		except:
+			pass
 		parent_organization.child_organizations.add(child_organization)
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_parent_pk]))
 
