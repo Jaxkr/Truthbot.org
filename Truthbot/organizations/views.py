@@ -66,16 +66,60 @@ def organization_create_review(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 
 	if request.method == 'POST':
-		form = NewReview(request.POST)
+		form = ReviewForm(request.POST)
 		if form.is_valid():
 			new_review = OrganizationReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], user=request.user, organization=org)
 			new_review.save()
 			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 		else:
-			print('EFEFEF')
 			return render(request, 'organizations/organization_review.html', {'form': form, 'org': org})
-	form = NewReview()
+	form = ReviewForm()
 	return render(request, 'organizations/organization_review.html', {'form' : form, 'org': org})
+
+
+@login_required
+def organization_review_view(request, review_pk):
+	review = OrganizationReview.objects.get(pk=review_pk)
+	review_edits = LoggedOrganizationReviewEdit.objects.filter(review=review)
+	return render(request, 'organizations/organization_review_view.html', {'review' : review, 'edits': review_edits})
+
+@login_required
+def organization_review_confirm_rollback(request, edit_pk):
+	logged_edit = LoggedOrganizationReviewEdit.objects.get(pk=edit_pk)
+	if request.method == 'POST':
+		review = logged_edit.review
+		serialized_data = serializers.serialize("python", [review])
+		review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
+		review_old.save()
+		old_review_fields = logged_edit.review_old_json[0]['fields']
+		review.text = old_review_fields['text']
+		review.tone = old_review_fields['tone']
+		review.save()
+		return HttpResponseRedirect(reverse('organizationreviewview', args=[review.pk]))
+
+	return render(request, 'organizations/generic/confirm_rollback.html')
+
+
+@login_required
+def organization_edit_review(request, review_pk):
+	review = OrganizationReview.objects.get(pk=review_pk)
+	form = ReviewForm(initial={'review': review.text, 'tone': review.tone})
+
+	if request.method == 'POST':
+		form = ReviewForm(request.POST)
+		if form.is_valid():
+			if ((form.cleaned_data['review'] != review.text) or (form.cleaned_data['tone'] != review.tone)):
+				serialized_data = serializers.serialize("python", [review])
+				review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
+				review_old.save()
+				review.text = form.cleaned_data['review']
+				review.tone = form.cleaned_data['tone']
+				review.save()
+				return HttpResponseRedirect(reverse('organizationreviewview', args=[review.pk]))
+		else:
+			return render(request, 'organizations/organization_review.html', {'form': form, 'org': org})
+
+	return render(request, 'organizations/organization_edit_review.html', {'form' : form})
 
 @login_required
 def organization_modify_domains(request, organization_pk):
@@ -163,6 +207,9 @@ def organization_confirm_rollback(request, edit_pk):
 
 	if request.method == 'POST':
 		org = logged_edit.organization
+		serialized_data = serializers.serialize("python", [org])
+		organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
+		organization_old.save()
 		old_organization_fields = logged_edit.organization_old_json[0]['fields']
 		org.name = old_organization_fields['name']
 		org.description = old_organization_fields['description']

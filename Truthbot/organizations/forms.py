@@ -8,7 +8,7 @@ class OrganizationForm(forms.Form):
 	description = forms.CharField(validators=[MaxLengthValidator(1000)], widget=forms.Textarea(attrs={'class': 'form-control'}), max_length=1000)
 	info_url = forms.CharField(validators=[url_validator], widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=2083)
 
-class NewReview(forms.Form):
+class ReviewForm(forms.Form):
 	review = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'editor'}))
 	POSITIVE_TONE = 'P'
 	NEUTRAL_TONE = 'N'

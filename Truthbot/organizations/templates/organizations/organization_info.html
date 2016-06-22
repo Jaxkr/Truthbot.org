@@ -26,7 +26,8 @@
 			<div class="panel-body">
 				{{ review.text|parsemarkdown|safe }}
 				<hr>
-				<b>Written by {{ review.user.username }}</b>
+				<p><b>Written by {{ review.user.username }}</b></p>
+				<p><a class="btn btn-default" href="{% url 'organizationreviewview' review.pk %}">View/edit review</a></p>
 			</div>
 		</div>
 		{% endfor %}

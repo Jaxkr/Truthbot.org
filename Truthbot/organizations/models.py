@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField, ArrayField
 from django.contrib.auth.models import User
+import hashlib
 
 # Create your models here.
 class OrganizationDomain(models.Model):
@@ -44,6 +45,11 @@ class LoggedOrganizationEdit(models.Model):
 	user = models.ForeignKey(User)
 	organization = models.ForeignKey('Organization')
 	edit_time = models.DateTimeField(auto_now=True)
+	edit_hash = models.CharField(max_length=20, unique=True)
+
+	def save(self, **kwargs):
+		self.edit_hash = hashlib.sha256((str(self.organization_old_json) + str(self.organization.pk)).encode('utf-8')).hexdigest()[:20]
+		super().save(**kwargs)
 
 
 class LoggedOrganizationDomainRemoval(models.Model):
@@ -51,3 +57,14 @@ class LoggedOrganizationDomainRemoval(models.Model):
 	organization = models.ForeignKey('Organization')
 	user = models.ForeignKey(User)
 	edit_time = models.DateTimeField(auto_now=True)
+
+class LoggedOrganizationReviewEdit(models.Model):
+	review_old_json = JSONField()
+	user = models.ForeignKey(User)
+	review = models.ForeignKey('OrganizationReview')
+	edit_time = models.DateTimeField(auto_now=True)
+	edit_hash = models.CharField(max_length=20, unique=True)
+
+	def save(self, **kwargs):
+		self.edit_hash = hashlib.sha256((str(self.review_old_json) + str(self.review.pk)).encode('utf-8')).hexdigest()[:20]
+		super().save(**kwargs)

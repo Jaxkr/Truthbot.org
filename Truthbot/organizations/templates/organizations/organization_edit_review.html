@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block maincontent %}
+<h1>Editing review</h1>
+<div class="row">
+  <div class="col-md-6">
+    <form action="" method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="{{ form.review.id_for_label }}">Review</label>
+        {% if form.review.errors %}
+        <span class="form-error">{{ form.review.errors.as_text }}</span>
+        {% endif %}
+        {{ form.review }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.tone.id_for_label }}">Tone</label>
+        {% if form.tone.errors %}
+        <span class="form-error">{{ form.tone.errors.as_text }}</span>
+        {% endif %}
+        {{ form.tone }}
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h2>Preview:</h2>
+    <div id="preview"> </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Writing a good review</h3>
+    <h4><u>Tone</u></h4>
+    <p>In the drop-down menu above, you'll see three options of tone for use in writing your review. These are used for catagorization and display purposes only.</p>
+    <p>
+      <ul>
+      <li><b>Positive tone</b><p>Use this if you are praising an action of the organization. Eg. accurate coverage of an event, unbaised writing, etc.</li>
+      <li><b>Neutral tone</b><p>Use this if you are neither praising not criticizing an action of the organization and simply presenting information. This should be rarely used.</li>
+      <li><b>Critical tone</b><p>Use this if you are criticizing an action of the organization. Eg. public endorsement of a politician, biased writing across many articles, selective coverage, etc.</li>
+      </ul>
+    </p>
+    <h4><u>Organization reviews vs Article reviews</u></h4>
+    <p>Organization rewiews are for presenting information on the organization/publication as a whole. Habitual actions or known biases are great topics for organization reviews.</p>
+    <p>Article reviews are for presenting information or providing cross references / conflicting information on specific articles.</p>
+    <h4><u>Formatting</u></h4>
+    <p>Truthbot has full support for markdown, and we encourage you to use it to format your review to your liking. We support markdown <a target="_blank" href="http://pandoc.org/README.html#tables">tables</a> and <a target="_blank" href="http://pandoc.org/README.html#footnotes">citations</a>. Image use is discouraged, but if completely necessary please use <a target="_blank" href="http://imgur.com/">Imgur.com</a>.</p>
+    <h4><u>Making citations</u></h4>
+    <p>Whenever you make a claim or assert a fact, please provide a source or example. The correct method for doing this is via a footnote. An example of footnote syntax is shown below.</p>
+    <pre>
+This is my statement, x is equal to y[^1].
+Here is more, with another source[^2].
+You can name your footnotes whatever you like, as long as they match[^test123].
+
+[^1]: http://example.com/
+[^2]: http://example.com/moreinfo
+[^test123]: http://pandoc.org/README.html#footnotes
+</pre>
+    <p>Feel free to copy-paste that example into the editor box to see a live preview of it!</p>
+    <h4><u>Content and style</u></h4>
+    <p>Please use a formal and neutral tone. Please write succinctly, but feel free to write in whichever style you feel is best. Thank you for contributing to Truthbot!</p>
+  </div>
+</div>
+<script src="{% static 'js/remarkable.min.js' %}"></script>
+<script>
+  var md = new Remarkable();
+  md.set({
+    html: false,
+    breaks: true,
+    linkify: true,
+  });
+  md.block.ruler.enable([
+    'footnote',
+    ]);
+  area = document.getElementById('editor');
+  preview = document.getElementById('preview');
+  area.addEventListener('input', function() {
+    preview.innerHTML = md.render(area.value)
+    console.log(md.render(area.value))
+  }, true);
+</script>
+{% endblock %}

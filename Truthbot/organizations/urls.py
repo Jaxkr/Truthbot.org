@@ -12,10 +12,13 @@ urlpatterns = [
     url(r'organization/(?P<organization_pk>\d+)/edit/$', views.organization_modify, name='organizationmodify'),
     url(r'organization/(?P<organization_pk>\d+)/edit-history/$', views.organization_edit_history, name='organizationedithistory'),
     url(r'organization/(?P<organization_pk>\d+)/new-review/$', views.organization_create_review, name='organizationcreatereview'),
+    url(r'review/(?P<review_pk>\d+)/$', views.organization_review_view, name='organizationreviewview'),
+    url(r'review/(?P<review_pk>\d+)/edit/$', views.organization_edit_review, name='organizationeditreview'),
 
     #confirmation functions
     url(r'organization/(?P<organization_pk>\d+)/domains/remove/$', views.organization_delete_domain, name='organizationdeletedomain'),
     url(r'organization/(?P<organization_pk>\d+)/edit-children/remove/$', views.organization_remove_child, name='organizationremovechild'),
     url(r'organization/(?P<organization_parent_pk>\d+)/edit-children/add/(?P<organization_child_pk>\d+)$', views.organization_add_child, name='organizationaddchild'),
     url(r'organization/edit-history/rollback/(?P<edit_pk>\d+)$', views.organization_confirm_rollback, name='organizationconfirmrollback'),
+    url(r'review/rollback/(?P<edit_pk>\d+)/edit/$', views.organization_review_confirm_rollback, name='organizationreviewconfirmrollback'),
 ]
