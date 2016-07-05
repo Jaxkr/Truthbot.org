@@ -11,3 +11,8 @@ class Article(models.Model):
 
 	def __str__(self):
 		return self.title
+
+
+class ArticleInProgress(models.Model):
+	url = models.CharField(max_length=2083, blank=False, unique=True)
+	time_added = models.DateTimeField(auto_now=True)

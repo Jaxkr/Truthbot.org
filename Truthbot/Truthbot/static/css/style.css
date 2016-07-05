@@ -1,0 +1,16 @@
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  padding: 7px 15px;
+  height: 80px;
+  width: auto;
+}
+.nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}

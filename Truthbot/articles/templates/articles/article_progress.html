@@ -1,0 +1,17 @@
+{% extends "pub_base.html" %}
+
+{% block maincontent %}
+{% if new %}
+<div class="well">
+<p class="lead">
+It appears that the article at <b>{{ url }}</b> isn't in our database yet! It has been added to the queue for processing.
+<p><i class="fa fa-cog fa-spin" aria-hidden="true"></i> No queue data.</p>
+</p>
+</div>
+{% else %}
+<p class="lead">
+It appears that the article at <b>{{ url }}</b> isn't in our database yet! It has been added to the queue for processing.
+<p><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Page has been in queue for approximately {{ seconds }} seconds.</p>
+</p>
+{% endif %}
+{% endblock %}
