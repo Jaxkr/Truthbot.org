@@ -12,8 +12,8 @@ base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 
 @shared_task
 def create_article(url):
-	ArticleInProgress.objects.get(url=url).delete()
 	get_organization_info(url)
+	ArticleInProgress.objects.get(url=url).delete()
 
 def get_organization_info(url, **kwargs):
 	if not 'wikilink' in kwargs:
@@ -44,19 +44,15 @@ def get_organization_info(url, **kwargs):
 		except:
 			return
 	else:
-		print('ISWIKI')
 		url = base_wikipedia_url[:-6] + url
-		print('----------------------------------')
-		print(url)
 		response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
 		soup = BeautifulSoup(response, 'html.parser')
-		print(response[:500])
-
 
 	try:
 		org_name = soup.find('h1', { "class" : "firstHeading" }).text
 	except:
 		return
+	
 	[s.extract() for s in soup('sup')]
 	intro = soup.find('p').getText()
 	infobox_table = soup.findAll('table', { "class" : "infobox" })
@@ -73,29 +69,33 @@ def get_organization_info(url, **kwargs):
 		if not Organization.objects.filter(name=org_name).exists():
 			org = Organization(name=org_name, description=intro, url=web_address, wiki_url=url)
 			org.save()
-			if 'child' in kwargs:
-				org.child_organizations.add(kwargs['child'])
-		else:
-			return
-
-		if not 'wikilink' in kwargs:
-			for domain in n_domains:
-				d = OrganizationDomain(domain=domain, organization=org)
+			if not 'wikilink' in kwargs:
+				for domain in n_domains:
+					d = OrganizationDomain(domain=domain, organization=org)
+					d.save()
+			else:
+				d = OrganizationDomain(domain=web_address, organization=org)
 				d.save()
 		else:
-			d = OrganizationDomain(domain=web_address, organization=org)
+			org = Organization.objects.get(name=org_name)
+	else:
+		return
+	
 
-		owner_data = get_owner_data(infobox_data)
+	if 'child' in kwargs:
+		org.child_organizations.add(kwargs['child'])
 
-		if owner_data[0] == 0:
-			get_organization_info(owner_data[1], child=org, wikilink=True)
-		elif owner_data[0] == 1:
-			parent_org = Organization(name=owner_data[1])
-			parent_org.save()
-			parent_org.child_organizations.add(org)
-			parent_org.save()
-		else:
-			return
+	owner_data = get_owner_data(infobox_data)
+
+	if owner_data[0] == 0:
+		get_organization_info(owner_data[1], child=org, wikilink=True)
+	elif owner_data[0] == 1:
+		parent_org = Organization(name=owner_data[1])
+		parent_org.save()
+		parent_org.child_organizations.add(org)
+		parent_org.save()
+	else:
+		return
 
 
 
@@ -112,8 +112,7 @@ def get_owner_data(infobox_data):
 				#or just get the name
 				owner_name = infobox_data['Owner'].text
 				return (1, owner_name)
-	return (2)
-
+	return [2]
 
 def parse_wikipedia_table(infobox_table):
 	infobox_rows = infobox_table.find_all('tr')
