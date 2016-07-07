@@ -87,30 +87,32 @@ def get_organization_info(url, **kwargs):
 
 		owner_data = get_owner_data(infobox_data)
 
-		if owner_data[0]:
+		if owner_data[0] == 0:
 			get_organization_info(owner_data[1], child=org, wikilink=True)
-		elif not owner_data[0]:
+		elif owner_data[0] == 1:
 			parent_org = Organization(name=owner_data[1])
 			parent_org.save()
 			parent_org.child_organizations.add(org)
 			parent_org.save()
+		else:
+			return
 
 
 
 def get_owner_data(infobox_data):
 	possible_field_names = ['Owner', 'Parent', 'Owned by', 'Owner(s)', 'Company']
-	#(Is link? If not name, data)
+	#(0 = there is link, 1 = there is name, 2 = there is no parent)
 	for fieldname in possible_field_names:
 		if (fieldname in infobox_data):
 			if (infobox_data[fieldname].find('a')):
 				#simply get the last link for now
 				link = infobox_data[fieldname].find_all('a')[-1]
-				return (True, link['href'])
+				return (0, link['href'])
 			else:
 				#or just get the name
 				owner_name = infobox_data['Owner'].text
-				return (False, owner_name)
-
+				return (1, owner_name)
+	return (2)
 
 
 def parse_wikipedia_table(infobox_table):
