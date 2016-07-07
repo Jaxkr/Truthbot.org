@@ -1,5 +1,6 @@
 from celery import shared_task
 from .models import *
+from organizations.models import *
 import time
 import newspaper
 import re
@@ -15,40 +16,100 @@ def create_article(url):
 	get_organization_info(url)
 
 def get_organization_info(url, **kwargs):
-	try:
-		o = urllib.parse.urlsplit(url)
-		url_without_path = o.scheme + '://' + o.netloc
-		n = newspaper.build(url_without_path)
-		n_domains = []
-		for category in n.category_urls():
-			domain = urllib.parse.urlsplit(category).netloc
-			if (domain not in n_domains):
-				n_domains.append(domain)
-	except:
-		return
+	if not 'wikilink' in kwargs:
+		try:
+			o = urllib.parse.urlsplit(url)
+			url_without_path = o.scheme + '://' + o.netloc
+			n = newspaper.build(url_without_path)
+			n_domains = []
+			for category in n.category_urls():
+				domain = urllib.parse.urlsplit(category).netloc
+				if (domain not in n_domains):
+					n_domains.append(domain)
+		except:
+			return
 
-	try:
-		extracted = tldextract.extract(url_without_path)
-		tld = "{}.{}".format(extracted.domain, extracted.suffix)
-		url = urllib.parse.urljoin(base_wikipedia_url, tld)
+		try:
+			extracted = tldextract.extract(url_without_path)
+			tld = "{}.{}".format(extracted.domain, extracted.suffix)
+			url = urllib.parse.urljoin(base_wikipedia_url, tld)
+			response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
+			soup = BeautifulSoup(response, 'html.parser')
+		except:
+			pass
+		try:
+			url = urllib.parse.urljoin(base_wikipedia_url, n.brand)
+			response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
+			soup = BeautifulSoup(response, 'html.parser')
+		except:
+			return
+	else:
+		print('ISWIKI')
+		url = base_wikipedia_url[:-6] + url
+		print('----------------------------------')
+		print(url)
 		response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
 		soup = BeautifulSoup(response, 'html.parser')
-	except:
-		pass
+		print(response[:500])
+
+
 	try:
-		url = urllib.parse.urljoin(base_wikipedia_url, n.brand)
-		response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
-		soup = BeautifulSoup(response, 'html.parser')
+		org_name = soup.find('h1', { "class" : "firstHeading" }).text
 	except:
 		return
-
 	[s.extract() for s in soup('sup')]
 	intro = soup.find('p').getText()
 	infobox_table = soup.findAll('table', { "class" : "infobox" })
 	if (infobox_table):
 		infobox_table = infobox_table[0]
 		infobox_data = parse_wikipedia_table(infobox_table)
-		print(infobox_data)
+		
+		web_address = '#' #pretty next level right
+		if ('Website' in infobox_data):
+			web_address = infobox_data['Website'].find('a')['href']
+		elif ('Web address' in infobox_data):
+			web_address = infobox_data['Web address'].find('a')['href']
+
+		if not Organization.objects.filter(name=org_name).exists():
+			org = Organization(name=org_name, description=intro, url=web_address, wiki_url=url)
+			org.save()
+			if 'child' in kwargs:
+				org.child_organizations.add(kwargs['child'])
+		else:
+			return
+
+		if not 'wikilink' in kwargs:
+			for domain in n_domains:
+				d = OrganizationDomain(domain=domain, organization=org)
+				d.save()
+		else:
+			d = OrganizationDomain(domain=web_address, organization=org)
+
+		owner_data = get_owner_data(infobox_data)
+
+		if owner_data[0]:
+			get_organization_info(owner_data[1], child=org, wikilink=True)
+		elif not owner_data[0]:
+			parent_org = Organization(name=owner_data[1])
+			parent_org.save()
+			parent_org.child_organizations.add(org)
+			parent_org.save()
+
+
+
+def get_owner_data(infobox_data):
+	possible_field_names = ['Owner', 'Parent', 'Owned by', 'Owner(s)', 'Company']
+	#(Is link? If not name, data)
+	for fieldname in possible_field_names:
+		if (fieldname in infobox_data):
+			if (infobox_data[fieldname].find('a')):
+				#simply get the last link for now
+				link = infobox_data[fieldname].find_all('a')[-1]
+				return (True, link['href'])
+			else:
+				#or just get the name
+				owner_name = infobox_data['Owner'].text
+				return (False, owner_name)
 
 
 
