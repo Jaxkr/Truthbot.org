@@ -1,0 +1,21 @@
+{% extends "pub_base.html" %}
+
+{% block maincontent %}
+<div class="col-md-6">
+	{% if org_exists %}
+	<h2>Ownership info:</h2>
+	<p class="lead">
+		<b>{{ domain }}</b> is part of <b>{{ org.name }}</b> {% if parents %}{% for parent in parents %} which is owned by <b>{{ parent.name}}</b>{% if not forloop.last %} {% endif %}{% endfor %}{% endif %}.
+	</p>
+	{% endif %}
+</div>
+<div class="col-md-6">
+	<h2>Article Reviews</h2>
+	{% if not have_article %}
+	<p class="lead">It appears that the article at <b>{{ url }}</b> isn't in our database yet! It has been added to the queue for processing.</p>
+	<p><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Page has been in queue for approximately {{ seconds }} seconds.</p>
+	{% else %}
+	<big><a href="{{ article.url }}"><i>{{ article.title }}</i></a></big>
+	{% endif %}
+</div>
+{% endblock %}

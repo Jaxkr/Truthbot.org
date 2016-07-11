@@ -1,17 +1,31 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Article(models.Model):
 	title = models.CharField(max_length=300, blank=False)
 	url = models.CharField(max_length=2083, blank=False, unique=True)
 	related_articles = models.ManyToManyField('Article', blank=True)
-	keywords = ArrayField(models.CharField(max_length=200), blank=True)
-	date = models.DateTimeField(null=True)
 
 	def __str__(self):
 		return self.title
 
+class ArticleReview(models.Model):
+	POSITIVE_TONE = 'P'
+	NEUTRAL_TONE = 'N'
+	CRITICAL_TONE = 'C'
+
+	REVIEW_TONE_CHOICES = (
+		(POSITIVE_TONE, 'Positive'),
+		(NEUTRAL_TONE, 'Neutral'),
+		(CRITICAL_TONE, 'Critical')
+		)
+
+	tone = models.CharField(max_length=1, choices=REVIEW_TONE_CHOICES, default=NEUTRAL_TONE)
+	text = models.CharField(max_length=3000)
+	organization = models.ForeignKey('Article')
+	user = models.ForeignKey(User)
 
 class ArticleInProgress(models.Model):
 	url = models.CharField(max_length=2083, blank=False, unique=True)

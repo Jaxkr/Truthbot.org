@@ -13,8 +13,16 @@ base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 @shared_task
 def create_article(url):
 	get_organization_info(url)
+	get_article_info(url)
 	ArticleInProgress.objects.get(url=url).delete()
 
+def get_article_info(url):
+	a = newspaper.Article(url)
+	a.download()
+	a.parse()
+
+	new_article = Article(title=a.title, url=url)
+	new_article.save()
 def get_organization_info(url, **kwargs):
 	if not 'wikilink' in kwargs:
 		try:
@@ -60,7 +68,7 @@ def get_organization_info(url, **kwargs):
 		infobox_table = infobox_table[0]
 		infobox_data = parse_wikipedia_table(infobox_table)
 		
-		web_address = '#' #pretty next level right
+		web_address = '#'
 		if ('Website' in infobox_data):
 			web_address = infobox_data['Website'].find('a')['href']
 		elif ('Web address' in infobox_data):
