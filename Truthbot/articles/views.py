@@ -45,6 +45,7 @@ def article_view(request, url):
 		org_exists = True
 		# to return: org, parents, org_exists
 
+	elapsed = 0
 
 	if Article.objects.filter(url=url).exists():
 		article = Article.objects.get(url=url)
@@ -58,5 +59,5 @@ def article_view(request, url):
 		a = ArticleInProgress(url=url)
 		a.save()
 
-	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article})
+	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
 	

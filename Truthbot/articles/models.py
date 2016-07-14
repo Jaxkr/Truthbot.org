@@ -24,7 +24,7 @@ class ArticleReview(models.Model):
 
 	tone = models.CharField(max_length=1, choices=REVIEW_TONE_CHOICES, default=NEUTRAL_TONE)
 	text = models.CharField(max_length=3000)
-	organization = models.ForeignKey('Article')
+	article = models.ForeignKey('Article')
 	user = models.ForeignKey(User)
 
 class ArticleInProgress(models.Model):
