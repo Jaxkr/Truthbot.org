@@ -5,7 +5,7 @@
 	{% if org_exists %}
 	<h2>Ownership info:</h2>
 	<p class="lead">
-		<b>{{ domain }}</b> is part of <b>{{ org.name }}</b> {% if parents %}{% for parent in parents %} which is owned by <b>{{ parent.name}}</b>{% if not forloop.last %} {% endif %}{% endfor %}{% endif %}.
+		<b>{{ domain }}</b> is part of <b>{{ org.name }}</b> {% if parents %}{% for parent in parents %} which is owned by <b>{{ parent.name }}</b>{% if not forloop.last %} {% endif %}{% endfor %}{% endif %}.
 	</p>
 	{% endif %}
 </div>
@@ -15,7 +15,10 @@
 	<p class="lead">It appears that the article at <b>{{ url }}</b> isn't in our database yet! It has been added to the queue for processing.</p>
 	<p><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Page has been in queue for approximately {{ seconds }} seconds.</p>
 	{% else %}
-	<big><a href="{{ article.url }}"><i>{{ article.title }}</i></a></big>
+	<big><a href="{{ article.url }}" target="_blank"><i>{{ article.title }}</i> <i class="fa fa-external-link" aria-hidden="true"></i></a></big>
+	<p>
+	<a href="{% url 'articlecreatereview' article.pk %}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Write review for this article</a>
+	</p>
 	{% endif %}
 </div>
 {% endblock %}

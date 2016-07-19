@@ -123,9 +123,9 @@ def organization_edit_review(request, review_pk):
 				review.save()
 				return HttpResponseRedirect(reverse('organizationreviewview', args=[review.pk]))
 		else:
-			return render(request, 'organizations/organization_review.html', {'form': form, 'org': org})
+			return render(request, 'organizations/organization_review.html', {'form': form, 'edit': True})
 
-	return render(request, 'organizations/organization_edit_review.html', {'form' : form})
+	return render(request, 'organizations/organization_review.html', {'form' : form, 'edit': True})
 
 @login_required
 def organization_modify_domains(request, organization_pk):

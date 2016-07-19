@@ -7,6 +7,7 @@ import datetime
 import math
 from django.utils import timezone
 from urllib.parse import urlparse
+from .forms import *
 
 # Create your views here.
 
@@ -61,4 +62,12 @@ def article_view(request, url):
 		a.save()
 
 	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
-	
+
+def article_create_review(request, article_pk):
+	article = Article.objects.get(pk=article_pk)
+
+	form = ReviewForm()
+	return render(request, 'articles/article_review_new.html', {'article': article, 'form': form})
+
+
+

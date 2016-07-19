@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block maincontent %}
+{% if edit %}
+<h1>Editing review</h1>
+{% else %}
 <h1>Write a review for {{ org.name }}</h1>
+{% endif %}
 <div class="row">
   <div class="col-md-6">
     <form action="" method="post">
@@ -50,7 +54,7 @@
     <p>Organization rewiews are for presenting information on the organization/publication as a whole. Habitual actions or known biases are great topics for organization reviews.</p>
     <p>Article reviews are for presenting information or providing cross references / conflicting information on specific articles.</p>
     <h4><u>Formatting</u></h4>
-    <p>Truthbot has full support for markdown, and we encourage you to use it to format your review to your liking. We support markdown <a target="_blank" href="http://pandoc.org/README.html#tables">tables</a> and <a target="_blank" href="http://pandoc.org/README.html#footnotes">citations</a>. Image use is discouraged, but if completely necessary please use <a target="_blank" href="http://imgur.com/">Imgur.com</a>.</p>
+    <p>Truthbot has full support for markdown, and we encourage you to use it to format your review to your liking. You can view the docs for Markdown <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank">here</a>. We support markdown <a target="_blank" href="http://pandoc.org/README.html#tables">tables</a> and <a target="_blank" href="http://pandoc.org/README.html#footnotes">citations</a>. Image use is discouraged, but if completely necessary please use <a target="_blank" href="http://imgur.com/">Imgur.com</a>.</p>
     <h4><u>Making citations</u></h4>
     <p>Whenever you make a claim or assert a fact, please provide a source or example. The correct method for doing this is via a footnote. An example of footnote syntax is shown below.</p>
     <pre>
