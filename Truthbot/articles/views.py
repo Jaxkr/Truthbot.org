@@ -50,6 +50,7 @@ def article_view(request, url):
 	if Article.objects.filter(url=url).exists():
 		article = Article.objects.get(url=url)
 		have_article = True
+		
 	elif ArticleInProgress.objects.filter(url=url).exists():
 		t1 = ArticleInProgress.objects.get(url=url).time_added
 		now = datetime.datetime.now()
