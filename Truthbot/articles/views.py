@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from organizations.models import *
 from .tasks import create_article
@@ -8,9 +8,11 @@ import math
 from django.utils import timezone
 from urllib.parse import urlparse
 from .forms import *
+from django.contrib.auth.decorators import login_required
+from django.core import serializers
 
 # Create your views here.
-
+@login_required
 def article_view(request, url):
 	#this view is atrocious, but it seems efficient
 
@@ -62,7 +64,7 @@ def article_view(request, url):
 		a.save()
 
 	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
-
+@login_required
 def article_create_review(request, article_pk):
 	article = Article.objects.get(pk=article_pk)
 
@@ -78,5 +80,30 @@ def article_create_review(request, article_pk):
 	form = ReviewForm()
 	return render(request, 'articles/article_review.html', {'article': article, 'form': form})
 
+@login_required
+def article_edit_review(request, review_pk):
+	review = ArticleReview.objects.get(pk=review_pk)
+	form = ReviewForm(initial={'review': review.text, 'tone': review.tone})
 
+	if request.method == 'POST':
+		form = ReviewForm(request.POST)
+		if form.is_valid():
+			if ((form.cleaned_data['review'] != review.text) or (form.cleaned_data['tone'] != review.tone)):
+				serialized_data = serializers.serialize("python", [review])
+				try:
+					review_old = LoggedArticleReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
+					review_old.save()
+				except:
+					pass
+				review.text = form.cleaned_data['review']
+				review.tone = form.cleaned_data['tone']
+				review.save()
+				return HttpResponseRedirect(reverse('articlereviewview', args=[review.pk]))
+		else:
+			return render(request, 'articles/article_review.html', {'form': form, 'edit': True})
 
+	return render(request, 'articles/article_review.html', {'form' : form, 'edit': True})
+
+@login_required
+def article_review_view(request, review_pk):
+	return HttpResponse('asdfasdfasdf')

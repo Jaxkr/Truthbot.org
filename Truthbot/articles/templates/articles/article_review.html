@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block maincontent %}
+{% if edit %}
+<h2>Editing article review</h2>
+{% else %}
 <h2>Write a review for article <i>{{ article.title }}</i></h2>
+{% endif %}
 <div class="row">
   <div class="col-md-6">
     <form action="" method="post">
