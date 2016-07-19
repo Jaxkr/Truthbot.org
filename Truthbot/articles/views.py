@@ -66,8 +66,17 @@ def article_view(request, url):
 def article_create_review(request, article_pk):
 	article = Article.objects.get(pk=article_pk)
 
+	if request.method == 'POST':
+		form = ReviewForm(request.POST)
+		if form.is_valid():
+			new_review = ArticleReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], user=request.user, article=article)
+			new_review.save()
+			return HttpResponse('asdf')
+		else:
+			return render(request, 'article/article_review.html', {'form': form, 'org': org})
+
 	form = ReviewForm()
-	return render(request, 'articles/article_review_new.html', {'article': article, 'form': form})
+	return render(request, 'articles/article_review.html', {'article': article, 'form': form})
 
 
 
