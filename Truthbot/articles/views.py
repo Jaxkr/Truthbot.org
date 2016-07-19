@@ -10,6 +10,7 @@ from urllib.parse import urlparse
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.core.urlresolvers import reverse, reverse_lazy
 
 # Create your views here.
 @login_required
@@ -73,7 +74,7 @@ def article_create_review(request, article_pk):
 		if form.is_valid():
 			new_review = ArticleReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], user=request.user, article=article)
 			new_review.save()
-			return HttpResponse('asdf')
+			return HttpResponseRedirect('articlereviewview', args=[new_review.pk])
 		else:
 			return render(request, 'article/article_review.html', {'form': form, 'org': org})
 
@@ -106,4 +107,31 @@ def article_edit_review(request, review_pk):
 
 @login_required
 def article_review_view(request, review_pk):
-	return HttpResponse('asdfasdfasdf')
+	review = ArticleReview.objects.get(pk=review_pk)
+	review_edits = LoggedArticleReviewEdit.objects.filter(review=review)
+	return render(request, 'articles/article_review_view.html', {'review' : review, 'edits': review_edits})
+
+
+@login_required
+def article_review_confirm_rollback(request, edit_pk):
+	logged_edit = LoggedArticleReviewEdit.objects.get(pk=edit_pk)
+	if request.method == 'POST':
+		review = logged_edit.review
+		serialized_data = serializers.serialize("python", [review])
+		try:
+			review_old = LoggedArticleReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
+			review_old.save()
+		except:
+			pass
+		old_review_fields = logged_edit.review_old_json[0]['fields']
+		review.text = old_review_fields['text']
+		review.tone = old_review_fields['tone']
+		review.save()
+		return HttpResponseRedirect(reverse('articlereviewview', args=[review.pk]))
+
+	return render(request, 'organizations/generic/confirm_rollback.html')
+
+
+
+
+

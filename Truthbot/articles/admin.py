@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Article)
 admin.site.register(ArticleInProgress)
 admin.site.register(ArticleReview)
+admin.site.register(LoggedArticleReviewEdit)

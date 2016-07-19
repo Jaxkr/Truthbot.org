@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.auth.models import User
+import hashlib
+
 # Create your models here.
 
 class Article(models.Model):

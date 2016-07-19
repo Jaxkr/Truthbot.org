@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load markdown_parser %}
+{% block maincontent %}
+<div class="row">
+	<div class="col-md-6">
+		<p><a href="{% url 'articleeditreview' review.pk %}" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit review</a></p>
+		{{ review.text|parsemarkdown|safe }}
+	</div>
+	<div class="col-md-6">
+	<h2>Previous versions:</h2>
+		{% for edit in edits %}
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<p><b>Review</b>: {{ edit.review_old_json.0.fields.text|parsemarkdown|safe }}</p>
+				<p><b>Tone</b>: {{ edit.review_old_json.0.fields.tone }}</p>
+				<p><i>Edited by {{ edit.user.username }}</i></p>
+				<a href="{% url 'articlereviewconfirmrollback' edit.pk %}" class="btn btn-default">Rollback to this version</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
