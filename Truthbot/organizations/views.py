@@ -6,8 +6,8 @@ from .models import *
 import pprint
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.core import serializers
 import json
+import reversion
 
 # Create your views here.
 

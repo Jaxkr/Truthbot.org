@@ -1,11 +1,17 @@
 from django.contrib import admin
 from .models import *
+from reversion.admin import VersionAdmin
 
 # Register your models here.
 
-admin.site.register(OrganizationDomain)
-admin.site.register(Organization)
-admin.site.register(LoggedOrganizationEdit)
-admin.site.register(LoggedOrganizationDomainRemoval)
-admin.site.register(OrganizationReview)
-admin.site.register(LoggedOrganizationReviewEdit)
+@admin.register(OrganizationDomain)
+class OrganizationDomainAdmin(VersionAdmin):
+	pass
+
+@admin.register(Organization)
+class OrganizationAdmin(VersionAdmin):
+	pass
+
+@admin.register(OrganizationReview)
+class OrganizationReviewAdmin(VersionAdmin):
+	pass
