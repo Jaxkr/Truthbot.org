@@ -117,6 +117,7 @@ def organization_edit_review(request, review_pk):
 				with reversion.create_revision():
 					review.text = form.cleaned_data['review']
 					review.tone = form.cleaned_data['tone']
+					review.contributors.add(request.user)
 					review.save()
 					reversion.set_user(request.user)
 
@@ -259,5 +260,3 @@ def organization_add_child(request, organization_parent_pk, organization_child_p
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_parent_pk]))
 
 	return render(request, 'organizations/generic/confirm_add_child.html', {'organization': parent_organization, 'childorg': child_organization})
-
-

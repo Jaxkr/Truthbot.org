@@ -3,5 +3,5 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Article)
-admin.site.register(ArticleInProgress)
+admin.site.register(PageInProgress)
 admin.site.register(ArticleReview)
