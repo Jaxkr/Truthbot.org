@@ -84,10 +84,6 @@ def get_organization_info(url, **kwargs):
 					with reversion.create_revision():
 						d = OrganizationDomain(domain=domain, organization=org)
 						d.save()
-			else:
-				with reversion.create_revision():
-					d = OrganizationDomain(domain=web_address, organization=org)
-					d.save()
 		else:
 			org = Organization.objects.get(name=org_name)
 	else:
