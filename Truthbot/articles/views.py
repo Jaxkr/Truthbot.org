@@ -17,7 +17,6 @@ from django.core.urlresolvers import reverse, reverse_lazy
 def article_view(request, url):
 	#this view is atrocious, but it seems efficient
 
-
 	#get the parents of the requested article
 	org = {}
 	parents = {}
