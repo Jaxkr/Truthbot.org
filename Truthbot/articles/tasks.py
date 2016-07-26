@@ -7,6 +7,7 @@ import re
 import tldextract
 from bs4 import BeautifulSoup
 import urllib.request
+import reversion
 
 base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 
@@ -75,17 +76,18 @@ def get_organization_info(url, **kwargs):
 			web_address = infobox_data['Web address'].find('a')['href']
 
 		if not Organization.objects.filter(name=org_name).exists():
-			org = Organization(name=org_name, description=intro, url=web_address, wiki_url=url)
-			org.save()
+			with reversion.create_revision():
+				org = Organization(name=org_name, description=intro, url=web_address, wiki_url=url)
+				org.save()
 			if not 'wikilink' in kwargs:
 				for domain in n_domains:
-					d = OrganizationDomain(domain=domain)
-					d.save()
-					org.domains.add(d)
+					with reversion.create_revision():
+						d = OrganizationDomain(domain=domain, organization=org)
+						d.save()
 			else:
-				d = OrganizationDomain(domain=web_address, organization=org)
-				d.save()
-				org.domains.add(d)
+				with reversion.create_revision():
+					d = OrganizationDomain(domain=web_address, organization=org)
+					d.save()
 		else:
 			org = Organization.objects.get(name=org_name)
 	else:
@@ -100,13 +102,13 @@ def get_organization_info(url, **kwargs):
 	if owner_data[0] == 0:
 		get_organization_info(owner_data[1], child=org, wikilink=True)
 	elif owner_data[0] == 1:
-		parent_org = Organization(name=owner_data[1])
-		parent_org.save()
-		parent_org.child_organizations.add(org)
-		parent_org.save()
+		with reversion.create_revision():
+			parent_org = Organization(name=owner_data[1])
+			parent_org.save()
+			parent_org.child_organizations.add(org)
+			parent_org.save()
 	else:
 		return
-
 
 
 def get_owner_data(infobox_data):
