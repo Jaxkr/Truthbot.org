@@ -38,5 +38,6 @@ class OrganizationReview(models.Model):
 	tone = models.CharField(max_length=1, choices=REVIEW_TONE_CHOICES, default=NEUTRAL_TONE)
 	text = models.CharField(max_length=3000)
 	organization = models.ForeignKey('Organization')
+	original_author = models.ForeignKey(User, related_name='original_author_of')
 	contributors = models.ManyToManyField(User)
-	points = models.IntegerField()
+	points = models.IntegerField(default=1)

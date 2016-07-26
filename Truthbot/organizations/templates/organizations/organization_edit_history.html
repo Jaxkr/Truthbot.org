@@ -4,17 +4,22 @@
 {% endblock %}
 {% block maincontent %}
 <h1>Viewing edit history for {{ org.name }}</h1>
-<p>Old versions of {{ org.name }}:</p>
-{% for edit in logged_edits %}
+<p>All versions of {{ org.name }}:</p>
+{% for version in versions %}
 <div class="row">
 	<div class="col-md-7">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<p><b>Name</b>: {{ edit.old_object.name }}</p>
-				<p><b>Description</b>: {{ edit.old_object.description }}</p>
-				<p><b>URL</b>: {{ edit.old_object.url }}</p>
-				<p><i>Edited by {{ edit.edit.user.username }}</i></p>
-				<a href="{% url "organizationconfirmrollback" edit.edit.pk %}" class="btn btn-default">Rollback to this version</a>
+				<p><b>Name</b>: {{ version.field_dict.name }}</p>
+				<p><b>Description</b>: {{ version.field_dict.description }}</p>
+				<p><b>URL</b>: {{ version.field_dict.url }}</p>
+				<p><b>Children</b>: 
+					{% for child in version.field_dict.child_organizations %}
+						<a href="{% url "organizationinfo" child %}">link, </a>
+					{% endfor %}
+				</p>
+				<p><i>Edited by {{ version.revision.user }}</i></p>
+				<a href="{% url "organizationconfirmrollback" version.pk %}" class="btn btn-default">Rollback to this version</a>
 			</div>
 		</div>
 	</div>

@@ -79,11 +79,13 @@ def get_organization_info(url, **kwargs):
 			org.save()
 			if not 'wikilink' in kwargs:
 				for domain in n_domains:
-					d = OrganizationDomain(domain=domain, organization=org)
+					d = OrganizationDomain(domain=domain)
 					d.save()
+					org.domains.add(d)
 			else:
 				d = OrganizationDomain(domain=web_address, organization=org)
 				d.save()
+				org.domains.add(d)
 		else:
 			org = Organization.objects.get(name=org_name)
 	else:
