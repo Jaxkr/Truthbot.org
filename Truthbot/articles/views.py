@@ -79,7 +79,6 @@ def article_create_review(request, article_pk):
 				new_review.save()
 				new_review.contributors.add(request.user)
 				reversion.set_user(request.user)
-
 			return HttpResponseRedirect(reverse('articlereviewview', args=[new_review.pk]))
 		else:
 			return render(request, 'article/article_review.html', {'form': form, 'org': org})
