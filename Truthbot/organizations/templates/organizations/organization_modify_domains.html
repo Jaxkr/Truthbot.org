@@ -41,8 +41,8 @@
 		<p class="lead">Recent domain removals:</p>
 		<ul class="list-group">
 			{% for domain in domain_removals %}
-			<li class="list-group-item">{{ domain.domain_old_json.0.fields.domain }} <a class="btn btn-default btn-xs" href="{% url 'organizationmodifydomains' org.pk %}?domainrestoreid={{ domain.pk }}">Restore</a>
-				<p>By user <b>{{ domain.user.username }}</b></p>
+			<li class="list-group-item">{{ domain.field_dict.domain }} <a class="btn btn-default btn-xs" href="{% url 'organizationmodifydomains' org.pk %}?domainrestoreid={{ domain.pk }}">Restore</a>
+				<p>By user <b>{{ domain.revision.user }}</b></p>
 			</li>
 			{% endfor %}
 		</ul>

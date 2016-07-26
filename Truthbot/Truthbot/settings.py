@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'organizations.apps.OrganizationsConfig',
     'articles.apps.ArticlesConfig',
+    'reversion',
 ]
 
 MIDDLEWARE_CLASSES = [

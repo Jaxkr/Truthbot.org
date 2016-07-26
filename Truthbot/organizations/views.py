@@ -6,8 +6,9 @@ from .models import *
 import pprint
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.core import serializers
 import json
+import reversion
+from reversion.models import Version
 
 # Create your views here.
 
@@ -21,6 +22,7 @@ def organization_search(request):
 
 
 	return render(request, 'organizations/organization_search.html', {'form': search_form, 'term': search_term, 'organizations': organizations})
+
 
 @login_required
 def organization_root(request):  
@@ -45,8 +47,11 @@ def organization_new(request):
 		form = OrganizationForm(request.POST, request.FILES)
 		
 		if form.is_valid():
-			org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], description=form.cleaned_data['description'])
-			org.save()
+			with reversion.create_revision():
+				org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], description=form.cleaned_data['description'])
+				org.save()
+				reversion.set_user(request.user)
+
 			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 
 		else:
@@ -59,6 +64,7 @@ def organization_new(request):
 def organization_info(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 	reviews = OrganizationReview.objects.filter(organization=org)
+
 	return render(request, 'organizations/organization_info.html', {'org': org, 'reviews': reviews})
 
 @login_required
@@ -68,8 +74,12 @@ def organization_create_review(request, organization_pk):
 	if request.method == 'POST':
 		form = ReviewForm(request.POST)
 		if form.is_valid():
-			new_review = OrganizationReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], user=request.user, organization=org)
-			new_review.save()
+			with reversion.create_revision():
+				new_review = OrganizationReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], organization=org, original_author=request.user)
+				new_review.save()
+				new_review.contributors.add(request.user)
+				reversion.set_user(request.user)
+
 			return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 		else:
 			return render(request, 'organizations/organization_review.html', {'form': form, 'org': org})
@@ -80,25 +90,17 @@ def organization_create_review(request, organization_pk):
 @login_required
 def organization_review_view(request, review_pk):
 	review = OrganizationReview.objects.get(pk=review_pk)
-	review_edits = LoggedOrganizationReviewEdit.objects.filter(review=review)
-	return render(request, 'organizations/organization_review_view.html', {'review' : review, 'edits': review_edits})
+	versions = Version.objects.get_for_object(review)
+
+	return render(request, 'organizations/organization_review_view.html', {'review' : review, 'versions': versions})
 
 @login_required
 def organization_review_confirm_rollback(request, edit_pk):
-	logged_edit = LoggedOrganizationReviewEdit.objects.get(pk=edit_pk)
+	version = Version.objects.get(pk=edit_pk)
+
 	if request.method == 'POST':
-		review = logged_edit.review
-		serialized_data = serializers.serialize("python", [review])
-		try:
-			review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
-			review_old.save()
-		except:
-			pass
-		old_review_fields = logged_edit.review_old_json[0]['fields']
-		review.text = old_review_fields['text']
-		review.tone = old_review_fields['tone']
-		review.save()
-		return HttpResponseRedirect(reverse('organizationreviewview', args=[review.pk]))
+		version.revert()
+		return HttpResponseRedirect(reverse('organizationreviewview', args=[version.object_id]))
 
 	return render(request, 'organizations/generic/confirm_rollback.html')
 
@@ -112,15 +114,12 @@ def organization_edit_review(request, review_pk):
 		form = ReviewForm(request.POST)
 		if form.is_valid():
 			if ((form.cleaned_data['review'] != review.text) or (form.cleaned_data['tone'] != review.tone)):
-				serialized_data = serializers.serialize("python", [review])
-				try:
-					review_old = LoggedOrganizationReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
-					review_old.save()
-				except:
-					pass
-				review.text = form.cleaned_data['review']
-				review.tone = form.cleaned_data['tone']
-				review.save()
+				with reversion.create_revision():
+					review.text = form.cleaned_data['review']
+					review.tone = form.cleaned_data['tone']
+					review.save()
+					reversion.set_user(request.user)
+
 				return HttpResponseRedirect(reverse('organizationreviewview', args=[review.pk]))
 		else:
 			return render(request, 'organizations/organization_review.html', {'form': form, 'edit': True})
@@ -128,28 +127,28 @@ def organization_edit_review(request, review_pk):
 	return render(request, 'organizations/organization_review.html', {'form' : form, 'edit': True})
 
 @login_required
-def organization_modify_domains(request, organization_pk):
+def organization_modify_domains(request, organization_pk):# NOTMG OLD VERSION
 	org = Organization.objects.get(pk=organization_pk)
 	domains = OrganizationDomain.objects.filter(organization=org)
-	removed_domains_history = LoggedOrganizationDomainRemoval.objects.filter(organization=org).order_by('-edit_time')[:25]
+	deleted_domains = Version.objects.get_deleted(OrganizationDomain)
 
 	if request.method == 'POST':
 		form = AddDomain(request.POST)
 		if form.is_valid():
-			new_domain = OrganizationDomain(domain=form.cleaned_data['domain'], organization=org)
-			new_domain.save()
-			logged_domain_addition.save()
+			with reversion.create_revision():
+				new_domain = OrganizationDomain(domain=form.cleaned_data['domain'], organization=org)
+				new_domain.save()
+				reversion.set_user(request.user)
+			deleted_domains = Version.objects.get_deleted(OrganizationDomain)
 		else:
 			return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
 	if 'domainrestoreid' in request.GET:
-		domain_to_restore = LoggedOrganizationDomainRemoval.objects.get(pk=request.GET['domainrestoreid'])
-		new_domain = OrganizationDomain(domain=domain_to_restore.domain_old_json[0]['fields']['domain'], organization=org)
-		new_domain.save()
-		domain_to_restore.delete()
+		version = Version.objects.get(pk=request.GET['domainrestoreid'])
+		version.revert()
 		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[org.pk]))
 
 	form = AddDomain()
-	return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form, 'domain_removals': removed_domains_history})
+	return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form, 'domain_removals': deleted_domains})
 
 
 @login_required
@@ -169,6 +168,7 @@ def organization_modify_children(request, organization_pk):
 
 	return render(request, 'organizations/organization_modify_children.html', {'form': search_form, 'organization': organization, 'organization_children': organization_children})
 
+@login_required
 def organization_modify(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 	if request.method == 'POST':
@@ -176,17 +176,12 @@ def organization_modify(request, organization_pk):
 		if form.is_valid():
 			#check if there are any changes
 			if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['info_url'] != org.url)):
-				serialized_data = serializers.serialize("python", [org])
-				try:
-					organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
-					organization_old.save()
-				except:
-					pass
-
-				org.name = form.cleaned_data['name']
-				org.description = form.cleaned_data['description']
-				org.url = form.cleaned_data['info_url']
-				org.save()
+				with reversion.create_revision():
+					org.name = form.cleaned_data['name']
+					org.description = form.cleaned_data['description']
+					org.url = form.cleaned_data['info_url']
+					org.save()
+					reversion.set_user(request.user)
 				return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
 			else:
 				return render(request, 'organizations/organization_modify.html', {'form': form, 'nochanges': True})
@@ -202,33 +197,25 @@ def organization_modify(request, organization_pk):
 @login_required
 def organization_edit_history(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
-	logged_edits = LoggedOrganizationEdit.objects.filter(organization=org)[:20]
-	logged_edit_objects = []
+	versions = Version.objects.get_for_object(org)
 
-	for edit in logged_edits:
-		logged_edit_objects.append({'old_object': edit.organization_old_json[0]['fields'], 'edit': edit})
+	# workaround to get the names of organizations in addition to their ID due to limitation in django-reversion
+	for version in versions:
+		version.named_child_organizations = []
+		for child in version.field_dict['child_organizations']:
+			child_organization = Organization.objects.get(pk=child)
+			version.named_child_organizations.append((child_organization.name, child_organization.pk))
+		print(version.named_child_organizations)
 
 
-	return render(request, 'organizations/organization_edit_history.html', {'logged_edits': logged_edit_objects, 'org': org})
+	return render(request, 'organizations/organization_edit_history.html', {'versions': versions, 'org': org})
 
 def organization_confirm_rollback(request, edit_pk):
-	logged_edit = LoggedOrganizationEdit.objects.get(pk=edit_pk)
+	version = Version.objects.get(pk=edit_pk)
 
 	if request.method == 'POST':
-		org = logged_edit.organization
-		serialized_data = serializers.serialize("python", [org])
-		try:
-			organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=org, user=request.user)
-			organization_old.save()
-		except:
-			pass
-		old_organization_fields = logged_edit.organization_old_json[0]['fields']
-		org.name = old_organization_fields['name']
-		org.description = old_organization_fields['description']
-		org.url = old_organization_fields['url']
-		org.child_organizations = old_organization_fields['child_organizations']
-		org.save()
-		return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
+		version.revert()
+		return HttpResponseRedirect(reverse('organizationinfo', args=[version.object_id]))
 
 	return render(request, 'organizations/generic/confirm_rollback.html')
 
@@ -240,13 +227,8 @@ def organization_delete_domain(request, organization_pk):
 	domain = OrganizationDomain.objects.get(pk=domain_pk)
 	org = domain.organization
 	if request.method == 'POST':
-		serialized_data = serializers.serialize("python", [domain])
-		try:
-			logged_domain_deletion = LoggedOrganizationDomainRemoval(domain_old_json=serialized_data, organization=org, user=request.user)
-			logged_domain_deletion.save()
-		except:
-			pass
-		domain.delete()
+		with reversion.create_revision():
+			domain.delete()
 		return HttpResponseRedirect(reverse('organizationmodifydomains', args=[domain.organization.pk]))
 	return render(request, 'organizations/generic/confirm_remove_domain.html', {'domain': domain})
 
@@ -258,13 +240,8 @@ def organization_remove_child(request, organization_pk):
 	child_organization = Organization.objects.get(pk=child_organization_pk)
 
 	if request.method == 'POST':
-		serialized_data = serializers.serialize("python", [parent_organization])
-		try:
-			organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
-			organization_old.save()
-		except:
-			pass
-		parent_organization.child_organizations.remove(child_organization)
+		with reversion.create_revision():
+			parent_organization.child_organizations.remove(child_organization)
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_pk]))
 	
 
@@ -277,13 +254,8 @@ def organization_add_child(request, organization_parent_pk, organization_child_p
 	parent_organization = Organization.objects.get(pk=organization_parent_pk)
 
 	if request.method == 'POST':
-		serialized_data = serializers.serialize("python", [parent_organization])
-		try:
-			organization_old = LoggedOrganizationEdit(organization_old_json=serialized_data, organization=parent_organization, user=request.user)
-			organization_old.save()
-		except:
-			pass
-		parent_organization.child_organizations.add(child_organization)
+		with reversion.create_revision():
+			parent_organization.child_organizations.add(child_organization)
 		return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_parent_pk]))
 
 	return render(request, 'organizations/generic/confirm_add_child.html', {'organization': parent_organization, 'childorg': child_organization})
