@@ -11,6 +11,8 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core.urlresolvers import reverse, reverse_lazy
+import reversion
+from reversion.models import Version
 
 # Create your views here.
 @login_required
@@ -54,16 +56,17 @@ def article_view(request, url):
 		article = Article.objects.get(url=url)
 		have_article = True
 		
-	elif ArticleInProgress.objects.filter(url=url).exists():
-		t1 = ArticleInProgress.objects.get(url=url).time_added
+	elif PageInProgress.objects.filter(url=url).exists():
+		t1 = PageInProgress.objects.get(url=url).time_added
 		now = datetime.datetime.now()
 		elapsed = math.floor((now-t1).total_seconds())
 	else:
 		create_article.delay(url)
-		a = ArticleInProgress(url=url)
+		a = PageInProgress(url=url)
 		a.save()
 
 	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
+
 @login_required
 def article_create_review(request, article_pk):
 	article = Article.objects.get(pk=article_pk)
@@ -71,9 +74,13 @@ def article_create_review(request, article_pk):
 	if request.method == 'POST':
 		form = ReviewForm(request.POST)
 		if form.is_valid():
-			new_review = ArticleReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], user=request.user, article=article)
-			new_review.save()
-			return HttpResponseRedirect('articlereviewview', args=[new_review.pk])
+			with reversion.create_revision():
+				new_review = ArticleReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], original_author=request.user, article=article)
+				new_review.save()
+				new_review.contributors.add(request.user)
+				reversion.set_user(request.user)
+
+			return HttpResponseRedirect(reverse('articlereviewview', args=[new_review.pk]))
 		else:
 			return render(request, 'article/article_review.html', {'form': form, 'org': org})
 
@@ -89,15 +96,12 @@ def article_edit_review(request, review_pk):
 		form = ReviewForm(request.POST)
 		if form.is_valid():
 			if ((form.cleaned_data['review'] != review.text) or (form.cleaned_data['tone'] != review.tone)):
-				serialized_data = serializers.serialize("python", [review])
-				try:
-					review_old = LoggedArticleReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
-					review_old.save()
-				except:
-					pass
-				review.text = form.cleaned_data['review']
-				review.tone = form.cleaned_data['tone']
-				review.save()
+				with reversion.create_revision():
+					review.text = form.cleaned_data['review']
+					review.tone = form.cleaned_data['tone']
+					review.contributors.add(request.user)
+					review.save()
+					reversion.set_user(request.user)
 				return HttpResponseRedirect(reverse('articlereviewview', args=[review.pk]))
 		else:
 			return render(request, 'articles/article_review.html', {'form': form, 'edit': True})
@@ -107,30 +111,18 @@ def article_edit_review(request, review_pk):
 @login_required
 def article_review_view(request, review_pk):
 	review = ArticleReview.objects.get(pk=review_pk)
-	review_edits = LoggedArticleReviewEdit.objects.filter(review=review)
+	review_edits = Version.objects.get_for_object(review)
 	return render(request, 'articles/article_review_view.html', {'review' : review, 'edits': review_edits})
 
 
 @login_required
 def article_review_confirm_rollback(request, edit_pk):
-	logged_edit = LoggedArticleReviewEdit.objects.get(pk=edit_pk)
+	version = Version.objects.get(pk=edit_pk)
 	if request.method == 'POST':
-		review = logged_edit.review
-		serialized_data = serializers.serialize("python", [review])
-		try:
-			review_old = LoggedArticleReviewEdit(review_old_json=serialized_data, review=review, user=request.user)
-			review_old.save()
-		except:
-			pass
-		old_review_fields = logged_edit.review_old_json[0]['fields']
-		review.text = old_review_fields['text']
-		review.tone = old_review_fields['tone']
-		review.save()
-		return HttpResponseRedirect(reverse('articlereviewview', args=[review.pk]))
+		version.revert()
+		return HttpResponseRedirect(reverse('articlereviewview', args=[version.object_id]))
 
 	return render(request, 'organizations/generic/confirm_rollback.html')
-
-
 
 
 

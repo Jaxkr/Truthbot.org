@@ -14,7 +14,7 @@ base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 def create_article(url):
 	get_organization_info(url)
 	get_article_info(url)
-	ArticleInProgress.objects.get(url=url).delete()
+	PageInProgress.objects.get(url=url).delete()
 
 def get_article_info(url):
 	a = newspaper.Article(url)
