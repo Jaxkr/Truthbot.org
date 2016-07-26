@@ -139,6 +139,7 @@ def organization_modify_domains(request, organization_pk):# NOTMG OLD VERSION
 				new_domain = OrganizationDomain(domain=form.cleaned_data['domain'], organization=org)
 				new_domain.save()
 				reversion.set_user(request.user)
+			deleted_domains = Version.objects.get_deleted(OrganizationDomain)
 		else:
 			return render(request, 'organizations/organization_modify_domains.html', {'org': org, 'domains': domains, 'form': form})
 	if 'domainrestoreid' in request.GET:
@@ -197,6 +198,15 @@ def organization_modify(request, organization_pk):
 def organization_edit_history(request, organization_pk):
 	org = Organization.objects.get(pk=organization_pk)
 	versions = Version.objects.get_for_object(org)
+
+	# workaround to get the names of organizations in addition to their ID due to limitation in django-reversion
+	for version in versions:
+		version.named_child_organizations = []
+		for child in version.field_dict['child_organizations']:
+			child_organization = Organization.objects.get(pk=child)
+			version.named_child_organizations.append((child_organization.name, child_organization.pk))
+		print(version.named_child_organizations)
+
 
 	return render(request, 'organizations/organization_edit_history.html', {'versions': versions, 'org': org})
 
