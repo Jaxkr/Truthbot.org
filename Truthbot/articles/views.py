@@ -29,7 +29,7 @@ def article_view(request, url):
 
 	requested_domain = urlparse(url).netloc
 	if (OrganizationDomain.objects.filter(domain=requested_domain).exists()):
-
+		print('DOMAIN IS HERE')
 		organization_domain = OrganizationDomain.objects.get(domain=requested_domain)
 
 		org = organization_domain.organization
@@ -64,6 +64,8 @@ def article_view(request, url):
 		create_article.delay(url)
 		a = PageInProgress(url=url)
 		a.save()
+
+	print('ORG??? - '  + str(org_exists))
 
 	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
 

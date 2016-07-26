@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'organizations.apps.OrganizationsConfig',
     'articles.apps.ArticlesConfig',
-    'voting.apps.VotingConfig',
     'reversion',
 ]
 
