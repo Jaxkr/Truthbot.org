@@ -16,6 +16,13 @@ from reversion.models import Version
 from voting.models import Vote
 
 # Create your views here.
+
+
+@login_required
+def articles_index(request):
+
+	return render(request, 'articles/articles.html')
+
 @login_required
 def article_view(request, url):
 	#this view is atrocious, but it seems efficient
@@ -64,6 +71,7 @@ def article_view(request, url):
 		create_article.delay(url)
 		a = PageInProgress(url=url)
 		a.save()
+	
 
 	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
 
