@@ -13,6 +13,7 @@ from django.core import serializers
 from django.core.urlresolvers import reverse, reverse_lazy
 import reversion
 from reversion.models import Version
+from voting.models import Vote
 
 # Create your views here.
 @login_required
@@ -29,7 +30,6 @@ def article_view(request, url):
 
 	requested_domain = urlparse(url).netloc
 	if (OrganizationDomain.objects.filter(domain=requested_domain).exists()):
-		print('DOMAIN IS HERE')
 		organization_domain = OrganizationDomain.objects.get(domain=requested_domain)
 
 		org = organization_domain.organization
@@ -65,8 +65,6 @@ def article_view(request, url):
 		a = PageInProgress(url=url)
 		a.save()
 
-	print('ORG??? - '  + str(org_exists))
-
 	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
 
 @login_required
@@ -81,6 +79,7 @@ def article_create_review(request, article_pk):
 				new_review.save()
 				new_review.contributors.add(request.user)
 				reversion.set_user(request.user)
+			Vote.objects.record_vote(new_review, request.user, +1)
 			return HttpResponseRedirect(reverse('articlereviewview', args=[new_review.pk]))
 		else:
 			return render(request, 'article/article_review.html', {'form': form, 'org': org})
