@@ -16,6 +16,11 @@
 	<p><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Page has been in queue for approximately {{ seconds }} seconds.</p>
 	{% else %}
 	<big><a href="{{ article.url }}" target="_blank"><i>{{ article.title }}</i> <i class="fa fa-external-link" aria-hidden="true"></i></a></big>
+	{% if have_article_reviews %}
+	{% for article_review in article_reviews %}
+	{{ article_review.1 }}
+	{% endfor %}
+	{% endif %}
 	<p>
 	<a href="{% url 'articlecreatereview' article.pk %}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Write review for this article</a>
 	</p>

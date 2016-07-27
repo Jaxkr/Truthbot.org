@@ -13,7 +13,6 @@ from django.core import serializers
 from django.core.urlresolvers import reverse, reverse_lazy
 import reversion
 from reversion.models import Version
-from voting.models import Vote
 
 # Create your views here.
 
@@ -33,6 +32,9 @@ def article_view(request, url):
 	org_exists = False
 	have_article = False
 	article = {}
+	have_article_reviews = False
+	sorting = request.GET['sorting'] if ('sorting' in request.GET) else 'top'
+	article_reviews = {}
 
 
 	requested_domain = urlparse(url).netloc
@@ -62,7 +64,10 @@ def article_view(request, url):
 	if Article.objects.filter(url=url).exists():
 		article = Article.objects.get(url=url)
 		have_article = True
-		
+
+		if ArticleReview.objects.filter(article=article).exists():
+			have_article_reviews = True
+
 	elif PageInProgress.objects.filter(url=url).exists():
 		t1 = PageInProgress.objects.get(url=url).time_added
 		now = datetime.datetime.now()
@@ -71,9 +76,13 @@ def article_view(request, url):
 		create_article.delay(url)
 		a = PageInProgress(url=url)
 		a.save()
-	
 
-	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 'domain': requested_domain, 'org_exists': org_exists, 'article': article, 'have_article': have_article, 'seconds': elapsed})
+
+	return render(request, 'articles/article.html', {'org': org, 'parents': parents, 
+													'domain': requested_domain, 'org_exists': org_exists,
+													'article': article, 'have_article': have_article, 
+													'seconds': elapsed, 'have_article_reviews': have_article_reviews,
+													'article_reviews': article_reviews})
 
 @login_required
 def article_create_review(request, article_pk):
@@ -87,7 +96,6 @@ def article_create_review(request, article_pk):
 				new_review.save()
 				new_review.contributors.add(request.user)
 				reversion.set_user(request.user)
-			Vote.objects.record_vote(new_review, request.user, +1)
 			return HttpResponseRedirect(reverse('articlereviewview', args=[new_review.pk]))
 		else:
 			return render(request, 'article/article_review.html', {'form': form, 'org': org})
