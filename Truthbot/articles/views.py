@@ -67,6 +67,7 @@ def article_view(request, url):
 
 		if ArticleReview.objects.filter(article=article).exists():
 			have_article_reviews = True
+			article_reviews = ArticleReview.objects.filter(article=article)
 
 	elif PageInProgress.objects.filter(url=url).exists():
 		t1 = PageInProgress.objects.get(url=url).time_added

@@ -18,7 +18,7 @@
 	<big><a href="{{ article.url }}" target="_blank"><i>{{ article.title }}</i> <i class="fa fa-external-link" aria-hidden="true"></i></a></big>
 	{% if have_article_reviews %}
 	{% for article_review in article_reviews %}
-	{{ article_review.1 }}
+	{{ article_review.text }}<br>
 	{% endfor %}
 	{% endif %}
 	<p>
