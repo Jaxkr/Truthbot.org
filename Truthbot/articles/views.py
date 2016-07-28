@@ -68,7 +68,7 @@ def article_view(request, url):
 
         if ArticleReview.objects.filter(article=article).exists():
             have_article_reviews = True
-            article_reviews = ArticleReview.objects.filter(article=article)
+            article_reviews = ArticleReviewVote.objects.get_top_reviews(review_object=article)
 
     elif PageInProgress.objects.filter(url=url).exists():
         t1 = PageInProgress.objects.get(url=url).time_added
@@ -80,9 +80,9 @@ def article_view(request, url):
         a.save()
 
 
-    return render(request, 'articles/article.html', {'org': org, 'parents': parents, 
+    return render(request, 'articles/article.html', {'org': org, 'parents': parents,
                                                     'domain': requested_domain, 'org_exists': org_exists,
-                                                    'article': article, 'have_article': have_article, 
+                                                    'article': article, 'have_article': have_article,
                                                     'seconds': elapsed, 'have_article_reviews': have_article_reviews,
                                                     'article_reviews': article_reviews})
 
@@ -142,6 +142,3 @@ def article_review_confirm_rollback(request, edit_pk):
         return HttpResponseRedirect(reverse('articlereviewview', args=[version.object_id]))
 
     return render(request, 'organizations/generic/confirm_rollback.html')
-
-
-
