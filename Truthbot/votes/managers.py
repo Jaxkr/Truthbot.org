@@ -40,10 +40,11 @@ class VoteManager(models.Manager):
             model = OrganizationReview
             results = self.filter(review__organization = review_object).values('review_id').annotate(score=Sum('vote'))
 
-        results.order_by('score')
+        results = results.order_by('-score')
 
         reviews = []
         for item in results:
+            print(item)
             review = model.objects.get(pk=item['review_id'])
             reviews.append({'review': review, 'score': item['score']})
 

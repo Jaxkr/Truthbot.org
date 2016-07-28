@@ -9,7 +9,6 @@ $('.voting .vote-up').click(function() {
   var url = $(this).attr('data-voteurl');
 
   $.post(url, {csrfmiddlewaretoken: csrftoken}, function(data) {
-    alert(data);
   });
 });
 $('.voting .vote-down').click(function() {
@@ -21,7 +20,6 @@ $('.voting .vote-down').click(function() {
   var url = $(this).attr('data-voteurl');
 
   $.post(url, {csrfmiddlewaretoken: csrftoken}, function(data) {
-    alert(data);
   });
 });
 
