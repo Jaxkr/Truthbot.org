@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from articles.models import ArticleReview
-from organizations.models import OrganizationReview
+from articles.models import *
+from organizations.models import *
 from .managers import VoteManager
 
 

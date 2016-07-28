@@ -13,6 +13,7 @@ from django.core import serializers
 from django.core.urlresolvers import reverse, reverse_lazy
 import reversion
 from reversion.models import Version
+from votes.models import *
 
 # Create your views here.
 
@@ -97,6 +98,7 @@ def article_create_review(request, article_pk):
                 new_review.save()
                 new_review.contributors.add(request.user)
                 reversion.set_user(request.user)
+            ArticleReviewVote.objects.cast_vote(new_review, request.user, +1)
             return HttpResponseRedirect(reverse('articlereviewview', args=[new_review.pk]))
         else:
             return render(request, 'article/article_review.html', {'form': form, 'org': org})
