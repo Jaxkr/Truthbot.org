@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 import json
 import reversion
 from reversion.models import Version
-from votes.models import OrganizationReviewVote
+from votes.models import *
 
 # Create your views here.
 

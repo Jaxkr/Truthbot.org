@@ -9,7 +9,28 @@ class VoteManager(models.Manager):
         if vote not in (+1, -1):
             raise ValueError('Invalid vote (must be +1/-1)')
 
-        v = self.create(review=obj, user=user, vote=vote)
+        if self.filter(review=obj, user=user).exists():
+            v = self.get(review=obj, user=user)
+            v.vote = vote
+            v.save()
+        else:
+            v = self.create(review=obj, user=user, vote=vote)
+
+    def remove_vote(self, obj, user):
+        if self.filter(review=obj, user=user).exists():
+            v = self.get(review=obj, user=user)
+            v.delete()
+
+    def get_user_vote(self, obj, user):
+        if self.filter(review=obj, user=user).exists():
+            v = self.get(review=obj, user=user)
+            return v.vote
+        else:
+            return '0'
+
+    def get_objects_voted_on(self, user):
+        voted_on = self.filter(user=user)
+        return voted_on
 
     def get_top_reviews(self, review_object):
         if type(review_object) == Article:
@@ -27,6 +48,3 @@ class VoteManager(models.Manager):
             reviews.append({'review': review, 'score': item['score']})
 
         return(reviews)
-
-    def remove_vote(self, obj, user):
-        pass

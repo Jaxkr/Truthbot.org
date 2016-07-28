@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load markdown_parser %}
+{% load staticfiles %}
 {% block maincontent %}
 <div class="row">
 	<div class="col-md-12">
@@ -27,7 +28,7 @@
 				{{ review.review.text|parsemarkdown|safe }}
 				<hr>
 				<p><b>Written by {{ review.review.original_author }}</b></p>
-				<p><b>Points</b>: <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ review.score }} <i class="fa fa-thumbs-down" aria-hidden="true"></i></p>
+				<p class="voting"><b>Points</b>: <i class="fa fa-thumbs-up vote-up"></i> <span class="review-score">{{ review.score }}</span> <i class="fa fa-thumbs-down vote-down"></i></p>
 				<p><a class="btn btn-default" href="{% url 'organizationreviewview' review.review.pk %}">View/edit review</a></p>
 			</div>
 		</div>
