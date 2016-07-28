@@ -49,3 +49,6 @@ class VoteManager(models.Manager):
             reviews.append({'review': review, 'score': item['score']})
 
         return(reviews)
+
+    def get_hot_reviews(self, review_object): #too lazy to implement anything cool, just top of last two days
+        pass
