@@ -24,10 +24,11 @@
 		{% for review in reviews %}
 		<div class="panel panel-default">
 			<div class="panel-body">
-				{{ review.text|parsemarkdown|safe }}
+				{{ review.review.text|parsemarkdown|safe }}
 				<hr>
-				<p><b>Written by {{ review.original_author }}</b></p>
-				<p><a class="btn btn-default" href="{% url 'organizationreviewview' review.pk %}">View/edit review</a></p>
+				<p><b>Written by {{ review.review.original_author }}</b></p>
+				<p><b>Points</b>: <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ review.score }} <i class="fa fa-thumbs-down" aria-hidden="true"></i></p>
+				<p><a class="btn btn-default" href="{% url 'organizationreviewview' review.review.pk %}">View/edit review</a></p>
 			</div>
 		</div>
 		{% endfor %}

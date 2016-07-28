@@ -28,8 +28,5 @@ class VoteManager(models.Manager):
 
         return(reviews)
 
-    def get_top_organization_reviews(self, organization):
-        pass
-
     def remove_vote(self, obj, user):
         pass

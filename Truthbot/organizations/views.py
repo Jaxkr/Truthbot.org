@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 import json
 import reversion
 from reversion.models import Version
+from votes.models import OrganizationReviewVote
 
 # Create your views here.
 
@@ -25,7 +26,7 @@ def organization_search(request):
 
 
 @login_required
-def organization_root(request):  
+def organization_root(request):
     organizations_list = Organization.objects.all()
     paginator = Paginator(organizations_list, 25)
     page = request.GET.get('page')
@@ -45,7 +46,7 @@ def organization_root(request):
 def organization_new(request):
     if request.method == 'POST':
         form = OrganizationForm(request.POST, request.FILES)
-        
+
         if form.is_valid():
             with reversion.create_revision():
                 org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], description=form.cleaned_data['description'])
@@ -63,7 +64,7 @@ def organization_new(request):
 @login_required
 def organization_info(request, organization_pk):
     org = Organization.objects.get(pk=organization_pk)
-    reviews = OrganizationReview.objects.filter(organization=org)
+    reviews = OrganizationReviewVote.objects.get_top_reviews(review_object=org)
 
     return render(request, 'organizations/organization_info.html', {'org': org, 'reviews': reviews})
 
@@ -79,6 +80,7 @@ def organization_create_review(request, organization_pk):
                 new_review.save()
                 new_review.contributors.add(request.user)
                 reversion.set_user(request.user)
+            OrganizationReviewVote.objects.cast_vote(new_review, request.user, +1)
 
             return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
         else:
@@ -206,7 +208,6 @@ def organization_edit_history(request, organization_pk):
         for child in version.field_dict['child_organizations']:
             child_organization = Organization.objects.get(pk=child)
             version.named_child_organizations.append((child_organization.name, child_organization.pk))
-        print(version.named_child_organizations)
 
 
     return render(request, 'organizations/organization_edit_history.html', {'versions': versions, 'org': org})
@@ -244,7 +245,7 @@ def organization_remove_child(request, organization_pk):
         with reversion.create_revision():
             parent_organization.child_organizations.remove(child_organization)
         return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_pk]))
-    
+
 
     return render(request, 'organizations/generic/confirm_remove_child.html', {'organization': parent_organization, 'childorg': child_organization})
 

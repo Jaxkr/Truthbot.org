@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markdown_parser %}
 
 {% block maincontent %}
 <div class="col-md-6">
@@ -18,7 +19,12 @@
 	<big><a href="{{ article.url }}" target="_blank"><i>{{ article.title }}</i> <i class="fa fa-external-link" aria-hidden="true"></i></a></big>
 	{% if have_article_reviews %}
 	{% for article_review in article_reviews %}
-	<br>{{ article_review.review.text }} - {{ article_review.score }}<br>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<p>{{ article_review.review.text|parsemarkdown|safe }}</p>
+			<p><b>Points</b>: <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ article_review.score }} <i class="fa fa-thumbs-down" aria-hidden="true"></i></p>
+		</div>
+	</div>
 	{% endfor %}
 	{% endif %}
 	<p>
