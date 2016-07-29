@@ -68,7 +68,14 @@ def article_view(request, url):
 
         if ArticleReview.objects.filter(article=article).exists():
             have_article_reviews = True
-            article_reviews = ArticleReviewVote.objects.get_top_reviews(review_object=article)
+            if request.GET.get('sort') == 'new':
+                reviews = ArticleReview.objects.filter(article=article).order_by('-time_created')
+                reviews_list = []
+                for review in reviews:
+                    reviews_list.append({'review': review, 'score': ArticleReviewVote.objects.get_score(review)['score']})
+                article_reviews = reviews_list
+            else:
+                article_reviews = ArticleReviewVote.objects.get_top_reviews(review_object=article)
 
     elif PageInProgress.objects.filter(url=url).exists():
         t1 = PageInProgress.objects.get(url=url).time_added
@@ -131,7 +138,8 @@ def article_edit_review(request, review_pk):
 def article_review_view(request, review_pk):
     review = ArticleReview.objects.get(pk=review_pk)
     review_edits = Version.objects.get_for_object(review)
-    return render(request, 'articles/article_review_view.html', {'review' : review, 'edits': review_edits})
+    score = ArticleReviewVote.objects.get_score(obj=review)
+    return render(request, 'articles/article_review_view.html', {'review' : review, 'edits': review_edits, 'reviewscore': score})
 
 
 @login_required

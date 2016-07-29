@@ -12,5 +12,10 @@ def get_vote_color(obj, user, model_type):
             color = 'red'
         elif OrganizationReviewVote.objects.get_user_vote(obj, user) == -1:
             color = 'blue'
+    if model_type == 'articlereview':
+        if ArticleReviewVote.objects.get_user_vote(obj, user) == 1:
+            color = 'red'
+        elif ArticleReviewVote.objects.get_user_vote(obj, user) == -1:
+            color = 'blue'
 
     return color

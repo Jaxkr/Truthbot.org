@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load markdown_parser %}
+{% load get_user_vote %}
 
 {% block maincontent %}
 <div class="col-md-6">
@@ -18,11 +19,15 @@
 	{% else %}
 	<big><a href="{{ article.url }}" target="_blank"><i>{{ article.title }}</i> <i class="fa fa-external-link" aria-hidden="true"></i></a></big>
 	{% if have_article_reviews %}
+	<p>Sort: <a href="?sort=top">Top</a>, <a href="?sort=new">New</a></p>
 	{% for article_review in article_reviews %}
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<p>{{ article_review.review.text|parsemarkdown|safe }}</p>
-			<p><b>Points</b>: <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ article_review.score }} <i class="fa fa-thumbs-down" aria-hidden="true"></i></p>
+			<hr>
+			<p><b>Written by {{ article_review.review.original_author }}</b></p>
+			<p class="voting"><b>Points</b>: <i data-voteurl="{% url 'castvote' %}?review={{ article_review.review.pk }}&type=+1&model=articlereview" class="fa fa-thumbs-up vote-up"></i> <span class="review-score" style="color:{% get_vote_color article_review.review request.user 'articlereview' %};">{{ article_review.score }}</span> <i class="fa fa-thumbs-down vote-down" data-voteurl="{% url 'castvote' %}?review={{ article_review.review.pk }}&type=-1&model=articlereview"></i></p>
+			<p><a class="btn btn-default" href="{% url 'articlereviewview' article_review.review.pk %}">View/edit review</a></p>
 		</div>
 	</div>
 	{% endfor %}

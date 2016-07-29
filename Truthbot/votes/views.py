@@ -13,4 +13,8 @@ def cast_vote(request):
             vote_type = int(request.GET['type'])
             review = OrganizationReview.objects.get(pk=request.GET['review'])
             OrganizationReviewVote.objects.cast_vote(review, request.user, vote_type)
+        elif request.GET['model'] == 'articlereview':
+            vote_type = int(request.GET['type'])
+            review = ArticleReview.objects.get(pk=request.GET['review'])
+            ArticleReviewVote.objects.cast_vote(review, request.user, vote_type)
         return HttpResponse('success')

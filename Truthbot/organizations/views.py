@@ -100,8 +100,9 @@ def organization_create_review(request, organization_pk):
 def organization_review_view(request, review_pk):
     review = OrganizationReview.objects.get(pk=review_pk)
     versions = Version.objects.get_for_object(review)
+    score = OrganizationReviewVote.objects.get_score(obj=review)
 
-    return render(request, 'organizations/organization_review_view.html', {'review' : review, 'versions': versions})
+    return render(request, 'organizations/organization_review_view.html', {'review' : review, 'versions': versions, 'reviewscore': score})
 
 @login_required
 def organization_review_confirm_rollback(request, edit_pk):
