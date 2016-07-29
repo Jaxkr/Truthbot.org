@@ -64,7 +64,14 @@ def organization_new(request):
 @login_required
 def organization_info(request, organization_pk):
     org = Organization.objects.get(pk=organization_pk)
-    reviews = OrganizationReviewVote.objects.get_top_reviews(review_object=org)
+    if request.GET.get('sort') == 'new':
+        reviews = OrganizationReview.objects.filter(organization=org).order_by('-time_created')
+        reviews_list = []
+        for review in reviews:
+            reviews_list.append({'review': review, 'score': OrganizationReviewVote.objects.get_score(review)['score']})
+        reviews = reviews_list
+    else:
+        reviews = OrganizationReviewVote.objects.get_top_reviews(review_object=org)
 
     return render(request, 'organizations/organization_info.html', {'org': org, 'reviews': reviews})
 

@@ -5,6 +5,14 @@ from articles.models import *
 from organizations.models import *
 
 class VoteManager(models.Manager):
+    def get_score(self, obj):
+        result = self.filter(review = obj).values('review_id').aggregate(score=Sum('vote'))
+
+        if result['score'] is None:
+            result['score'] = 0
+
+        return result
+
     def cast_vote(self, obj, user, vote):
         if vote not in (+1, -1):
             raise ValueError('Invalid vote (must be +1/-1)')
@@ -43,12 +51,9 @@ class VoteManager(models.Manager):
         results = results.order_by('-score')
 
         reviews = []
-        for item in results:
+        for item in results[:30]:
             print(item)
             review = model.objects.get(pk=item['review_id'])
             reviews.append({'review': review, 'score': item['score']})
 
         return(reviews)
-
-    def get_hot_reviews(self, review_object): #too lazy to implement anything cool, just top of last two days
-        pass
