@@ -6,12 +6,12 @@ from reversion.admin import VersionAdmin
 
 @admin.register(OrganizationDomain)
 class OrganizationDomainAdmin(VersionAdmin):
-	pass
+    pass
 
 @admin.register(Organization)
 class OrganizationAdmin(VersionAdmin):
-	pass
+    pass
 
 @admin.register(OrganizationReview)
 class OrganizationReviewAdmin(VersionAdmin):
-	pass
+    pass

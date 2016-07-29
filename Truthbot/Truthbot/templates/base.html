@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="{% url 'organizationroot' %}">Organizations</a></li>
-            <li><a href="#">Link</a></li>
+            <li><a href="{% url 'articlesroot' %}">Articles</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
@@ -54,5 +54,6 @@
   </div>
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/voting.js' %}"></script>
 </body>
 </html>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'organizations.apps.OrganizationsConfig',
     'articles.apps.ArticlesConfig',
+    'votes.apps.VotesConfig',
     'reversion',
 ]
 
@@ -142,3 +143,6 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Denver'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

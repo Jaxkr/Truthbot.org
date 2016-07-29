@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load markdown_parser %}
+{% load get_user_vote %}
+{% load staticfiles %}
 {% block maincontent %}
 <div class="row">
 	<div class="col-md-12">
@@ -21,13 +23,15 @@
 	</div>
 	<div class="col-md-7">
 		<h2>Reviews of {{ org.name }}:</h2>
+		<p>Sort: <a href="?sort=top">Top</a>, <a href="?sort=new">New</a></p>
 		{% for review in reviews %}
 		<div class="panel panel-default">
 			<div class="panel-body">
-				{{ review.text|parsemarkdown|safe }}
+				{{ review.review.text|parsemarkdown|safe }}
 				<hr>
-				<p><b>Written by {{ review.original_author }}</b></p>
-				<p><a class="btn btn-default" href="{% url 'organizationreviewview' review.pk %}">View/edit review</a></p>
+				<p><b>Written by {{ review.review.original_author }}</b></p>
+				<p class="voting"><b>Points</b>: <i data-voteurl="{% url 'castvote' %}?review={{ review.review.pk }}&type=+1&model=organizationreview" class="fa fa-thumbs-up vote-up"></i> <span class="review-score" style="color:{% get_vote_color review.review request.user 'organizationreview' %};">{{ review.score }}</span> <i class="fa fa-thumbs-down vote-down" data-voteurl="{% url 'castvote' %}?review={{ review.review.pk }}&type=-1&model=organizationreview"></i></p>
+				<p><a class="btn btn-default" href="{% url 'organizationreviewview' review.review.pk %}">View/edit review</a></p>
 			</div>
 		</div>
 		{% endfor %}
