@@ -18,7 +18,6 @@
 	<p><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Page has been in queue for approximately {{ seconds }} seconds.</p>
 	{% else %}
 	<big><a href="{{ article.url }}" target="_blank"><i>{{ article.title }}</i> <i class="fa fa-external-link" aria-hidden="true"></i></a></big>
-	{% if have_article_reviews %}
 	<p>Sort: <a href="?sort=top">Top</a>, <a href="?sort=new">New</a></p>
 	{% for article_review in article_reviews %}
 	<div class="panel panel-default">
@@ -29,8 +28,10 @@
 			<p><a class="btn btn-default" href="{% url 'articlereviewview' article_review.review.pk %}">View/edit review</a></p>
 		</div>
 	</div>
+	{% empty %}
+    <p class="lead">There are no reviews for this article yet! If you're still looking for information,
+			you can try browsing the <a href="http://forums.truthbot.org/c/in-the-news">news forums</a>.
 	{% endfor %}
-	{% endif %}
 	{% endif %}
 </div>
 {% endblock %}
