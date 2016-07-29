@@ -8,6 +8,7 @@ import math
 from django.utils import timezone
 from urllib.parse import urlparse
 from .forms import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -18,8 +19,18 @@ from votes.models import *
 # Create your views here.
 @login_required
 def articles_index(request):
-    recent_articles = Article.objects.all().order_by('-time_created')[:50]
-    return render(request, 'articles/articles.html', {'recent_articles': recent_articles})
+    articles_list = Article.objects.all().order_by('-time_created')
+    paginator = Paginator(articles_list, 25)
+    page = request.GET.get('page')
+
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+
+    return render(request, 'articles/articles.html', {'articles': articles})
 
 @login_required
 def article_view(request, url):
