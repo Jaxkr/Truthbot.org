@@ -16,12 +16,10 @@ from reversion.models import Version
 from votes.models import *
 
 # Create your views here.
-
-
 @login_required
 def articles_index(request):
-
-    return render(request, 'articles/articles.html')
+    recent_articles = Article.objects.all().order_by('-time_created')[:50]
+    return render(request, 'articles/articles.html', {'recent_articles': recent_articles})
 
 @login_required
 def article_view(request, url):
