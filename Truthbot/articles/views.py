@@ -15,6 +15,8 @@ from django.core.urlresolvers import reverse, reverse_lazy
 import reversion
 from reversion.models import Version
 from votes.models import *
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 @login_required
@@ -46,6 +48,12 @@ def article_view(request, url):
     sorting = request.GET['sorting'] if ('sorting' in request.GET) else 'top'
     article_reviews = {}
 
+    url_validator = URLValidator()
+
+    try:
+        url_validator(url)
+    except ValidationError:
+        return HttpResponse('Invalid url')
 
     requested_domain = urlparse(url).netloc
     if (OrganizationDomain.objects.filter(domain=requested_domain).exists()):
