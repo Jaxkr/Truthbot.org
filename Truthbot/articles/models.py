@@ -30,7 +30,7 @@ class ArticleReview(models.Model):
     article = models.ForeignKey('Article')
     original_author = models.ForeignKey(User, related_name='article_original_author_of')
     contributors = models.ManyToManyField(User)
-    time_created = models.DateTimeField(auto_now_add=True)
+    time_created = models.DateTimeField(auto_now=True)
 
 
 class PageInProgress(models.Model):
