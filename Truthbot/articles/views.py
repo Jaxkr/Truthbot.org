@@ -34,7 +34,6 @@ def articles_index(request):
 
     return render(request, 'articles/articles.html', {'articles': articles})
 
-@login_required
 def article_view(request, url):
     #this view is atrocious, but it seems efficient
 

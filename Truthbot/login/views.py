@@ -47,7 +47,7 @@ def login(request):
             user_auth = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user_auth is not None:
                 auth_login(request, user_auth)
-                return HttpResponseRedirect(reverse('organizationroot'))
+                return HttpResponseRedirect(request.POST.get('next') or '/')
             else:
                 form.add_error(None, 'Username or password incorrect.')
                 return render(request, 'login/login.html', {'form': form})
