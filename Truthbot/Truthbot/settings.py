@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'organizations.apps.OrganizationsConfig',
     'articles.apps.ArticlesConfig',
     'votes.apps.VotesConfig',
-    'public.apps.PublicConfig',
     'reversion',
 ]
 
