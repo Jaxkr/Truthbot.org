@@ -11,12 +11,12 @@ import reversion
 
 base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 
-@shared_task
 def create_article(url):
     get_organization_info(url)
     get_article_info(url)
     PageInProgress.objects.get(url=url).delete()
 
+@shared_task
 def get_article_info(url):
     a = newspaper.Article(url)
     a.download()
@@ -24,9 +24,11 @@ def get_article_info(url):
 
     new_article = Article(title=a.title, url=url)
     new_article.save()
+
+@shared_task
 def get_organization_info(url, **kwargs):
     if not 'wikilink' in kwargs:
-        try:    
+        try:
             o = urllib.parse.urlsplit(url)
             url_without_path = o.scheme + '://' + o.netloc
             n = newspaper.build(url_without_path)
@@ -61,14 +63,14 @@ def get_organization_info(url, **kwargs):
         org_name = soup.find('h1', { "class" : "firstHeading" }).text
     except:
         return
-    
+
     [s.extract() for s in soup('sup')]
     intro = soup.find('p').getText()
     infobox_table = soup.findAll('table', { "class" : "infobox" })
     if (infobox_table):
         infobox_table = infobox_table[0]
         infobox_data = parse_wikipedia_table(infobox_table)
-        
+
         web_address = '#'
         if ('Website' in infobox_data):
             web_address = infobox_data['Website'].find('a')['href']
@@ -88,7 +90,7 @@ def get_organization_info(url, **kwargs):
             org = Organization.objects.get(name=org_name)
     else:
         return
-    
+
 
     if 'child' in kwargs:
         org.child_organizations.add(kwargs['child'])
@@ -134,8 +136,8 @@ def parse_wikipedia_table(infobox_table):
 
 def create_request(url):
     return urllib.request.Request(
-        url, 
-        data=None, 
+        url,
+        data=None,
         headers={
         'User-Agent': 'Truthbot Web Scraper/1.0 (https://github.com/Jaxkr/Truthbot.org; jacksonroberts25@gmail.com) urllib/Python3'
         }
