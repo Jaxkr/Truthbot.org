@@ -13,7 +13,6 @@ from votes.models import *
 
 # Create your views here.
 
-@login_required
 def organization_search(request):
     search_form = OrganizationSearch(request.GET)
     search_term = search_form.data['search_term']
@@ -25,7 +24,6 @@ def organization_search(request):
     return render(request, 'organizations/organization_search.html', {'form': search_form, 'term': search_term, 'organizations': organizations})
 
 
-@login_required
 def organization_root(request):
     organizations_list = Organization.objects.all()
     paginator = Paginator(organizations_list, 25)
@@ -61,7 +59,6 @@ def organization_new(request):
     form = OrganizationForm()
     return render(request, 'organizations/organization_new.html', {'form': form})
 
-@login_required
 def organization_info(request, organization_pk):
     org = Organization.objects.get(pk=organization_pk)
     if request.GET.get('sort') == 'new':
@@ -96,7 +93,6 @@ def organization_create_review(request, organization_pk):
     return render(request, 'organizations/organization_review.html', {'form' : form, 'org': org})
 
 
-@login_required
 def organization_review_view(request, review_pk):
     review = OrganizationReview.objects.get(pk=review_pk)
     versions = Version.objects.get_for_object(review)
@@ -220,6 +216,7 @@ def organization_edit_history(request, organization_pk):
 
     return render(request, 'organizations/organization_edit_history.html', {'versions': versions, 'org': org})
 
+@login_required
 def organization_confirm_rollback(request, edit_pk):
     version = Version.objects.get(pk=edit_pk)
 

@@ -19,7 +19,6 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 
 # Create your views here.
-@login_required
 def articles_index(request):
     articles_list = Article.objects.all().order_by('-time_created')
     paginator = Paginator(articles_list, 25)
@@ -153,7 +152,6 @@ def article_edit_review(request, review_pk):
 
     return render(request, 'articles/article_review.html', {'form' : form, 'edit': True})
 
-@login_required
 def article_review_view(request, review_pk):
     review = ArticleReview.objects.get(pk=review_pk)
     review_edits = Version.objects.get_for_object(review)
