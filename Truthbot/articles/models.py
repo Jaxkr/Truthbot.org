@@ -8,6 +8,7 @@ import reversion
 class Article(models.Model):
     title = models.CharField(max_length=300, blank=False)
     url = models.CharField(max_length=2083, blank=False, unique=True)
+    time_created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -29,7 +30,7 @@ class ArticleReview(models.Model):
     article = models.ForeignKey('Article')
     original_author = models.ForeignKey(User, related_name='article_original_author_of')
     contributors = models.ManyToManyField(User)
-    time_created = models.DateTimeField(auto_now_add=True)
+    time_created = models.DateTimeField(auto_now=True)
 
 
 class PageInProgress(models.Model):

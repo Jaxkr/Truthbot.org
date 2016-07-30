@@ -41,4 +41,4 @@ class OrganizationReview(models.Model):
     original_author = models.ForeignKey(User, related_name='original_author_of')
     contributors = models.ManyToManyField(User)
     points = models.IntegerField(default=1)
-    time_created = models.DateTimeField(auto_now_add=True)
+    time_created = models.DateTimeField(auto_now=True)
