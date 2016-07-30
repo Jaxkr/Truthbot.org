@@ -52,7 +52,6 @@ class VoteManager(models.Manager):
 
         reviews = []
         for item in results[:30]:
-            print(item)
             review = model.objects.get(pk=item['review_id'])
             reviews.append({'review': review, 'score': item['score']})
 

@@ -105,6 +105,7 @@ def article_view(request, url):
         a.save()
 
 
+
     return render(request, 'articles/article.html', {'org': org, 'parents': parents,
                                                     'domain': requested_domain, 'org_exists': org_exists,
                                                     'article': article, 'have_article': have_article,

@@ -4,7 +4,11 @@
 {% block maincontent %}
 <div class="row">
 	<div class="col-md-6">
-		<p class="voting"><b>Points</b>: <i data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=+1&model=articlereview" class="fa fa-thumbs-up vote-up"></i> <span class="review-score" style="color:{% get_vote_color review request.user 'articlereview' %};">{{ reviewscore.score }}</span> <i class="fa fa-thumbs-down vote-down" data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=-1&model=articlereview"></i></p>
+		<p class="voting"><b>Points</b>:
+			<i data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=+1&model=articlereview" class="fa fa-thumbs-up vote-up"></i>
+			<i data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=0&model=articlereview" class="fa fa-remove vote-up"></i>
+			<i class="fa fa-thumbs-down vote-down" data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=-1&model=articlereview"></i>
+		</p>
 		<p><a href="{% url 'articleeditreview' review.pk %}" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit review</a></p>
 		{{ review.text|parsemarkdown|safe }}
 	</div>
