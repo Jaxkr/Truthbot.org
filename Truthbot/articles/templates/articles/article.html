@@ -7,7 +7,7 @@
 	{% if org_exists %}
 	<h2>Ownership info:</h2>
 	<p class="lead">
-		<b>{{ domain }}</b> is part of <b>{{ org.name }}</b> {% if parents %}{% for parent in parents %} which is owned by <b>{{ parent.name }}</b>{% if not forloop.last %} {% endif %}{% endfor %}{% endif %}.
+		<b>{{ domain }}</b> is part of <a href="{% url "organizationinfo" org.pk %}"><b>{{ org.name }}</b></a> {% if parents %}{% for parent in parents %} which is owned by <a href="{% url "organizationinfo" parent.pk %}"><b>{{ parent.name }}</b></a>{% if not forloop.last %} {% endif %}{% endfor %}{% endif %}.
 	</p>
 	{% endif %}
 </div>
