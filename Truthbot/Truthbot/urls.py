@@ -25,5 +25,4 @@ urlpatterns = [
     url(r'^organizations/', include('organizations.urls')),
     url(r'^articles/', include('articles.urls')),
     url(r'^vote/', include('votes.urls')),
-    url(r'^public/', include('public.urls')),
 ]
