@@ -74,3 +74,6 @@ media/
 
 # sftp configuration file
 sftp-config.json
+
+#production settings file
+prodsettings.py
