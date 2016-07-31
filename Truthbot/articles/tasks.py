@@ -24,6 +24,7 @@ def get_article_info(url):
 
     new_article = Article(title=a.title, url=url)
     new_article.save()
+    PageInProgress.objects.get(url=url).delete()
 
 @shared_task
 def get_organization_info(url, **kwargs):
