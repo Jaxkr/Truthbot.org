@@ -7,7 +7,7 @@
 		{% if user.is_authenticated %}
 		<p class="voting"><b>Points</b>:
 			<i data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=+1&model=articlereview" class="fa fa-thumbs-up vote-up"></i>
-			<i data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=0&model=articlereview" class="fa fa-remove vote-up"></i>
+			<span class="review-score" style="color:{% get_vote_color review request.user 'articlereview' %};">{{ reviewscore.score }}</span>
 			<i class="fa fa-thumbs-down vote-down" data-voteurl="{% url 'castvote' %}?review={{ review.pk }}&type=-1&model=articlereview"></i>
 		</p>
 		{% endif %}
