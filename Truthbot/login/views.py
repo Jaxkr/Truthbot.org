@@ -79,14 +79,14 @@ def sso(request):
     ## Validate the payload
 
     try:
-        payload = urllib.unquote(payload)
-        decoded = base64.decodestring(payload)
+        payload = bytes(urllib.unquote(payload), encoding='utf-8')
+        decoded = base64.decodestring(payload).decode('utf-8')
         assert 'nonce' in decoded
         assert len(payload) > 0
     except AssertionError:
         return HttpResponseBadRequest('Invalid payload. Please contact support if this problem persists.')
 
-    key = str(settings.DISCOURSE_SSO_SECRET) # must not be unicode
+    key = bytes(settings.DISCOURSE_SSO_SECRET, encoding='utf-8') # must not be unicode
     h = hmac.new(key, payload, digestmod=hashlib.sha256)
     this_signature = h.hexdigest()
 
@@ -101,10 +101,10 @@ def sso(request):
         'email': request.user.email,
         'external_id': request.user.id,
         'username': request.user.username,
-        'require_activation': true
+        'require_activation': 'true',
     }
 
-    return_payload = base64.encodestring(urllib.urlencode(params))
+    return_payload = base64.encodestring(bytes(urllib.urlencode(params), 'utf-8'))
     h = hmac.new(key, return_payload, digestmod=hashlib.sha256)
     query_string = urllib.urlencode({'sso': return_payload, 'sig': h.hexdigest()})
 
