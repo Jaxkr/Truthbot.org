@@ -59,4 +59,4 @@ def login(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponse('You have been logged out.')
+    return HttpResponseRedirect(reverse('homepage'))

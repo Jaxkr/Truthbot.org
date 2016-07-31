@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block maincontent %}
+<h3>Go to article page for article with URL...</h3>
+<form action="{% url "articlesroot" %}" method="post">
+	<div class="input-group">
+		{{ form.article_url }}
+		<span class="input-group-btn">
+			<button style="height: 50px" class="btn btn-default" type="submit">Go</button>
+		</span>
+	</div>
+  {% csrf_token %}
+</form>
 <h2>Recently added articles</h2>
 <nav>
   <ul class="pagination">

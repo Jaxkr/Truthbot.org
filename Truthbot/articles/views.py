@@ -23,6 +23,12 @@ def articles_index(request):
     articles_list = Article.objects.all().order_by('-time_created')
     paginator = Paginator(articles_list, 25)
     page = request.GET.get('page')
+    form = GoToArticle()
+
+    if request.method == 'POST':
+        form = GoToArticle(request.POST)
+        url = form.data['article_url']
+        return HttpResponseRedirect(reverse('article', args=[url]))
 
     try:
         articles = paginator.page(page)
@@ -31,7 +37,7 @@ def articles_index(request):
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
 
-    return render(request, 'articles/articles.html', {'articles': articles})
+    return render(request, 'articles/articles.html', {'articles': articles, 'form': form})
 
 def article_view(request, url):
     #this view is atrocious, but it seems efficient

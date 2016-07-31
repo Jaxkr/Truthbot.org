@@ -11,3 +11,6 @@ class ReviewForm(forms.Form):
         (CRITICAL_TONE, 'Critical')
         )
     tone = forms.ChoiceField(choices=REVIEW_TONE_CHOICES, required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+
+class GoToArticle(forms.Form):
+    article_url = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Article URL', 'style': 'height: 50px;font-size: 20px'}), max_length=2000)
