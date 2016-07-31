@@ -3,6 +3,7 @@
 {% load get_user_vote %}
 
 {% block maincontent %}
+<div class="row">
 <div class="col-md-6">
 	{% if org_exists %}
 	<h2>Ownership info:</h2>
@@ -26,7 +27,9 @@
 			<p>{{ article_review.review.text|parsemarkdown|safe }}</p>
 			<hr>
 			<p><b>Written by {{ article_review.review.original_author }}</b></p>
+			{% if user.is_authenticated %}
 			<p class="voting"><b>Points</b>: <i data-voteurl="{% url 'castvote' %}?review={{ article_review.review.pk }}&type=+1&model=articlereview" class="fa fa-thumbs-up vote-up"></i> <span class="review-score" style="color:{% get_vote_color article_review.review request.user 'articlereview' %};">{{ article_review.score }}</span> <i class="fa fa-thumbs-down vote-down" data-voteurl="{% url 'castvote' %}?review={{ article_review.review.pk }}&type=-1&model=articlereview"></i></p>
+			{% endif %}
 			<p><a class="btn btn-default" href="{% url 'articlereviewview' article_review.review.pk %}">View/edit review</a></p>
 		</div>
 	</div>
@@ -36,5 +39,6 @@
 		<a href="{% url 'articlecreatereview' article.pk %}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Write review for this article</a>
 	</p>
 	{% endif %}
+</div>
 </div>
 {% endblock %}
