@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load markdown_parser %}
 {% load get_user_vote %}
-
+{% block title %}
+{{ article }} - Truthbot
+{% endblock %}
 {% block maincontent %}
 <div class="row">
 <div class="col-md-6">

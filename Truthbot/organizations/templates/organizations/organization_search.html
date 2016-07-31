@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-
+{% block title %}
+Search results for "{{ term }}"
+{% endblock %}
 {% block maincontent %}
 <h2>Search results for "{{ term }}":</h2>
 <form action="{% url "organizationsearch" %}" method="get">

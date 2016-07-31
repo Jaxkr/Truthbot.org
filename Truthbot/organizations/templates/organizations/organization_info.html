@@ -2,6 +2,9 @@
 {% load markdown_parser %}
 {% load get_user_vote %}
 {% load staticfiles %}
+{% block title %}
+{{ org.name }} - Truthbot
+{% endblock %}
 {% block maincontent %}
 <div class="row">
 	<div class="col-md-12">
