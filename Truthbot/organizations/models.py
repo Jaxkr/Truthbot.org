@@ -16,9 +16,8 @@ class OrganizationDomain(models.Model):
 class Organization(models.Model):
     name = models.CharField(max_length=300, blank=False)
     description = models.CharField(max_length=1000, blank=False)
-    url = models.CharField(max_length=2083, blank=False)
+    homepage = models.CharField(max_length=2083, blank=False)
     child_organizations = models.ManyToManyField('Organization', blank=True, related_name='parent_organizations')
-    wiki = models.ForeignKey('OrganizationWiki')
 
     def __str__(self):
         return self.name
@@ -29,3 +28,4 @@ class OrganizationWiki(models.Model):
     contributors = models.ManyToManyField(User)
     time_created = models.DateTimeField(auto_now=True)
     time_last_edited = models.DateTimeField()
+    wiki = models.ForeignKey('OrganizationWiki', blank=True)
