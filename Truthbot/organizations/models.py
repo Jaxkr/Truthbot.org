@@ -18,27 +18,14 @@ class Organization(models.Model):
     description = models.CharField(max_length=1000, blank=False)
     url = models.CharField(max_length=2083, blank=False)
     child_organizations = models.ManyToManyField('Organization', blank=True, related_name='parent_organizations')
-    wiki_url = models.CharField(max_length=2083, blank=False)
+    wiki = models.ForeignKey('OrganizationWiki')
 
     def __str__(self):
         return self.name
 
 @reversion.register()
-class OrganizationReview(models.Model):
-    POSITIVE_TONE = 'P'
-    NEUTRAL_TONE = 'N'
-    CRITICAL_TONE = 'C'
-
-    REVIEW_TONE_CHOICES = (
-        (POSITIVE_TONE, 'Positive'),
-        (NEUTRAL_TONE, 'Neutral'),
-        (CRITICAL_TONE, 'Critical')
-        )
-
-    tone = models.CharField(max_length=1, choices=REVIEW_TONE_CHOICES, default=NEUTRAL_TONE)
-    text = models.CharField(max_length=3000)
-    organization = models.ForeignKey('Organization')
-    original_author = models.ForeignKey(User, related_name='original_author_of')
+class OrganizationWiki(models.Model):
+    text = models.TextField()
     contributors = models.ManyToManyField(User)
-    points = models.IntegerField(default=1)
     time_created = models.DateTimeField(auto_now=True)
+    time_last_edited = models.DateTimeField()

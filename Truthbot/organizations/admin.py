@@ -12,6 +12,6 @@ class OrganizationDomainAdmin(VersionAdmin):
 class OrganizationAdmin(VersionAdmin):
     pass
 
-@admin.register(OrganizationReview)
-class OrganizationReviewAdmin(VersionAdmin):
+@admin.register(OrganizationWiki)
+class OrganizationWikiAdmin(VersionAdmin):
     pass
