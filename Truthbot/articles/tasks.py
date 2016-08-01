@@ -8,15 +8,18 @@ import tldextract
 from bs4 import BeautifulSoup
 import urllib.request
 import reversion
+from urllib.parse import urlparse
 
 base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 
+@shared_task
 def create_article(url):
-    get_organization_info(url)
+    requested_domain = urlparse(url).netloc
+    if not OrganizationDomain.objects.filter(domain=requested_domain).exists():
+        get_organization_info(url)
     get_article_info(url)
     PageInProgress.objects.get(url=url).delete()
 
-@shared_task
 def get_article_info(url):
     a = newspaper.Article(url)
     a.download()
@@ -24,9 +27,7 @@ def get_article_info(url):
 
     new_article = Article(title=a.title, url=url)
     new_article.save()
-    PageInProgress.objects.get(url=url).delete()
 
-@shared_task
 def get_organization_info(url, **kwargs):
     if not 'wikilink' in kwargs:
         try:

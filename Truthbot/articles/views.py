@@ -80,8 +80,6 @@ def article_view(request, url):
                 hasParents = False
         org_exists = True
         # to return: org, parents, org_exists
-    else:
-        get_organization_info.delay(url)
 
     elapsed = 0
 
@@ -105,9 +103,9 @@ def article_view(request, url):
         now = datetime.datetime.now()
         elapsed = math.floor((now-t1).total_seconds())
     else:
-        get_article_info.delay(url)
         a = PageInProgress(url=url)
         a.save()
+        create_article.delay(url)
 
 
 
