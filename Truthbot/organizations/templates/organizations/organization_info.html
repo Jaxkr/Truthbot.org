@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load markdown_parser %}
-{% load get_user_vote %}
 {% load staticfiles %}
 {% block title %}
 {{ org.name }} - Truthbot
@@ -15,7 +14,7 @@
 <div class="row">
 	<div class="col-md-5">
 		<h1>{{ org.name }}</h1>
-		<p class="lead"><a href="{{ org.url }}" target="_blank">{{ org.url }} <i class="fa fa-external-link"></i></a></p>
+		<p class="lead"><a href="{{ org.homepage }}" target="_blank">{{ org.homepage }} <i class="fa fa-external-link"></i></a></p>
 		<p>
 			<a href="{% url "organizationmodify" org.pk %}" class="btn btn-default btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Organization</a>
 			<a href="{% url "organizationedithistory" org.pk %}" class="btn btn-default btn-default">View Edit History</a>
@@ -25,22 +24,7 @@
 		</p>
 	</div>
 	<div class="col-md-7">
-		<h2>Reviews of {{ org.name }}:</h2>
-		<p>Sort: <a href="?sort=top">Top</a>, <a href="?sort=new">New</a></p>
-		{% for review in reviews %}
-		<div class="panel panel-default">
-			<div class="panel-body">
-				{{ review.review.text|parsemarkdown|safe }}
-				<hr>
-				<p><b>Written by {{ review.review.original_author }}</b></p>
-				{% if user.is_authenticated %}
-				<p class="voting"><b>Points</b>: <i data-voteurl="{% url 'castvote' %}?review={{ review.review.pk }}&type=+1&model=organizationreview" class="fa fa-thumbs-up vote-up"></i> <span class="review-score" style="color:{% get_vote_color review.review request.user 'organizationreview' %};">{{ review.score }}</span> <i class="fa fa-thumbs-down vote-down" data-voteurl="{% url 'castvote' %}?review={{ review.review.pk }}&type=-1&model=organizationreview"></i></p>
-				{% endif %}
-				<p><a class="btn btn-default" href="{% url 'organizationreviewview' review.review.pk %}">View/edit review</a></p>
-			</div>
-		</div>
-		{% endfor %}
-		<a href="{% url 'organizationcreatereview' org.pk %}" class="btn btn-primary btn-lg"><i class="fa fa-pencil" aria-hidden="true"></i> Write a review</a>
+
 	</div>
 </div>
 {% endblock %}
