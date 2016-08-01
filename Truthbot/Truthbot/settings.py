@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
     'organizations.apps.OrganizationsConfig',
-    'articles.apps.ArticlesConfig',
-    'votes.apps.VotesConfig',
     'staticpages.apps.StaticpagesConfig',
     'reversion',
 ]
