@@ -117,7 +117,7 @@ def organization_modify(request, organization_pk):
                 with reversion.create_revision():
                     org.name = form.cleaned_data['name']
                     org.description = form.cleaned_data['description']
-                    org.url = form.cleaned_data['info_url']
+                    org.homepage = form.cleaned_data['info_url']
                     org.save()
                     reversion.set_user(request.user)
                 return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))

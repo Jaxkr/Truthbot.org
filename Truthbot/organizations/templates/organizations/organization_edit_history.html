@@ -13,7 +13,7 @@ Edit history for {{ org.name }}
 			<div class="panel-body">
 				<p><b>Name</b>: {{ version.field_dict.name }}</p>
 				<p><b>Description</b>: {{ version.field_dict.description }}</p>
-				<p><b>URL</b>: {{ version.field_dict.url }}</p>
+				<p><b>Homepage</b>: {{ version.field_dict.homepage }}</p>
 				<p><b>Children</b>:
 					{% for child in version.named_child_organizations %}
 						<a href="{% url "organizationinfo" child.1 %}">{{ child.0 }}</a>{% if not forloop.last %}, {% endif %}
