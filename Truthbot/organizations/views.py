@@ -10,6 +10,7 @@ import json
 import reversion
 from reversion.models import Version
 from .tasks import get_organization_info
+import datetime
 
 # Create your views here.
 
@@ -199,6 +200,25 @@ def organization_add_child(request, organization_parent_pk, organization_child_p
 
     return render(request, 'organizations/generic/confirm_add_child.html', {'organization': parent_organization, 'childorg': child_organization})
 
+
+#organization wiki views
+@login_required
+def organization_create_wiki(request, organization_pk):
+    org = Organization.objects.get(pk=organization_pk)
+
+    if not hasattr(org, 'organizationwiki'):
+        with reversion.create_revision():
+            wiki = OrganizationWiki(text="This is a newly created wiki page!  \nThings to include in a wiki page:  \n * Potential biases held by the organization.  \n * Any incidents of under-reporting.  \n * Anything you think needs to be known!  \n Don't feel pressured to add this all right now. Feel free to add what you want, and someone else will come along and add more. Community-style!", organization=org, time_last_edited=datetime.datetime.now())
+            wiki.save()
+
+        return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
+    else:
+        return HttpResponse('already exists')
+
+
+@login_required
+def organization_edit_wiki():
+    pass
 
 @login_required
 def organization_scrape(request):

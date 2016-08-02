@@ -24,8 +24,8 @@ class Organization(models.Model):
 
 @reversion.register()
 class OrganizationWiki(models.Model):
+    organization = models.OneToOneField('Organization')
     text = models.TextField()
     contributors = models.ManyToManyField(User)
     time_created = models.DateTimeField(auto_now=True)
     time_last_edited = models.DateTimeField()
-    wiki = models.ForeignKey('OrganizationWiki', blank=True)
