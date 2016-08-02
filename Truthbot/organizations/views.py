@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse, reverse_lazy
 import json
 import reversion
 from reversion.models import Version
-from votes.models import *
 
 # Create your views here.
 
@@ -47,7 +46,7 @@ def organization_new(request):
 
         if form.is_valid():
             with reversion.create_revision():
-                org = Organization(name=form.cleaned_data['name'], url=form.cleaned_data['info_url'], description=form.cleaned_data['description'])
+                org = Organization(name=form.cleaned_data['name'], homepage=form.cleaned_data['homepage'], description=form.cleaned_data['description'])
                 org.save()
                 reversion.set_user(request.user)
 
@@ -61,77 +60,9 @@ def organization_new(request):
 
 def organization_info(request, organization_pk):
     org = Organization.objects.get(pk=organization_pk)
-    if request.GET.get('sort') == 'new':
-        reviews = OrganizationReview.objects.filter(organization=org).order_by('-time_created')
-        reviews_list = []
-        for review in reviews:
-            reviews_list.append({'review': review, 'score': OrganizationReviewVote.objects.get_score(review)['score']})
-        reviews = reviews_list
-    else:
-        reviews = OrganizationReviewVote.objects.get_top_reviews(review_object=org)
 
-    return render(request, 'organizations/organization_info.html', {'org': org, 'reviews': reviews})
+    return render(request, 'organizations/organization_info.html', {'org': org})
 
-@login_required
-def organization_create_review(request, organization_pk):
-    org = Organization.objects.get(pk=organization_pk)
-
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            with reversion.create_revision():
-                new_review = OrganizationReview(tone=form.cleaned_data['tone'], text=form.cleaned_data['review'], organization=org, original_author=request.user)
-                new_review.save()
-                new_review.contributors.add(request.user)
-                reversion.set_user(request.user)
-            OrganizationReviewVote.objects.cast_vote(new_review, request.user, +1)
-
-            return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
-        else:
-            return render(request, 'organizations/organization_review.html', {'form': form, 'org': org})
-    form = ReviewForm()
-    return render(request, 'organizations/organization_review.html', {'form' : form, 'org': org})
-
-
-def organization_review_view(request, review_pk):
-    review = OrganizationReview.objects.get(pk=review_pk)
-    versions = Version.objects.get_for_object(review)
-    score = OrganizationReviewVote.objects.get_score(obj=review)
-
-    return render(request, 'organizations/organization_review_view.html', {'review' : review, 'versions': versions, 'reviewscore': score})
-
-@login_required
-def organization_review_confirm_rollback(request, edit_pk):
-    version = Version.objects.get(pk=edit_pk)
-
-    if request.method == 'POST':
-        version.revert()
-        return HttpResponseRedirect(reverse('organizationreviewview', args=[version.object_id]))
-
-    return render(request, 'organizations/generic/confirm_rollback.html')
-
-
-@login_required
-def organization_edit_review(request, review_pk):
-    review = OrganizationReview.objects.get(pk=review_pk)
-    form = ReviewForm(initial={'review': review.text, 'tone': review.tone})
-
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            if ((form.cleaned_data['review'] != review.text) or (form.cleaned_data['tone'] != review.tone)):
-                with reversion.create_revision():
-                    review.text = form.cleaned_data['review']
-                    review.tone = form.cleaned_data['tone']
-                    review.contributors.add(request.user)
-                    review.save()
-                    reversion.set_user(request.user)
-
-                return HttpResponseRedirect(reverse('organizationreviewview', args=[review.pk]))
-        else:
-            return render(request, 'organizations/organization_review.html', {'form': form, 'edit': True})
-
-    return render(request, 'organizations/organization_review.html', {'form' : form, 'edit': True})
 
 @login_required
 def organization_modify_domains(request, organization_pk):# NOTMG OLD VERSION
@@ -182,11 +113,11 @@ def organization_modify(request, organization_pk):
         form = OrganizationForm(request.POST, request.FILES)
         if form.is_valid():
             #check if there are any changes
-            if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['info_url'] != org.url)):
+            if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['homepage'] != org.homepage)):
                 with reversion.create_revision():
                     org.name = form.cleaned_data['name']
                     org.description = form.cleaned_data['description']
-                    org.url = form.cleaned_data['info_url']
+                    org.homepage = form.cleaned_data['homepage']
                     org.save()
                     reversion.set_user(request.user)
                 return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
@@ -197,7 +128,7 @@ def organization_modify(request, organization_pk):
 
 
 
-    form = OrganizationForm(initial={'name': org.name, 'description': org.description, 'info_url': org.url})
+    form = OrganizationForm(initial={'name': org.name, 'description': org.description, 'homepage': org.homepage})
 
     return render(request, 'organizations/organization_modify.html', {'form': form})
 

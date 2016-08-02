@@ -23,7 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('login.urls')),
     url(r'^organizations/', include('organizations.urls')),
-    url(r'^articles/', include('articles.urls')),
-    url(r'^vote/', include('votes.urls')),
     url(r'^', include('staticpages.urls')),
 ]

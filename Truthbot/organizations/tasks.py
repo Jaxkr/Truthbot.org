@@ -13,21 +13,6 @@ from urllib.parse import urlparse
 base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 
 @shared_task
-def create_article(url):
-    requested_domain = urlparse(url).netloc
-    if not OrganizationDomain.objects.filter(domain=requested_domain).exists():
-        get_organization_info(url)
-    get_article_info(url)
-    PageInProgress.objects.get(url=url).delete()
-
-def get_article_info(url):
-    a = newspaper.Article(url)
-    a.download()
-    a.parse()
-
-    new_article = Article(title=a.title, url=url)
-    new_article.save()
-
 def get_organization_info(url, **kwargs):
     if not 'wikilink' in kwargs:
         try:
