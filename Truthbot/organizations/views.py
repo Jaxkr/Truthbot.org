@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 import json
 import reversion
 from reversion.models import Version
+from .tasks import get_organization_info
 
 # Create your views here.
 
@@ -197,3 +198,11 @@ def organization_add_child(request, organization_parent_pk, organization_child_p
         return HttpResponseRedirect(reverse('organizationmodifychildren', args=[organization_parent_pk]))
 
     return render(request, 'organizations/generic/confirm_add_child.html', {'organization': parent_organization, 'childorg': child_organization})
+
+
+@login_required
+def organization_scrape(request):
+    url = request.GET.get('url')
+    if url:
+        get_organization_info.delay(url)
+        return HttpResponse(url)
