@@ -113,11 +113,11 @@ def organization_modify(request, organization_pk):
         form = OrganizationForm(request.POST, request.FILES)
         if form.is_valid():
             #check if there are any changes
-            if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['info_url'] != org.url)):
+            if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['homepage'] != org.homepage)):
                 with reversion.create_revision():
                     org.name = form.cleaned_data['name']
                     org.description = form.cleaned_data['description']
-                    org.homepage = form.cleaned_data['info_url']
+                    org.homepage = form.cleaned_data['homepage']
                     org.save()
                     reversion.set_user(request.user)
                 return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
@@ -128,7 +128,7 @@ def organization_modify(request, organization_pk):
 
 
 
-    form = OrganizationForm(initial={'name': org.name, 'description': org.description, 'info_url': org.url})
+    form = OrganizationForm(initial={'name': org.name, 'description': org.description, 'homepage': org.homepage})
 
     return render(request, 'organizations/organization_modify.html', {'form': form})
 
