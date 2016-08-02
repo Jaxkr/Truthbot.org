@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'organizations.apps.OrganizationsConfig',
     'staticpages.apps.StaticpagesConfig',
+    'contributors.apps.ContributorsConfig',
+    'api.apps.ApiConfig',
     'reversion',
 ]
 
