@@ -62,8 +62,12 @@ def organization_new(request):
 
 def organization_info(request, organization_pk):
     org = Organization.objects.get(pk=organization_pk)
+    wiki = None
 
-    return render(request, 'organizations/organization_info.html', {'org': org})
+    if hasattr(org, 'organizationwiki'):
+        wiki = org.organizationwiki
+
+    return render(request, 'organizations/organization_info.html', {'org': org, 'wiki': wiki})
 
 
 @login_required
@@ -208,17 +212,42 @@ def organization_create_wiki(request, organization_pk):
 
     if not hasattr(org, 'organizationwiki'):
         with reversion.create_revision():
-            wiki = OrganizationWiki(text="This is a newly created wiki page!  \nThings to include in a wiki page:  \n * Potential biases held by the organization.  \n * Any incidents of under-reporting.  \n * Anything you think needs to be known!  \n Don't feel pressured to add this all right now. Feel free to add what you want, and someone else will come along and add more. Community-style!", organization=org, time_last_edited=datetime.datetime.now())
+            wiki = OrganizationWiki(text="This is a newly created wiki page!  \nThings to include in a wiki page:  \n * Potential biases held by the organization.  \n * Any incidents of under-reporting.  \n * Anything you think needs to be known!  \n\nDon't feel pressured to add this all right now. Feel free to add what you want, and someone else will come along and add more. Community-style!", organization=org, time_last_edited=datetime.datetime.now())
             wiki.save()
 
-        return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
+        return HttpResponseRedirect(reverse('organizationeditwiki', args=[org.pk]))
     else:
         return HttpResponse('already exists')
 
-
 @login_required
-def organization_edit_wiki():
-    pass
+def organization_edit_wiki(request, organization_pk):
+    org = Organization.objects.get(pk=organization_pk)
+    wiki = org.organizationwiki
+
+    form = OrganizationWikiForm(initial={'text': wiki.text})
+
+    if request.method == 'POST':
+        form = OrganizationWikiForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['text'] != wiki.text:
+                with reversion.create_revision():
+                    wiki.text = form.cleaned_data['text']
+                    wiki.contributors.add(request.user)
+                    wiki.save()
+                    reversion.set_user(request.user)
+
+                return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
+        else:
+            return render(request, 'organizations/organization_edit_wiki.html', {'form': form, 'org': org})
+
+    return render(request, 'organizations/organization_edit_wiki.html', {'form' : form, 'org': org})
+
+def organization_wiki_edit_history(request, organization_pk):
+    org = Organization.objects.get(pk=organization_pk)
+    wiki = org.organizationwiki
+    versions = Version.objects.get_for_object(wiki)
+
+    return render(request, 'organizations/organization_wiki_edit_history.html', {'versions': versions, 'org': org})
 
 @login_required
 def organization_scrape(request):

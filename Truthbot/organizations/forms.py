@@ -14,3 +14,6 @@ class AddDomain(forms.Form):
 
 class OrganizationSearch(forms.Form):
     search_term = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Start of organization name...', 'style': 'height: 50px;font-size: 20px'}), max_length=50)
+
+class OrganizationWikiForm(forms.Form):
+    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'editor', 'rows': 16}))

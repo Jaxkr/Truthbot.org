@@ -11,7 +11,11 @@ urlpatterns = [
     url(r'organization/(?P<organization_pk>\d+)/edit-children/$', views.organization_modify_children, name='organizationmodifychildren'),
     url(r'organization/(?P<organization_pk>\d+)/edit/$', views.organization_modify, name='organizationmodify'),
     url(r'organization/(?P<organization_pk>\d+)/edit-history/$', views.organization_edit_history, name='organizationedithistory'),
+
     url(r'create-wiki/(?P<organization_pk>\d+)/$', views.organization_create_wiki, name='organizationcreatewiki'),
+    url(r'organization/(?P<organization_pk>\d+)/edit-wiki/$', views.organization_edit_wiki, name='organizationeditwiki'),
+    url(r'organization/(?P<organization_pk>\d+)/wiki-edit-history/$', views.organization_wiki_edit_history, name='organizationwikiedithistory'),
+
 
     #confirmation functions
     url(r'organization/(?P<organization_pk>\d+)/domains/remove/$', views.organization_delete_domain, name='organizationdeletedomain'),

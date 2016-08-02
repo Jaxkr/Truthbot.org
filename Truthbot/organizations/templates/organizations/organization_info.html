@@ -24,8 +24,16 @@
 		</p>
 	</div>
 	<div class="col-md-7">
-		<p class="lead">There is currently no page for this organization!</p>
-		<p><a href="{% url 'organizationcreatewiki' org.pk %}" class="btn btn-lg btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create Wiki Page</a></p>
+		{% if not wiki %}
+			<p class="lead">There is currently no page for this organization!</p>
+			<p><a href="{% url 'organizationcreatewiki' org.pk %}" class="btn btn-lg btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create Wiki Page</a></p>
+		{% else %}
+			{{ wiki.text|parsemarkdown|safe }}
+			<p>
+				<a href="{% url 'organizationeditwiki' org.pk %}" class="btn btn-sm btn-primary"><i class="fa fa-edit" aria-hidden="true"></i> Edit wiki page</a>
+				<a href="{% url 'organizationwikiedithistory' org.pk %}" class="btn btn-sm btn-default"><i class="fa fa-list" aria-hidden="true"></i> View edit history</a>
+			</p>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

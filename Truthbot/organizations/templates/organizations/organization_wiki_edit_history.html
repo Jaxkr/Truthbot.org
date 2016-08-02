@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit history for {{ org.name }}
+{% endblock %}
+{% block maincontent %}
+<h1>Viewing wiki edit history for {{ org.name }}</h1>
+<p>All versions of this wiki page</p>
+{% for version in versions %}
+<div class="row">
+	<div class="col-md-7">
+		<div class="panel panel-default">
+			<div class="panel-body">
+        {{ version.field_dict.text|linebreaks }}
+				<p><i>Edited by {{ version.revision.user }}</i></p>
+				<a href="{% url "organizationconfirmrollback" version.pk %}" class="btn btn-default">Rollback to this version</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endblock %}
