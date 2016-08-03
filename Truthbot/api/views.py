@@ -21,7 +21,6 @@ def get_org_info(request):
         data_to_return_dict = {'status': 'success', 'organization': org_dict, 'domain': requested_domain, 'parents': parents}
         return api_response(data_to_return_dict)
     except OrganizationDomain.DoesNotExist:
-        create_organization.delay(requested_url)
         return api_response({'status': 'notfound'})
 
 
