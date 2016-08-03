@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'staticpages.apps.StaticpagesConfig',
     'contributors.apps.ContributorsConfig',
     'api.apps.ApiConfig',
+    'news.apps.NewsConfig',
     'reversion',
 ]
 
