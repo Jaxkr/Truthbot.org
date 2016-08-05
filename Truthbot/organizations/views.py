@@ -44,7 +44,7 @@ def organization_root(request):
 @login_required
 def organization_new(request):
     if request.method == 'POST':
-        form = OrganizationForm(request.POST, request.FILES)
+        form = OrganizationForm(request.POST)
 
         if form.is_valid():
             with reversion.create_revision():
@@ -116,7 +116,7 @@ def organization_modify_children(request, organization_pk):
 def organization_modify(request, organization_pk):
     org = Organization.objects.get(pk=organization_pk)
     if request.method == 'POST':
-        form = OrganizationForm(request.POST, request.FILES)
+        form = OrganizationForm(request.POST)
         if form.is_valid():
             #check if there are any changes
             if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['homepage'] != org.homepage)):
