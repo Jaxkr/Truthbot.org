@@ -38,8 +38,34 @@ $('.vote-button').click(function() {
   }
 });
 
+$('.comment-vote-button').click(function() {
+  console.log('COMMENT')
+  var id = $(this).data('comment-id');
+  sendCommentVote(id);
+  var is_voted_on = $(this).data('comment-voted-on');
+  var score_element = $(this).find('.postscore');
+  var vote_button = $(this).find('.voteicon')
+
+  if (is_voted_on == 'yes') {
+    vote_button.css('color', 'black');
+    $(this).data('comment-voted-on', 'no');
+    var score = parseInt(score_element.html());
+    score_element.html(score - 1);
+  } else {
+    vote_button.css('color', 'red');
+    $(this).data('comment-voted-on', 'yes');
+    var score = parseInt(score_element.html());
+    score_element.html(score + 1);
+  }
+});
+
 function sendPostVote(id) {
   $.post( "/ajax/postvote/", {'postid': id, 'csrfmiddlewaretoken': csrftoken}).done(function(data) {
+
+  });
+}
+function sendCommentVote(id) {
+  $.post( "/ajax/commentvote/", {'commentid': id, 'csrfmiddlewaretoken': csrftoken}).done(function(data) {
 
   });
 }

@@ -34,4 +34,5 @@ class PostVote(models.Model):
     user = models.ForeignKey(User)
 
 class CommentVote(models.Model):
-    pass
+    comment = models.ForeignKey('Comment')
+    user = models.ForeignKey(User)

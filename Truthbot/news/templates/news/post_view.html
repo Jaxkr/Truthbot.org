@@ -35,6 +35,7 @@
         <span class="form-error">{{ form.text.errors.as_text }}</span>
         {% endif %}
         {{ form.text }}
+        <span class="help-block">You can use full markdown, including <a target="_blank" href="http://pandoc.org/MANUAL.html#footnotes">citations via footnotes</a>.</span>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form><br>
@@ -43,6 +44,9 @@
     <div class="panel panel-default">
       <div class="panel-body">
         {{ comment.text|parsemarkdown|safe }}
+        <button data-comment-voted-on="{% get_has_voted comment request.user 'comment' %}" data-comment-id="{{ comment.pk }}" class="comment-vote-button btn btn-lg btn-default pull-right">
+          <span style="color:{% get_vote_color comment request.user 'comment' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ comment.score }}</span>
+        </button>
       </div>
       <div class="panel-footer">{{ comment.author.username }}, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a></div>
     </div>

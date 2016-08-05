@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from datetime import datetime, timedelta
 
 
 # Create your views here.
@@ -12,11 +13,13 @@ from django.contrib.auth.decorators import login_required
 def post_list(request):
     sort = request.GET.get('sort')
     if sort == 'hot':
-        posts = Post.objects.all().order_by('-score')
+        time_threshold = datetime.now() - timedelta(hours=12)
+        posts = Post.objects.filter(timestamp__gt=time_threshold).order_by('-score')
     elif sort == 'new':
         posts = Post.objects.all().order_by('-timestamp')
     else:
-        posts = Post.objects.all().order_by('-score')
+        time_threshold = datetime.now() - timedelta(hours=12)
+        posts = Post.objects.filter(timestamp__gt=time_threshold).order_by('-score')
 
 
     paginator = Paginator(posts, 40)
@@ -95,6 +98,26 @@ def post_vote(request):
             p.save()
             post.score += 1
             post.save()
+            return HttpResponse('added')
+    else:
+        return HttpResponse('')
+
+@login_required
+def comment_vote(request):
+    if request.method == 'POST':
+        comment_id = request.POST.get('commentid')
+        comment = Comment.objects.get(pk=comment_id)
+        if CommentVote.objects.filter(comment=comment, user=request.user).exists():
+            c = CommentVote.objects.get(comment=comment, user=request.user)
+            c.delete()
+            comment.score -= 1
+            comment.save()
+            return HttpResponse('removed')
+        else:
+            c = CommentVote(comment=comment, user=request.user)
+            c.save()
+            comment.score += 1
+            comment.save()
             return HttpResponse('added')
     else:
         return HttpResponse('')
