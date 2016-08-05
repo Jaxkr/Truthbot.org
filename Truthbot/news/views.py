@@ -53,6 +53,7 @@ def submit_post(request):
 
     return render(request, 'news/submit_post.html', {'form': form})
 
+
 def post_view(request, post_slug):
     post = Post.objects.get(slug=post_slug)
     sort = request.GET.get('sort')
@@ -66,7 +67,7 @@ def post_view(request, post_slug):
 
     form = NewComment()
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated():
         form = NewComment(request.POST)
 
         if form.is_valid():
@@ -81,6 +82,7 @@ def post_view(request, post_slug):
 
     return render(request, 'news/post_view.html', {'post': post, 'form': form, 'comments': comments})
 
+@login_required
 def comment_reply(request, comment_pk):
     if request.method == 'POST':
         comment = Comment.objects.get(pk=comment_pk)

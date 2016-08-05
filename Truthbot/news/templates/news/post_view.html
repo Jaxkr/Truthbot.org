@@ -7,7 +7,7 @@
 {% block maincontent %}
 <div class="row">
   <div class="col-md-5">
-    <span style="font-size: 29px"><a href="{{ post.link }}">{{ post.title }}</a></span>
+    <span style="font-size: 29px"><a target="_blank" href="{{ post.link }}">{{ post.title }} <i class="fa fa-external-link"></i></a></span>
     <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
       <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
     </button>
