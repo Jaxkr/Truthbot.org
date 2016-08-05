@@ -19,34 +19,15 @@
     </div>
   </div>
   <div class="col-md-7">
-    <h4>Comments</h4>
-    {% if request.user.is_authenticated %}
-    <form action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% if form.non_field_errors %}
-      <div class="alert alert-danger">
-        {{ form.non_field_errors }}
-      </div>
-      {% endif %}
-
-      <div class="form-group">
-        <label for="{{ form.name.id_for_label }}">Add a comment</label>
-        {% if form.text.errors %}
-        <span class="form-error">{{ form.text.errors.as_text }}</span>
-        {% endif %}
-        {{ form.text }}
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form><br>
-    {% endif %}
-    {% for comment in comments %}
     <div class="panel panel-default">
       <div class="panel-body">
         {{ comment.text|parsemarkdown|safe }}
       </div>
-      <div class="panel-footer">{{ comment.author.username }}, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a></div>
-    </div>
-    {% endfor %}
+      <div class="panel-footer">{{ comment.author.username }}, {{ comment.timestamp }}</div>
+    </div><br>
+    <p>
+      You are viewing the permanent page for a single comment.<br>
+      <a href="{% url "postview" post.slug %}" class="btn btn-sm btn-default">View all comments</a>
   </div>
 </div>
 

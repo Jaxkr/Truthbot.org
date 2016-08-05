@@ -53,11 +53,27 @@ def submit_post(request):
 def post_view(request, post_slug):
     post = Post.objects.get(slug=post_slug)
     comments = Comment.objects.filter(post=post)
+    form = NewComment()
 
-    return render(request, 'news/post_view.html', {'post': post})
+    if request.method == 'POST':
+        form = NewComment(request.POST)
+
+        if form.is_valid():
+            comment = Comment(text=form.cleaned_data['text'], post=post, author=request.user)
+            comment.save()
+
+            return HttpResponseRedirect(reverse('postview', args=[post.slug]))
+
+        else:
+            return render(request, 'news/post_view.html', {'post': post, 'form': form, 'comments': comments})
 
 
+    return render(request, 'news/post_view.html', {'post': post, 'form': form, 'comments': comments})
 
+def comment_perma(request, post_slug, comment_pk):
+    post = Post.objects.get(slug=post_slug)
+    comment = Comment.objects.get(pk=comment_pk)
+    return render(request, 'news/post_view_comment_perma.html', {'post': post, 'comment': comment})
 
 
 

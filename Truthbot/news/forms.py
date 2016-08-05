@@ -13,4 +13,4 @@ class SubmitLink(forms.Form):
 
 
 class NewComment(forms.Form):
-    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 8}))
