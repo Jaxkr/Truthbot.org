@@ -44,24 +44,43 @@
           <span style="color:{% get_vote_color comment request.user 'comment' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ comment.score }}</span>
         </button>
       </div>
-      <div class="panel-footer">{{ comment.author.username }}, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a></div>
-    </div>
-    {% for reply in comment.commentreply_set.all %}
-    <div class="row">
-      <a name="reply-{{ reply.pk }}"></a>
-      <div class="col-xs-11 col-xs-offset-1">
-        <div class="panel panel-default">
-          <a name="comment-{{ comment.pk }}"></a>
-          <div class="panel-body">
-            {{ reply.text }}
+      <div class="panel-footer">{{ comment.author.username }}, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a><button data-target="reply-{{ comment.pk }}" class="reply btn btn-xs btn-default pull-right">Reply</a></div>
+      </div>
+      <div id="reply-{{ comment.pk }}" style="display: none;">
+        <form action="{% url 'commentreply' comment.pk %}" method="post">
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ form.non_field_errors }}
           </div>
-          <div class="panel-footer">{{ reply.author.username }}</div>
+          {% endif %}
+
+          <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Reply</label>
+            {% if form.text.errors %}
+            <span class="form-error">{{ form.text.errors.as_text }}</span>
+            {% endif %}
+            {{ form.text }}
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button> <button type="button" data-target="reply-{{ comment.pk }}" class="cancelreply btn btn-default">Cancel</button>
+        </form><br>
+      </div>
+      {% for reply in comment.commentreply_set.all %}
+      <div class="row">
+        <a name="reply-{{ reply.pk }}"></a>
+        <div class="col-xs-11 col-xs-offset-1">
+          <div class="panel panel-default">
+            <a name="comment-{{ comment.pk }}"></a>
+            <div class="panel-body">
+              {{ reply.text }}
+            </div>
+            <div class="panel-footer">{{ reply.author.username }}, {{ reply.timestamp }}</div>
+          </div>
         </div>
       </div>
+      {% endfor %}
+      {% endfor %}
     </div>
-    {% endfor %}
-    {% endfor %}
   </div>
-</div>
 
-{% endblock %}
+  {% endblock %}

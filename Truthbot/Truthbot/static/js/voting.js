@@ -68,3 +68,15 @@ function sendCommentVote(id) {
 
   });
 }
+
+
+//and now here's the code for reply box, it shouldn't be here
+
+$('.reply').click(function() {
+  var box_to_show = $(this).data('target');
+  $('#'+box_to_show).show();
+});
+$('.cancelreply').click(function() {
+  var box_to_hide = $(this).data('target');
+  $('#'+box_to_hide).hide();
+});

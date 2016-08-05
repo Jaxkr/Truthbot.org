@@ -81,8 +81,18 @@ def post_view(request, post_slug):
 
     return render(request, 'news/post_view.html', {'post': post, 'form': form, 'comments': comments})
 
-def post_reply(request, comment_pk):
-    pass
+def comment_reply(request, comment_pk):
+    if request.method == 'POST':
+        comment = Comment.objects.get(pk=comment_pk)
+        form = NewComment(request.POST)
+
+        if form.is_valid():
+            r = CommentReply(post=comment.post, comment=comment, author=request.user, text=form.cleaned_data['text'])
+            r.save()
+
+            return HttpResponseRedirect(reverse('postview', args=[comment.post.slug]) + '#reply-'+str(r.pk))
+    else:
+        return HttpResponse('no')
 
 def comment_perma(request, post_slug, comment_pk):
     post = Post.objects.get(slug=post_slug)
