@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField, ArrayField
 from django.contrib.auth.models import User
 import reversion
+from django.utils import timezone
 
 # Create your models here.
 @reversion.register()
@@ -27,5 +28,5 @@ class OrganizationWiki(models.Model):
     organization = models.OneToOneField('Organization')
     text = models.TextField()
     contributors = models.ManyToManyField(User)
-    time_created = models.DateTimeField(auto_now=True)
-    time_last_edited = models.DateTimeField()
+    time_created = models.DateTimeField(default=timezone.now)
+    time_last_edited = models.DateTimeField(auto_now=True)

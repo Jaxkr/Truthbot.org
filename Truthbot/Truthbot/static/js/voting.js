@@ -39,7 +39,6 @@ $('.vote-button').click(function() {
 });
 
 $('.comment-vote-button').click(function() {
-  console.log('COMMENT')
   var id = $(this).data('comment-id');
   sendCommentVote(id);
   var is_voted_on = $(this).data('comment-voted-on');

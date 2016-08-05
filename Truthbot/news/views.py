@@ -13,12 +13,12 @@ from datetime import datetime, timedelta
 def post_list(request):
     sort = request.GET.get('sort')
     if sort == 'hot':
-        time_threshold = datetime.now() - timedelta(hours=12)
+        time_threshold = timezone.now() - timedelta(hours=12)
         posts = Post.objects.filter(timestamp__gt=time_threshold).order_by('-score')
     elif sort == 'new':
         posts = Post.objects.all().order_by('-timestamp')
     else:
-        time_threshold = datetime.now() - timedelta(hours=12)
+        time_threshold = timezone.now() - timedelta(hours=12)
         posts = Post.objects.filter(timestamp__gt=time_threshold).order_by('-score')
 
 
@@ -55,7 +55,15 @@ def submit_post(request):
 
 def post_view(request, post_slug):
     post = Post.objects.get(slug=post_slug)
-    comments = Comment.objects.filter(post=post)
+    sort = request.GET.get('sort')
+
+    if sort == 'top':
+        comments = Comment.objects.filter(post=post).order_by('-score')
+    elif sort == 'new':
+        comments = Comment.objects.filter(post=post).order_by('-timestamp')
+    else:
+        comments = Comment.objects.filter(post=post).order_by('-score')
+
     form = NewComment()
 
     if request.method == 'POST':
