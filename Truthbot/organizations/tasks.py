@@ -107,7 +107,7 @@ def get_owner_data(infobox_data):
                 return (0, link['href'])
             else:
                 #or just get the name
-                owner_name = infobox_data['Owner'].text
+                owner_name = infobox_data[fieldname].text
                 return (1, owner_name)
     return [2]
 
