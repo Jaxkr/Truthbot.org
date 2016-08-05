@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 import reversion
 from urllib.parse import urlparse
+from urllib.error import HTTPError
 
 base_wikipedia_url = 'http://en.wikipedia.org/wiki/'
 
@@ -31,16 +32,14 @@ def get_organization_info(url, **kwargs):
             extracted = tldextract.extract(url_without_path)
             tld = "{}.{}".format(extracted.domain, extracted.suffix)
             url = urllib.parse.urljoin(base_wikipedia_url, tld)
+            print('TRYING URL ' + url)
             response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
             soup = BeautifulSoup(response, 'html.parser')
-        except:
-            pass
-        try:
+        except HTTPError:
             url = urllib.parse.urljoin(base_wikipedia_url, n.brand)
+            print('TRYING URL ' + url)
             response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
             soup = BeautifulSoup(response, 'html.parser')
-        except:
-            return
     else:
         url = base_wikipedia_url[:-6] + url
         response = urllib.request.urlopen(create_request(url)).read().decode('utf-8')
@@ -49,7 +48,7 @@ def get_organization_info(url, **kwargs):
     try:
         org_name = soup.find('h1', { "class" : "firstHeading" }).text
     except:
-        return
+        print('nameerror')
 
     [s.extract() for s in soup('sup')]
     intro = soup.find('p').getText()
@@ -76,6 +75,7 @@ def get_organization_info(url, **kwargs):
         else:
             org = Organization.objects.get(name=org_name)
     else:
+        print('NO INFOBOX')
         return
 
 
