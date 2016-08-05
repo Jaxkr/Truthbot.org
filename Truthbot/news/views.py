@@ -81,6 +81,9 @@ def post_view(request, post_slug):
 
     return render(request, 'news/post_view.html', {'post': post, 'form': form, 'comments': comments})
 
+def post_reply(request, comment_pk):
+    pass
+
 def comment_perma(request, post_slug, comment_pk):
     post = Post.objects.get(slug=post_slug)
     comment = Comment.objects.get(pk=comment_pk)

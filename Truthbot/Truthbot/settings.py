@@ -149,5 +149,6 @@ CELERY_TIMEZONE = 'America/Denver'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 RECAPTCHA_PRIVATE_KEY = '6LdI1iYTAAAAAGl2jUutGgqH9bsqF9Qo4kLP2yoh'
 RECAPTCHA_PUBLIC_KEY = '6LdI1iYTAAAAACIDQwfAS6X2sm1eSmqw13J8cbDg'

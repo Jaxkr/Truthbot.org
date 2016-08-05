@@ -26,8 +26,19 @@ class Comment(models.Model):
     author = models.ForeignKey(User)
     text = models.TextField()
     score = models.IntegerField(default=0)
-    timestamp = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(default=timezone.now, editable=False)
 
+#only a single level of reply
+#reply comments are always ordered chronologically and cannot be voted on
+class CommentReply(models.Model):
+    post = models.ForeignKey('Post')
+    comment = models.ForeignKey('Comment')
+    author = models.ForeignKey(User)
+    text = models.TextField()
+    timestamp = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        ordering = ['timestamp']
 
 
 class PostVote(models.Model):

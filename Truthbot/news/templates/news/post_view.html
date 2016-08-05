@@ -7,16 +7,10 @@
 {% block maincontent %}
 <div class="row">
   <div class="col-md-5">
-    <div class="row">
-      <div class="col-xs-10">
-        <h2><a href="{{ post.link }}">{{ post.title }}</a></h2>
-      </div>
-      <div class="col-xs-2">
-        <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
-          <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
-        </button>
-      </div>
-    </div>
+    <span style="font-size: 29px"><a href="{{ post.link }}">{{ post.title }}</a></span>
+    <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
+      <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
+    </button>
   </div>
   <div class="col-md-7">
     <h4>Comments</h4>
@@ -43,6 +37,7 @@
     <p>Sort by <a href="?sort=top">Top</a>, <a href="?sort=new">New</a></p>
     {% for comment in comments %}
     <div class="panel panel-default">
+      <a name="comment-{{ comment.pk }}"></a>
       <div class="panel-body">
         {{ comment.text|parsemarkdown|safe }}
         <button data-comment-voted-on="{% get_has_voted comment request.user 'comment' %}" data-comment-id="{{ comment.pk }}" class="comment-vote-button btn btn-lg btn-default pull-right">
@@ -51,6 +46,20 @@
       </div>
       <div class="panel-footer">{{ comment.author.username }}, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a></div>
     </div>
+    {% for reply in comment.commentreply_set.all %}
+    <div class="row">
+      <a name="reply-{{ reply.pk }}"></a>
+      <div class="col-xs-11 col-xs-offset-1">
+        <div class="panel panel-default">
+          <a name="comment-{{ comment.pk }}"></a>
+          <div class="panel-body">
+            {{ reply.text }}
+          </div>
+          <div class="panel-footer">{{ reply.author.username }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
     {% endfor %}
   </div>
 </div>
