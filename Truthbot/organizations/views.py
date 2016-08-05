@@ -71,7 +71,7 @@ def organization_info(request, organization_pk):
 
 
 @login_required
-def organization_modify_domains(request, organization_pk):# NOTMG OLD VERSION
+def organization_modify_domains(request, organization_pk):
     org = Organization.objects.get(pk=organization_pk)
     domains = OrganizationDomain.objects.filter(organization=org)
     deleted_domains = Version.objects.get_deleted(OrganizationDomain)
