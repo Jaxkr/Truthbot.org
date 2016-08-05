@@ -4,6 +4,8 @@ from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -30,7 +32,7 @@ def post_list(request):
 
     return render(request, 'news/news_list.html', {'posts': posts})
 
-
+@login_required
 def submit_post(request):
     form = SubmitLink()
 

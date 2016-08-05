@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% load recaptcha2 %}
 {% block title %}
 New post
 {% endblock %}
 {% block maincontent %}
+{% recaptcha_init %}
 <h1>Submit a news article to Truthbot</h1>
 <div class="row">
 	<div class="col-md-7">
@@ -27,6 +29,13 @@ New post
 					<span class="form-error">{{ form.link.errors.as_text }}</span>
 				{% endif %}
 				{{ form.link }}
+			</div>
+			<div class="form-group">
+				<label for="{{ form.captcha.id_for_label }}">Human?</label>
+				{% if form.captcha.errors %}
+					<span class="form-error">{{ form.link.captcha.as_text }}</span>
+				{% endif %}
+				{{ form.captcha }}
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>

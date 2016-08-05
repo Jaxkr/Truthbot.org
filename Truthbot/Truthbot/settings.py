@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'news.apps.NewsConfig',
     'reversion',
+    'snowpenguin.django.recaptcha2',
 ]
 
 MIDDLEWARE_CLASSES = [
