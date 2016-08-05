@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Top Articles - Truthbot{% endblock %}
+
+{% block maincontent %}
+<p>Sort by <a href="?sort=hot">Hot</a>, <a href="?sort=new">New</a></p>
+
+<div class="row">
+  <div class="col-md-10">
+    <ul class="list-group">
+      {% for post in posts %}
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10">
+            <span class="posttitle"><a href="{{ post.link }}">{{ post.title }}</a></span>
+          </div>
+          <div class="col-xs-2">
+            <button class="btn btn-lg btn-default pull-right"><i class="fa fa-caret-up" aria-hidden="true"></i> {{ post.score }}</button>
+          </div>
+        </div>
+        <p>
+          <a href="">{{ post.comment_set.count }} comments</a>
+        </p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-md-2">
+    <a href="" class="btn btn-sm btn-default">Submit a news story</a>
+  </div>
+</div>
+
+
+<nav>
+	<ul class="pagination">
+		{% if posts.has_previous %}
+		<li>
+			<a href="?page={{ posts.previous_page_number }}">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		{% else %}
+		<li class="disabled">
+			<a href="#">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		{% endif %}
+		<li><a href="#">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</a></li>
+		{% if posts.has_next %}
+		<li>
+			<a href="?page={{ posts.next_page_number }}">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+		{% else %}
+		<li class="disabled">
+			<a href="#">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+		{% endif %}
+	</ul>
+</nav>
+
+
+{% endblock %}

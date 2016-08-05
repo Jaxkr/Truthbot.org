@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^organizations/', include('organizations.urls')),
     url(r'^', include('staticpages.urls')),
     url(r'^api/', include('api.urls')),
+    url(r'^', include('news.urls')),
 ]
