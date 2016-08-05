@@ -254,4 +254,5 @@ def organization_scrape(request):
     url = request.GET.get('url')
     if url:
         get_organization_info.delay(url)
-        return HttpResponse(url)
+        return HttpResponse('queued for processing: ' + url + '<br>'
+                            'This can take some time. Please close this page.')
