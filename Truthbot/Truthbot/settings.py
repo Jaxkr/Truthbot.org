@@ -149,6 +149,3 @@ CELERY_TIMEZONE = 'America/Denver'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-DISCOURSE_BASE_URL = 'http://your-discourse-site.com'
-DISCOURSE_SSO_SECRET = 'paste_your_secret_here'

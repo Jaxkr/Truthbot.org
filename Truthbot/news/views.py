@@ -51,4 +51,34 @@ def submit_post(request):
     return render(request, 'news/submit_post.html', {'form': form})
 
 def post_view(request, post_slug):
-    return HttpResponse('lul')
+    post = Post.objects.get(slug=post_slug)
+    comments = Comment.objects.filter(post=post)
+
+    return render(request, 'news/post_view.html', {'post': post})
+
+
+
+
+
+
+
+#voting ajax views
+@login_required
+def post_vote(request):
+    if request.method == 'POST':
+        post_id = request.POST.get('postid')
+        post = Post.objects.get(pk=post_id)
+        if PostVote.objects.filter(post=post, user=request.user).exists():
+            p = PostVote.objects.get(post=post, user=request.user)
+            p.delete()
+            post.score -= 1
+            post.save()
+            return HttpResponse('removed')
+        else:
+            p = PostVote(post=post, user=request.user)
+            p.save()
+            post.score += 1
+            post.save()
+            return HttpResponse('added')
+    else:
+        return HttpResponse('')

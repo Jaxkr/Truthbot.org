@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load get_user_vote %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block maincontent %}
+<div class="row">
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-10">
+            <h2>{{ post.title }}</h2>
+          </div>
+          <div class="col-xs-2">
+            <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
+              <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer"><a href="{{ post.link }}" target="_blank">{{ post.link }} <i class="fa fa-external-link"></i></a></div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <h4>Comments</h4>
+
+  </div>
+</div>
+
+{% endblock %}
