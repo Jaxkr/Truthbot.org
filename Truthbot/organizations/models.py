@@ -18,6 +18,7 @@ class Organization(models.Model):
     name = models.CharField(max_length=300, blank=False)
     description = models.CharField(max_length=1000, blank=False)
     homepage = models.CharField(max_length=2083, blank=False)
+    wikipedia_page = models.CharField(max_length=2083, blank=True)
     child_organizations = models.ManyToManyField('Organization', blank=True, related_name='parent_organizations')
 
     def __str__(self):
