@@ -1,0 +1,2396 @@
+[
+{
+    "model": "organizations.organizationdomain",
+    "pk": 1,
+    "fields": {
+        "domain": "shanghaiist.com",
+        "organization": 1
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 2,
+    "fields": {
+        "domain": "www.shanghaiist.com",
+        "organization": 1
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 3,
+    "fields": {
+        "domain": "www.independent.co.uk",
+        "organization": 3
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 4,
+    "fields": {
+        "domain": "dating.independent.co.uk",
+        "organization": 3
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 5,
+    "fields": {
+        "domain": "edition.independent.co.uk",
+        "organization": 3
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 6,
+    "fields": {
+        "domain": "puzzles.independent.co.uk",
+        "organization": 3
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 7,
+    "fields": {
+        "domain": "i100.independent.co.uk",
+        "organization": 3
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 8,
+    "fields": {
+        "domain": "syndication.independent.co.uk",
+        "organization": 3
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 9,
+    "fields": {
+        "domain": "www.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 10,
+    "fields": {
+        "domain": "arabic.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 11,
+    "fields": {
+        "domain": "actualidad.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 12,
+    "fields": {
+        "domain": "deutsch.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 13,
+    "fields": {
+        "domain": "russian.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 14,
+    "fields": {
+        "domain": "rtd.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 15,
+    "fields": {
+        "domain": "francais.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 16,
+    "fields": {
+        "domain": "inotv.rt.com",
+        "organization": 5
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 17,
+    "fields": {
+        "domain": "www.standard.co.uk",
+        "organization": 7
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 18,
+    "fields": {
+        "domain": "syndication.standard.co.uk",
+        "organization": 7
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 19,
+    "fields": {
+        "domain": "courses.standard.co.uk",
+        "organization": 7
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 20,
+    "fields": {
+        "domain": "traveloffers.standard.co.uk",
+        "organization": 7
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 21,
+    "fields": {
+        "domain": "businessconnections.standard.co.uk",
+        "organization": 7
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 22,
+    "fields": {
+        "domain": "puzzles.standard.co.uk",
+        "organization": 7
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 23,
+    "fields": {
+        "domain": "local.standard.co.uk",
+        "organization": 7
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 24,
+    "fields": {
+        "domain": "arstechnica.co.uk",
+        "organization": 8
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 25,
+    "fields": {
+        "domain": "arstechnica.com",
+        "organization": 8
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 26,
+    "fields": {
+        "domain": "arstechnica.us1.list-manage.com",
+        "organization": 8
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 27,
+    "fields": {
+        "domain": "video.arstechnica.com",
+        "organization": 8
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 28,
+    "fields": {
+        "domain": "www.reddit.com",
+        "organization": 11
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 29,
+    "fields": {
+        "domain": "reddit.zendesk.com",
+        "organization": 11
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 30,
+    "fields": {
+        "domain": "time.com",
+        "organization": 12
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 31,
+    "fields": {
+        "domain": "content.time.com",
+        "organization": 12
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 32,
+    "fields": {
+        "domain": "auth.time.com",
+        "organization": 12
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 33,
+    "fields": {
+        "domain": "motto.time.com",
+        "organization": 12
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 34,
+    "fields": {
+        "domain": "labs.time.com",
+        "organization": 12
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 35,
+    "fields": {
+        "domain": "www.bloomberg.com",
+        "organization": 14
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 36,
+    "fields": {
+        "domain": "service.bloomberg.com",
+        "organization": 14
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 37,
+    "fields": {
+        "domain": "bba.bloomberg.net",
+        "organization": 14
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 38,
+    "fields": {
+        "domain": "bloomberg.com",
+        "organization": 14
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 39,
+    "fields": {
+        "domain": "www.smh.com.au",
+        "organization": 16
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 40,
+    "fields": {
+        "domain": "tributes.smh.com.au",
+        "organization": 16
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 41,
+    "fields": {
+        "domain": "weather.smh.com.au",
+        "organization": 16
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 42,
+    "fields": {
+        "domain": "paidcontent.smh.com.au",
+        "organization": 16
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 43,
+    "fields": {
+        "domain": "smh.myfairfax.com.au",
+        "organization": 16
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 44,
+    "fields": {
+        "domain": "celebrations.smh.com.au",
+        "organization": 16
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 45,
+    "fields": {
+        "domain": "psmag.com",
+        "organization": 18
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 46,
+    "fields": {
+        "domain": "www.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 47,
+    "fields": {
+        "domain": "auto.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 48,
+    "fields": {
+        "domain": "swachhindia.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 49,
+    "fields": {
+        "domain": "profit.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 50,
+    "fields": {
+        "domain": "sports.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 51,
+    "fields": {
+        "domain": "sites.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 52,
+    "fields": {
+        "domain": "tiger.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 53,
+    "fields": {
+        "domain": "social.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 54,
+    "fields": {
+        "domain": "gadgets.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 55,
+    "fields": {
+        "domain": "goodtimes.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 56,
+    "fields": {
+        "domain": "food.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 57,
+    "fields": {
+        "domain": "khabar.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 58,
+    "fields": {
+        "domain": "everylifecounts.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 59,
+    "fields": {
+        "domain": "prime.ndtv.com",
+        "organization": 20
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 60,
+    "fields": {
+        "domain": "www.nzherald.co.nz",
+        "organization": 21
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 61,
+    "fields": {
+        "domain": "spy.nzherald.co.nz",
+        "organization": 21
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 62,
+    "fields": {
+        "domain": "notices.nzherald.co.nz",
+        "organization": 21
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 63,
+    "fields": {
+        "domain": "newspix.nzherald.co.nz",
+        "organization": 21
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 64,
+    "fields": {
+        "domain": "nzherald.custhelp.com",
+        "organization": 21
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 65,
+    "fields": {
+        "domain": "dreamteam.nzherald.co.nz",
+        "organization": 21
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 66,
+    "fields": {
+        "domain": "truecommercial.nzherald.co.nz",
+        "organization": 21
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 67,
+    "fields": {
+        "domain": "www.latimes.com",
+        "organization": 24
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 68,
+    "fields": {
+        "domain": "www.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 69,
+    "fields": {
+        "domain": "br.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 70,
+    "fields": {
+        "domain": "jp.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 71,
+    "fields": {
+        "domain": "reuters.zendesk.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 72,
+    "fields": {
+        "domain": "in.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 73,
+    "fields": {
+        "domain": "sales.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 74,
+    "fields": {
+        "domain": "live.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 75,
+    "fields": {
+        "domain": "af.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 76,
+    "fields": {
+        "domain": "agency.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 77,
+    "fields": {
+        "domain": "commerce.us.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 78,
+    "fields": {
+        "domain": "funds.us.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 79,
+    "fields": {
+        "domain": "ar.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 80,
+    "fields": {
+        "domain": "mx.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 81,
+    "fields": {
+        "domain": "blogs.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 82,
+    "fields": {
+        "domain": "ca.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 83,
+    "fields": {
+        "domain": "lta.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 84,
+    "fields": {
+        "domain": "cn.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 85,
+    "fields": {
+        "domain": "it.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 86,
+    "fields": {
+        "domain": "uk.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 87,
+    "fields": {
+        "domain": "de.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 88,
+    "fields": {
+        "domain": "es.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 89,
+    "fields": {
+        "domain": "stockscreener.us.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 90,
+    "fields": {
+        "domain": "fr.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 91,
+    "fields": {
+        "domain": "newslink.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 92,
+    "fields": {
+        "domain": "ru.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 93,
+    "fields": {
+        "domain": "ara.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 94,
+    "fields": {
+        "domain": "polling.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 95,
+    "fields": {
+        "domain": "widerimage.reuters.com",
+        "organization": 28
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 96,
+    "fields": {
+        "domain": "www.thelocal.it",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 97,
+    "fields": {
+        "domain": "www.thelocal.fr",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 98,
+    "fields": {
+        "domain": "www.thelocal.at",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 99,
+    "fields": {
+        "domain": "www.thelocal.se",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 100,
+    "fields": {
+        "domain": "www.thelocal.de",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 101,
+    "fields": {
+        "domain": "www.thelocal.es",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 102,
+    "fields": {
+        "domain": "www.thelocal.ch",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 103,
+    "fields": {
+        "domain": "www.thelocal.no",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 104,
+    "fields": {
+        "domain": "www.thelocal.dk",
+        "organization": 30
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 105,
+    "fields": {
+        "domain": "www.tagesanzeiger.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 106,
+    "fields": {
+        "domain": "tagesanzeiger.sich-erinnern.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 107,
+    "fields": {
+        "domain": "abo.tagesanzeiger.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 108,
+    "fields": {
+        "domain": "marktplatz.tagesanzeiger.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 109,
+    "fields": {
+        "domain": "blog.tagesanzeiger.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 110,
+    "fields": {
+        "domain": "weiterbildung.tagesanzeiger.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 111,
+    "fields": {
+        "domain": "epaper.tagesanzeiger.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 112,
+    "fields": {
+        "domain": "tagesanzeiger.homegate.ch",
+        "organization": 32
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 113,
+    "fields": {
+        "domain": "www.businessinsider.com",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 114,
+    "fields": {
+        "domain": "www.businessinsider.in",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 115,
+    "fields": {
+        "domain": "www.businessinsider.com.pl",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 116,
+    "fields": {
+        "domain": "www.businessinsider.com.au",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 117,
+    "fields": {
+        "domain": "intelligence.businessinsider.com",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 118,
+    "fields": {
+        "domain": "uk.businessinsider.com",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 119,
+    "fields": {
+        "domain": "www.businessinsider.my",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 120,
+    "fields": {
+        "domain": "www.businessinsider.de",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 121,
+    "fields": {
+        "domain": "www.businessinsider.co.id",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 122,
+    "fields": {
+        "domain": "nordic.businessinsider.com",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 123,
+    "fields": {
+        "domain": "www.businessinsider.sg",
+        "organization": 34
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 124,
+    "fields": {
+        "domain": "www.israelnationalnews.com",
+        "organization": 36
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 125,
+    "fields": {
+        "domain": "www.theguardian.com",
+        "organization": 38
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 126,
+    "fields": {
+        "domain": "securedrop.theguardian.com",
+        "organization": 38
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 127,
+    "fields": {
+        "domain": "www.thestar.com",
+        "organization": 40
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 128,
+    "fields": {
+        "domain": "startouch.thestar.com",
+        "organization": 40
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 129,
+    "fields": {
+        "domain": "diversions.thestar.com",
+        "organization": 40
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 130,
+    "fields": {
+        "domain": "mediakit.thestar.ca",
+        "organization": 40
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 131,
+    "fields": {
+        "domain": "mondoweiss.net",
+        "organization": 42
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 132,
+    "fields": {
+        "domain": "www.nbcnews.com",
+        "organization": 43
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 133,
+    "fields": {
+        "domain": "nbcnews.weather.com",
+        "organization": 43
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 134,
+    "fields": {
+        "domain": "www.veterans.nbcnews.com",
+        "organization": 43
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 135,
+    "fields": {
+        "domain": "nbcnews.com",
+        "organization": 43
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 136,
+    "fields": {
+        "domain": "secure.nbcnews.com",
+        "organization": 43
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 137,
+    "fields": {
+        "domain": "feeds.nbcnews.com",
+        "organization": 43
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 138,
+    "fields": {
+        "domain": "www.financialexpress.com",
+        "organization": 47
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 139,
+    "fields": {
+        "domain": "epaper.financialexpress.com",
+        "organization": 47
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 140,
+    "fields": {
+        "domain": "www.cnn.com",
+        "organization": 50
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 141,
+    "fields": {
+        "domain": "cnn.it",
+        "organization": 50
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 142,
+    "fields": {
+        "domain": "money.cnn.com",
+        "organization": 50
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 143,
+    "fields": {
+        "domain": "thehill.com",
+        "organization": 51
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 144,
+    "fields": {
+        "domain": "www.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 145,
+    "fields": {
+        "domain": "rio16.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 146,
+    "fields": {
+        "domain": "internships.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 147,
+    "fields": {
+        "domain": "static.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 148,
+    "fields": {
+        "domain": "fantasy.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 149,
+    "fields": {
+        "domain": "offers.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 150,
+    "fields": {
+        "domain": "americasmarkets.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 151,
+    "fields": {
+        "domain": "user.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 152,
+    "fields": {
+        "domain": "college.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 153,
+    "fields": {
+        "domain": "puzzles.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 154,
+    "fields": {
+        "domain": "service.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 155,
+    "fields": {
+        "domain": "games.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 156,
+    "fields": {
+        "domain": "ftw.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 157,
+    "fields": {
+        "domain": "marketing.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 158,
+    "fields": {
+        "domain": "crosswords.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 159,
+    "fields": {
+        "domain": "www.usatoday.tumblr.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 160,
+    "fields": {
+        "domain": "portfoliotracker.usatoday.com",
+        "organization": 53
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 161,
+    "fields": {
+        "domain": "abcnews.go.com",
+        "organization": 55
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 162,
+    "fields": {
+        "domain": "liveblog.abcnews.go.com",
+        "organization": 55
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 163,
+    "fields": {
+        "domain": "mediakit.go.com",
+        "organization": 55
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 164,
+    "fields": {
+        "domain": "go.com",
+        "organization": 55
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 165,
+    "fields": {
+        "domain": "www.thesun.co.uk",
+        "organization": 57
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 166,
+    "fields": {
+        "domain": "perks.thesun.co.uk",
+        "organization": 57
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 167,
+    "fields": {
+        "domain": "favourite.thesun.co.uk",
+        "organization": 57
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 168,
+    "fields": {
+        "domain": "www.thesun.ie",
+        "organization": 57
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 169,
+    "fields": {
+        "domain": "thesun.inthepaper.co.uk",
+        "organization": 57
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 170,
+    "fields": {
+        "domain": "www.politico.eu",
+        "organization": 61
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 171,
+    "fields": {
+        "domain": "www.politico.com",
+        "organization": 61
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 172,
+    "fields": {
+        "domain": "www.npr.org",
+        "organization": 62
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 173,
+    "fields": {
+        "domain": "pd.npr.org",
+        "organization": 62
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 174,
+    "fields": {
+        "domain": "ethics.npr.org",
+        "organization": 62
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 175,
+    "fields": {
+        "domain": "thin.npr.org",
+        "organization": 62
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 176,
+    "fields": {
+        "domain": "generationlisten.npr.org",
+        "organization": 62
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 177,
+    "fields": {
+        "domain": "games.washingtonpost.com",
+        "organization": 64
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 178,
+    "fields": {
+        "domain": "www.washingtonpost.com",
+        "organization": 64
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 179,
+    "fields": {
+        "domain": "syndication.washingtonpost.com",
+        "organization": 64
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 180,
+    "fields": {
+        "domain": "washingtonpost.com",
+        "organization": 64
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 181,
+    "fields": {
+        "domain": "postpoints.washingtonpost.com",
+        "organization": 64
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 182,
+    "fields": {
+        "domain": "nie.washingtonpost.com",
+        "organization": 64
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 183,
+    "fields": {
+        "domain": "live.washingtonpost.com",
+        "organization": 64
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 184,
+    "fields": {
+        "domain": "www.nj.com",
+        "organization": 66
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 186,
+    "fields": {
+        "domain": "nj.com",
+        "organization": 66
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 187,
+    "fields": {
+        "domain": "www.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 188,
+    "fields": {
+        "domain": "foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 189,
+    "fields": {
+        "domain": "radio.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 190,
+    "fields": {
+        "domain": "latino.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 191,
+    "fields": {
+        "domain": "press.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 192,
+    "fields": {
+        "domain": "blogs.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 193,
+    "fields": {
+        "domain": "insider.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 194,
+    "fields": {
+        "domain": "live.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 195,
+    "fields": {
+        "domain": "video.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organizationdomain",
+    "pk": 196,
+    "fields": {
+        "domain": "nation.foxnews.com",
+        "organization": 67
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 1,
+    "fields": {
+        "name": "Gothamist",
+        "description": "Gothamist LLC is the operator, or in some cases franchisor, of eight city-centric websites worldwide that focus on news, events, food, culture, and other local coverage.",
+        "homepage": "http://gothamist.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/shanghaiist",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 2,
+    "fields": {
+        "name": "Gothamist LLC",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            1
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 3,
+    "fields": {
+        "name": "The Independent",
+        "description": "The Independent is a British online newspaper. Established in 1986 as an independent national morning newspaper published in London, it was controlled by Tony O'Reilly's Independent News & Media from 1997, and sold to Alexander Lebedev in 2010. It ceased to be produced in print in March 2016.",
+        "homepage": "http://www.independent.co.uk",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/independent.co.uk",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 4,
+    "fields": {
+        "name": "Evgeny Lebedev",
+        "description": "Evgeny Alexandrovich Lebedev (/iev'geni\u02d0.'l\u025bb\u025bd\u025bv/; Russian Cyrillic: \u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u0438\u0447 \u041b\u0435\u0431\u0435\u0434\u0435\u0432; born 8 May 1980) is the London-based Russian owner of Lebedev Holdings Ltd, which owns the Evening Standard, the Independent, and the TV channel London Live. He is also a journalist, supporter of the arts and charity campaigner.",
+        "homepage": "http://evgenylebedev.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Evgeny_Lebedev",
+        "child_organizations": [
+            3,
+            7
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 5,
+    "fields": {
+        "name": "RT (TV network)",
+        "description": "RT, originally Russia Today, is a television network funded by the Russian government. It operates cable and satellite television channels directed to audiences outside of Russia as well as providing Internet content in various languages, including Russian.",
+        "homepage": "http://rt.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/rt.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 6,
+    "fields": {
+        "name": "Government of Russia",
+        "description": "The Government of the Russian Federation (Russian: \u041f\u0440\u0430\u0432\u0438\u0301\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u043e \u0420\u043e\u0441\u0441\u0438\u0301\u0439\u0441\u043a\u043e\u0439 \u0424\u0435\u0434\u0435\u0440\u0430\u0301\u0446\u0438\u0438) exercises executive power in the Russian Federation. The members of the government are the Prime Minister of Russia (Chairman of the Government), the deputy prime ministers, and the federal ministers. It has its legal basis in the Constitution of the Russian Federation and the federal constitutional law \"On the Government of the Russian Federation\".",
+        "homepage": "http://government.ru/en/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Government_of_Russia",
+        "child_organizations": [
+            5
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 7,
+    "fields": {
+        "name": "London Evening Standard",
+        "description": "The London Evening Standard (simply the Evening Standard before May 2009) is a local, free daily newspaper, published Monday to Friday in tabloid format in London.",
+        "homepage": "http://www.standard.co.uk/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/standard.co.uk",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 8,
+    "fields": {
+        "name": "Ars Technica",
+        "description": "Ars Technica (/\u02cc\u0251\u02d0rz \u02c8t\u025bkn\u1d7bk\u0259/; Latin-derived for the \"art of technology\") is a technology news and information website created by Ken Fisher and Jon Stokes in 1998. It publishes news, reviews, and guides on issues such as computer hardware and software, science, technology policy, and video games. Many of the site's writers are postgraduates and some work for research institutions. Articles on the website are written in a less-formal tone than those in traditional journals.",
+        "homepage": "http://arstechnica.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/arstechnica",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 9,
+    "fields": {
+        "name": "Cond\u00e9 Nast",
+        "description": "Cond\u00e9 Nast, a division of Advance Publications, is an American mass media company headquartered at One World Trade Center in New York City. The company attracts more than 164 million consumers across its 20 print and digital media brands: Allure, Architectural Digest, Ars Technica, Bon App\u00e9tit, Brides, Cond\u00e9 Nast Traveler, Details (previously), Epicurious, Glamour, Golf Digest, Golf World, GQ, Lucky, The New Yorker, Pitchfork Media, \"reddit.com\", Self, Teen Vogue, Vanity Fair, Vogue, W and Wired.",
+        "homepage": "http://www.condenast.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Cond%C3%A9_Nast",
+        "child_organizations": [
+            8
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 10,
+    "fields": {
+        "name": "Advance Publications",
+        "description": "Advance Publications, Inc., is an American media company owned by the descendants of S.I. Newhouse Sr., Donald Newhouse and S.I. Newhouse, Jr. It is named after the Staten Island Advance, the first newspaper owned by the Newhouse family, in which Sam Newhouse bought a controlling interest in 1922. The company is nominally headquartered in the Advance offices in Staten Island's Grasmere neighborhood, though Advance does not have an official headquarters).",
+        "homepage": "http://www.advance.net",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Advance_Publications",
+        "child_organizations": [
+            9,
+            66
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 11,
+    "fields": {
+        "name": "Reddit",
+        "description": "Reddit (stylized as reddit, /\u02c8r\u025bd\u026at/) is an entertainment, social news, and news website. Reddit's registered community members can submit content, such as text posts or direct links. Registered users can then vote submissions up or down to organize the posts and determine their position on the site's pages. The submissions with the most positive votes appear on the main page or the top of a category. Content entries are organized by areas of interest called \"subreddits\". The subreddit topics include news, gaming, movies, music, books, fitness, food, and photosharing, among many others.",
+        "homepage": "https://www.reddit.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/reddit.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 12,
+    "fields": {
+        "name": "Time (magazine)",
+        "description": "Time (styled within the magazine as TIME) is an American weekly news magazine published in New York City. It was founded in 1923 and for decades was dominated by Henry Luce, who built a highly profitable stable of magazines.",
+        "homepage": "http://time.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/time.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 13,
+    "fields": {
+        "name": "Time Warner",
+        "description": "Time Warner Inc. (TWI, at one former interval named AOL Time Warner, stylized as TimeWarner since 2003) is an American multinational media and entertainment conglomerate headquartered in the Time Warner Center in New York City. It is currently the world's third largest television networks and filmed TV & entertainment company in terms of revenue (after Comcast and The Walt Disney Company), and at one time was the world's largest media conglomerate.",
+        "homepage": "http://www.timewarner.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Time_Warner",
+        "child_organizations": [
+            12,
+            50
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 14,
+    "fields": {
+        "name": "Bloomberg L.P.",
+        "description": "Bloomberg L.P. is a privately held financial software, data, and media company headquartered in Midtown Manhattan, New York City. Bloomberg L.P. was founded by Michael Bloomberg in 1981 with the help of Thomas Secunda, Duncan MacMillan, Charles Zegar, and a 30% ownership investment by Merrill Lynch.",
+        "homepage": "http://www.bloomberg.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/bloomberg.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 15,
+    "fields": {
+        "name": "Michael Bloomberg",
+        "description": "Michael \"Mike\" Rubens Bloomberg (born February 14, 1942) is an American business magnate, politician, and philanthropist. With a net worth of US$48.3 billion as of August 2016, Bloomberg is the 6th richest person in the United States and the 8th richest in the world.",
+        "homepage": "http://mikebloomberg.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Michael_Bloomberg",
+        "child_organizations": [
+            14
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 16,
+    "fields": {
+        "name": "The Sydney Morning Herald",
+        "description": "The Sydney Morning Herald (SMH) is a daily compact newspaper published by Fairfax Media in Sydney, Australia. Founded in 1831 as the Sydney Herald, the SMH is the oldest continuously published newspaper in Australia and a national online news brand. The newspaper is published six days a week. It is available at outlets in Sydney, regional New South Wales, Canberra, and South East Queensland (Brisbane, Gold Coast, and Sunshine Coast).",
+        "homepage": "http://www.smh.com.au",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/smh.com.au",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 17,
+    "fields": {
+        "name": "Fairfax Media",
+        "description": "Fairfax Media Limited [ASX:FXJ] is one of the largest media companies in Australia and New Zealand, with investment in newspaper, magazines, radio and internet. John Fairfax purchased The Sydney Morning Herald in 1841 and the family retained control of the business until late in the twentieth century.",
+        "homepage": "http://www.fxj.com.au/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Fairfax_Media",
+        "child_organizations": [
+            16
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 18,
+    "fields": {
+        "name": "Pacific Standard",
+        "description": "Pacific Standard, formerly Miller-McCune, is an American magazine, published bimonthly in print and continuously online by the nonprofit Miller-McCune Center for Research, Media and Public Policy, headquartered in Santa Barbara, California.",
+        "homepage": "http://www.psmag.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/psmag.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 19,
+    "fields": {
+        "name": "Miller-McCune Center for Research, Media and Public Policy",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            18
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 20,
+    "fields": {
+        "name": "NDTV",
+        "description": "New Delhi Television Limited (NDTV) is an Indian commercial broadcasting television network founded in 1988 by husband and wife Prannoy Roy and Radhika Roy. NDTV is an acronym for the original name of the company, New Delhi Television. Vikramaditya Chandra is the chief executive officer of the NDTV Group. KVL Narayan Rao is the Executive Vice Chairperson.",
+        "homepage": "http://www.ndtv.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/ndtv.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 21,
+    "fields": {
+        "name": "The New Zealand Herald",
+        "description": "The New Zealand Herald is a daily newspaper published in Auckland, New Zealand, owned by New Zealand Media and Entertainment. It has the largest newspaper circulation of all newspapers in New Zealand, peaking at over 200,000 copies in 2006, although circulation of the daily Herald had declined to 144,157 copies on average by December 2014. Its main circulation area is the Auckland region. It is also delivered to much of the north of the North Island including Northland, Waikato and King Country.",
+        "homepage": "http://www.nzherald.co.nz/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/nzherald.co.nz",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 22,
+    "fields": {
+        "name": "New Zealand Media and Entertainment",
+        "description": "New Zealand Media and Entertainment (abbreviated NZME and stylized as NZME.) is a New Zealand newspaper, radio, outdoor advertising and digital media business. It was launched in 2014 as the formal merger of the New Zealand division of APN News & Media and The Radio Network, part of the Australian Radio Network. It operates 32 newspapers, 8 radio networks and several websites in twenty-five markets across the country, and claims to reach 2.9 million people each week.",
+        "homepage": "http://nzme.co.nz",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/New_Zealand_Media_and_Entertainment",
+        "child_organizations": [
+            21
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 23,
+    "fields": {
+        "name": "APN News & Media",
+        "description": "APN News & Media Limited is an Australian and New Zealand media company. Divisions include newspaper publishing, online publishing, broadcast radio and outdoor advertising in Australia and New Zealand. APN's two largest shareholders are the Australian fund manager Allan Gray Australia and Rupert Murdoch's News Limited. Irish company Independent News & Media and Denis O'Brien's Baycliffe held an approximately 30% stake in the company before selling it in March 2015.",
+        "homepage": "http://www.apn.com.au",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/APN_News_%26_Media",
+        "child_organizations": [
+            22
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 24,
+    "fields": {
+        "name": "Los Angeles Times",
+        "description": "The Los Angeles Times, commonly referred to as the Times or LA Times, is a paid daily newspaper published in Los Angeles, California, since 1881. It was the largest metropolitan newspaper in circulation in the United States in 2008 and the fourth most widely distributed newspaper in the country. In 2000, the Tribune Company, parent company of both the Chicago Tribune and local television station KTLA, purchased the Los Angeles Times by acquiring its parent company, the Times Mirror Company. The Times is currently owned by tronc, Inc., formerly known as Tribune Publishing.",
+        "homepage": "http://www.latimes.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/latimes.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 25,
+    "fields": {
+        "name": "tronc",
+        "description": "Tribune Company (1861\u20132014)",
+        "homepage": "http://www.tronc.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Tronc,_Inc.",
+        "child_organizations": [
+            24
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 26,
+    "fields": {
+        "name": "Tribune Media",
+        "description": "The Tribune Media Company, also known as Tribune Media and formerly known as the Tribune Company, is an American multimedia corporation that is headquartered in Chicago, Illinois, United States. A significant amount of the stock of publicly traded Tribune is held by three firms that were the company's senior debt holders: Oaktree Capital Management (which owns a 23% interest), Angelo, Gordon & Co. and JPMorgan Chase (which both own 9%).",
+        "homepage": "http://www.tribunemedia.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Tribune_Media",
+        "child_organizations": [
+            25
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 27,
+    "fields": {
+        "name": "JPMorgan Chase",
+        "description": "JPMorgan Chase & Co. is a multinational banking and financial services holding company headquartered in New York City. It is the largest bank in the United States, and the world's sixth largest bank by total assets, with total assets of US$2.35 trillion. Moreover, it is the Fifth largest public company in the world according to the Forbes Global 2000. It is a major provider of financial services, and according to Forbes magazine is the world's sixth largest public company based on a composite ranking. The hedge fund unit of JPMorgan Chase is the second largest hedge fund in the United States. The company was formed in 2000, when Chase Manhattan Corporation merged with J.P. Morgan & Co.",
+        "homepage": "http://www.jpmorganchase.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/JPMorgan_Chase",
+        "child_organizations": [
+            26
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 28,
+    "fields": {
+        "name": "Reuters",
+        "description": "Reuters /\u02c8r\u0254\u026at\u0259rz/ is an international news agency headquartered in Canary Wharf, London, England, United Kingdom and is a division of Thomson Reuters.",
+        "homepage": "http://reuters.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/reuters.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 29,
+    "fields": {
+        "name": "Thomson Reuters",
+        "description": "Thomson Reuters Corporation (/\u02c8r\u0254\u026at\u0259rz/) is a major multinational mass media and information firm founded in Toronto, Ontario, Canada. Its operations are headquartered at 3 Times Square in Manhattan, New York City while its legal domicile offices are located at 333 Bay Street in Downtown Toronto.",
+        "homepage": "http://www.thomsonreuters.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Thomson_Reuters",
+        "child_organizations": [
+            28
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 30,
+    "fields": {
+        "name": "The Local",
+        "description": "The Local is an English-language digital news publisher with local editions in Sweden, Germany, France, Spain, Switzerland, Norway, Denmark, Austria and Italy. Each site, while alike in appearance, has separate editorial teams, each focused on its respective market.",
+        "homepage": "http://www.thelocal.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/thelocal.at",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 31,
+    "fields": {
+        "name": "The Local AB",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            30
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 32,
+    "fields": {
+        "name": "Tages-Anzeiger",
+        "description": "Tages-Anzeiger, also abbreviated Tagi or TA, is a Swiss German-language national daily newspaper published in Zurich, Switzerland.",
+        "homepage": "http://www.tagesanzeiger.ch/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/tagesanzeiger",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 33,
+    "fields": {
+        "name": "Tamedia",
+        "description": "Tamedia AG is a media company headquartered in Zurich, Switzerland. Through a portfolio of daily and weekly newspapers, magazines and digital platforms, as well as own printing facilities, it is the largest media group in the country. Since 2000, Tamedia has been listed on the Swiss Stock Exchange.",
+        "homepage": "http://www.tamedia.ch",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Tamedia",
+        "child_organizations": [
+            32
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 34,
+    "fields": {
+        "name": "Business Insider",
+        "description": "Business Insider is an American business, celebrity and technology news website launched in February 2009 and based in New York City. Founded by DoubleClick former CEO Kevin P. Ryan, it is the overarching brand where Silicon Alley Insider (launched May 16, 2007) and Clusterstock (launched March 20, 2008) appear. The site provides and analyzes business news and acts as an aggregator of top news stories from around the web. In 2011, the online newsroom employed a staff of 50, and the site reported a profit for the first time ever in the 4th quarter of 2010. In June 2012 it had 5.4 million unique visitors.",
+        "homepage": "http://www.businessinsider.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/businessinsider.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 35,
+    "fields": {
+        "name": "Axel Springer SE",
+        "description": "Axel Springer SE is one of the largest digital publishing houses in Europe, with numerous multimedia news brands, such as BILD, WELT, and FAKT and more than 15,000 employees. It generated total revenues of about \u20ac3.3 billion and an EBITDA of \u20ac559 million in the financial year 2015. The digital media activities contribute more than 60% to its revenues and nearly 70% to its EBITDA. Axel Springer\u2019s business is divided into three segments: paid models, marketing models, and classified ad models.",
+        "homepage": "http://www.axelspringer.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Axel_Springer_SE",
+        "child_organizations": [
+            34
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 36,
+    "fields": {
+        "name": "Arutz Sheva",
+        "description": "Arutz Sheva (Hebrew: \u05e2\u05e8\u05d5\u05e5 7\u200e, lit.\u00a0'Channel 7'\u200e), also known in English as Israel National News, is an Israeli media network identifying with Religious Zionism. It offers online news in Hebrew, English, and Russian, including 24-hour updated text news, live streaming radio, video and free podcasts. It also publishes a weekly newspaper, B'Sheva, with the third-largest weekend circulation in the country.",
+        "homepage": "http://www.israelnationalnews.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/israelnationalnews.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 37,
+    "fields": {
+        "name": "HolyLand Holdings Ltd",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            36
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 38,
+    "fields": {
+        "name": "theguardian.com",
+        "description": "theguardian.com, formerly known as Guardian Unlimited and guardian.co.uk, is a British news and media website owned by the Guardian Media Group. It contains nearly all of the content of the newspapers The Guardian and The Observer, as well as a substantial body of web-only work produced by its own staff, including a rolling news service. As of November 2014, it was the second most popular online newspaper in the UK with over 17 million readers per month; with over 21 million monthly readers, Mail Online was the most popular.",
+        "homepage": "http://www.theguardian.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/theguardian.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 39,
+    "fields": {
+        "name": "Guardian Media Group",
+        "description": "Guardian Media Group plc (GMG) is a British mass media company owning various media operations including The Guardian and The Observer. The group is wholly owned by Scott Trust Limited, which exists to secure the financial and editorial independence of The Guardian in perpetuity.",
+        "homepage": "http://www.theguardian.com/gmg",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Guardian_Media_Group",
+        "child_organizations": [
+            38
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 40,
+    "fields": {
+        "name": "Toronto Star",
+        "description": "The Toronto Star is a Canadian broadsheet daily newspaper. It is Canada's highest-circulation newspaper on overall weekly circulation; although it is a close second to The Globe and Mail in daily circulation on weekdays and Saturdays, it overtakes the Globe in weekly circulation because it publishes a Sunday edition while the Globe does not. It is owned by Toronto Star Newspapers Ltd., a division of Star Media Group, a subsidiary of Torstar Corporation.",
+        "homepage": "http://www.thestar.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/thestar.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 41,
+    "fields": {
+        "name": "Torstar",
+        "description": "Torstar Corporation is a Canadian media and publishing company. The company is primarily a publisher of daily and community papers, including its flagship and namesake, the Toronto Star.",
+        "homepage": "http://www.torstar.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Torstar",
+        "child_organizations": [
+            40
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 42,
+    "fields": {
+        "name": "Mondoweiss",
+        "description": "Mondoweiss (2006\u2013present) is a news website that is co-edited by journalists Philip Weiss and Adam Horowitz. It is a part of the Center for Economic Research and Social Change. According to the editors, Mondoweiss is \"a news website devoted to covering American foreign policy in the Middle East, chiefly from a progressive Jewish perspective\". Its founder describes himself as progressive and anti-Zionist.",
+        "homepage": "http://mondoweiss.net",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/mondoweiss",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 43,
+    "fields": {
+        "name": "NBCNews.com",
+        "description": "NBCNews.com, formerly known as msnbc.com, is a news website owned and operated by NBCUniversal as the online arm of NBC News. Along with original and wire reporting, it features content from NBC shows such as Today, NBC Nightly News and Dateline NBC, the MSNBC cable channel, and partners such as The New York Times.",
+        "homepage": "http://www.nbcnews.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/nbcnews.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 44,
+    "fields": {
+        "name": "NBCUniversal",
+        "description": "NBCUniversal (colloquially referred to as NBCU or NBCUni, and formerly written as NBC Universal) is an American multinational media conglomerate. Headquartered in Rockefeller Plaza's Comcast Building (formerly the GE Building) in Midtown Manhattan, New York City, the company is one of two successor companies to MCA Inc. (Music Corporation of America), the other being Vivendi through its subsidiary Universal Music Group.",
+        "homepage": "http://www.nbcuniversal.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/NBCUniversal",
+        "child_organizations": [
+            43
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 45,
+    "fields": {
+        "name": "Comcast",
+        "description": "Comcast Corporation (styled as COMCAST, formerly comcast), formerly registered as Comcast Holdings, is an American multinational mass media company and is the largest broadcasting and largest cable television company in the world by revenue. It is the second-largest pay-TV company after the AT&T-DirecTV acquisition, largest cable TV company and largest home Internet service provider in the United States, and the nation's third-largest home telephone service provider. Comcast services U.S. residential and commercial customers in 40 states and the District of Columbia. The company's headquarters are located in Philadelphia, Pennsylvania.",
+        "homepage": "http://corporate.comcast.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Comcast",
+        "child_organizations": [
+            44
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 46,
+    "fields": {
+        "name": "Roberts Family (33% Controlling Stake)",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            45
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 47,
+    "fields": {
+        "name": "The Financial Express (India)",
+        "description": "The Financial Express is an Indian English-language business newspaper. It is published by the Indian Express group since 1961. The FE specialises in India and international business and financial news.",
+        "homepage": "http://www.financialexpress.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/financialexpress.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 48,
+    "fields": {
+        "name": "Indian Express Limited",
+        "description": "Indian Express Limited is an Indian news media publishing company. It publishes several widely circulated dailies, including The Indian Express and The Financial Express in English, the Loksatta in Marathi and the Jansatta in Hindi. The company's newspapers are published from over a dozen cities daily, including New Delhi, Mumbai, Bangalore, Kolkata, Pune, Chandigarh, Lucknow, Jammu, Coimbatore and Chennai. Its weekly entertainment magazine Screen, covering Indian film industry, also has a popular following.",
+        "homepage": "http://www.indianexpress.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Indian_Express_Group",
+        "child_organizations": [
+            47
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 49,
+    "fields": {
+        "name": "Viveck Goenka",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            48
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 50,
+    "fields": {
+        "name": "CNN",
+        "description": "The Cable News Network (CNN) is an American basic cable and satellite television channel that is owned by the Turner Broadcasting System division of Time Warner. It was founded in 1980 by American media proprietor Ted Turner as a 24-hour cable news channel; however, by April 2016, a CNN executive officially described the channel as \"no longer a TV news network\" and instead as \"a 24-hour global multiplatform network.\" Upon its launch, CNN was the first television channel to provide 24-hour news coverage, and was the first all-news television channel in the United States.",
+        "homepage": "http://www.cnn.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/cnn.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 51,
+    "fields": {
+        "name": "The Hill (newspaper)",
+        "description": "The Hill is an American political newspaper published in Washington, D.C. since 1994. It is published by Capitol Hill Publishing, which is owned by News Communications, Inc.",
+        "homepage": "http://thehill.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/thehill.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 52,
+    "fields": {
+        "name": "Capitol Hill Publishing Corp., a subsidiary of News Communications, Inc.",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            51
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 53,
+    "fields": {
+        "name": "USA Today",
+        "description": "1,021,638 Daily Print ",
+        "homepage": "http://www.usatoday.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/usatoday.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 54,
+    "fields": {
+        "name": "Gannett Company",
+        "description": "Gannett Company, Inc. is a publicly traded American media holding company headquartered in Tysons Corner, Virginia, near McLean in Greater Washington DC. It is the largest U.S. newspaper publisher as measured by total daily circulation. Its assets include the national newspaper USA Today and the erstwhile weekly USA Weekend. Its largest non-national newspaper is The Arizona Republic in Phoenix, Arizona. Other significant newspapers include The Indianapolis Star, The Cincinnati Enquirer, The Tennessean in Nashville, Tennessee, The Courier-Journal in Louisville, Kentucky, the Democrat and Chronicle in Rochester, NY, The Des Moines Register, the Detroit Free Press and The News-Press in Fort Myers.",
+        "homepage": "http://www.gannett.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Gannett_Company",
+        "child_organizations": [
+            53
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 55,
+    "fields": {
+        "name": "Go.com",
+        "description": "Go.com (also known as The Go Network) is a landing page for Disney content, operated by Disney Interactive, which is a part of The Walt Disney Company. It began as a web portal launched by Jeff Gold. Go.com includes content from ABC News and ESPN which are associated with Disney and are hosted under a .go.com name. Along with Time Warner's Pathfinder.com, Go.com proved to be an expensive failure for its parent company, as web users preferred to use search engines to access content directly, rather than start at a top-level corporate portal. In 2013, the site was transitioned from a portal to a simple landing page.",
+        "homepage": "http://www.go.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/go.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 56,
+    "fields": {
+        "name": "The Walt Disney Company",
+        "description": "The Walt Disney Company, commonly known as Disney, is an American diversified multinational mass media and entertainment conglomerate headquartered at the Walt Disney Studios in Burbank, California. It is the world's second largest media conglomerate in terms of revenue, after Comcast. Disney was founded on October 16, 1923, by Walt Disney and Roy O. Disney as the Disney Brothers Cartoon Studio, and established itself as a leader in the American animation industry before diversifying into live-action film production, television, and theme parks. The company also operated under the names The Walt Disney Studio, then Walt Disney Productions. Taking on its current name in 1986, it expanded its existing operations and also started divisions focused upon theater, radio, music, publishing, and online media.",
+        "homepage": "https://thewaltdisneycompany.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/The_Walt_Disney_Company",
+        "child_organizations": [
+            55
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 57,
+    "fields": {
+        "name": "The Sun (United Kingdom)",
+        "description": "The Sun is a daily tabloid newspaper published in the United Kingdom and Ireland. Since The Sun on Sunday was launched in February 2012, the paper has been a seven-day operation. As a broadsheet, it was founded in 1964 as a successor to the Daily Herald; it became a tabloid in 1969 after it was purchased by its current owners. It is published by the News Group Newspapers division of News UK, itself a wholly owned subsidiary of Rupert Murdoch's News Corp.",
+        "homepage": "http://www.thesun.co.uk/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/thesun.co.uk",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 58,
+    "fields": {
+        "name": "News UK",
+        "description": "News Corp UK & Ireland Limited (trading as News UK, formerly News International and NI Group), is a British-based American-owned newspaper publisher, and a wholly owned subsidiary of the American mass media conglomerate News Corp. It is the current publisher of The Times, The Sunday Times and The Sun newspapers and its former publications include the Today, News of the World and The London Paper newspapers. Until June 2002, it was called News International plc. On 31 May 2011 the company name was changed from News International Limited to NI Group Limited, and on 26 June 2013 to News UK.",
+        "homepage": "http://news.co.uk",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/News_UK",
+        "child_organizations": [
+            57
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 59,
+    "fields": {
+        "name": "News Corp",
+        "description": "News Corporation (officially referred to as New News Corp; trading as News Corp) is an American multinational mass media company, formed as a spin-off of the former News Corporation (as founded by Rupert Murdoch in 1979) focusing on newspapers and publishing. It is one of two companies which succeeded the former News Corporation, alongside 21st Century Fox\u2014which consists of the old News Corporation's broadcasting and media properties, such as Fox Entertainment Group. The spin out was structured so that 21st Century Fox would be the legal successor and continuation of the old News Corporation, with the new News Corp being an entirely new company formed by a stock split.",
+        "homepage": "http://www.newscorp.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/News_Corp",
+        "child_organizations": [
+            58
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 60,
+    "fields": {
+        "name": "Murdoch Family Trust",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            59
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 61,
+    "fields": {
+        "name": "Politico",
+        "description": "Politico is an American political-journalism organization based in Arlington County, Virginia, that covers politics and policy in the United States and internationally. It distributes content via television, the Internet, The Politico newspaper, and radio. Its coverage in Washington, D.C. includes the U.S. Congress, lobbying, media and the Presidency.",
+        "homepage": "http://politico.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/politico",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 62,
+    "fields": {
+        "name": "NPR",
+        "description": "National Public Radio (usually shortened to NPR, stylized as npr) is an American privately and publicly funded non-profit membership media organization that serves as a national syndicator to a network of 900 public radio stations in the United States of America.",
+        "homepage": "#",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/npr.org",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 63,
+    "fields": {
+        "name": "National Public Radio, Inc.",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            62
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 64,
+    "fields": {
+        "name": "The Washington Post",
+        "description": "The Washington Post is an American daily newspaper. It is the most widely circulated newspaper published in Washington, D.C., and was founded on December 6, 1877, making it the area's oldest extant newspaper.",
+        "homepage": "http://www.washingtonpost.com/",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/washingtonpost.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 65,
+    "fields": {
+        "name": "Jeff Bezos",
+        "description": "Jeffrey Preston \"Jeff\" Bezos (/\u02c8be\u026azo\u028as/; born January 12, 1964) is an American technology entrepreneur and investor. He has played a role in the growth of e-commerce as the founder and CEO of Amazon.com, an online merchant of books and later of a wide variety of products and services, most recently video streaming. Amazon.com became the largest retailer on the World Wide Web and a model for Internet sales.",
+        "homepage": "#",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/Jeff_Bezos",
+        "child_organizations": [
+            64
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 66,
+    "fields": {
+        "name": "NJ.com",
+        "description": "NJ.com is a digital news content provider and website in New Jersey. According to a report in the New York Times in 2012, it was the largest provider of digital news in the state at the time.",
+        "homepage": "http://nj.com",
+        "wikipedia_page": "https://en.wikipedia.org/wiki/NJ.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 67,
+    "fields": {
+        "name": "Fox News Channel",
+        "description": "1211 Avenue of the Americas",
+        "homepage": "http://foxnews.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/foxnews.com",
+        "child_organizations": []
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 68,
+    "fields": {
+        "name": "21st Century Fox",
+        "description": "Twenty-First Century Fox (stylized as 21st Century Fox and simply known as Fox) is an American multinational mass media corporation. It was one of two companies formed from the 2013 spin-out of the publishing assets of News Corporation, as founded by Rupert Murdoch in 1979; 21st Century Fox is the legal successor to News Corporation, and primarily deals in the film and television industries. The other company, the \"new\" News Corporation, holds Murdoch's print interests.",
+        "homepage": "http://www.21cf.com",
+        "wikipedia_page": "http://en.wikipedia.org/wiki/21st_Century_Fox",
+        "child_organizations": [
+            67
+        ]
+    }
+},
+{
+    "model": "organizations.organization",
+    "pk": 69,
+    "fields": {
+        "name": "Murdoch Family Trust",
+        "description": "",
+        "homepage": "",
+        "wikipedia_page": "",
+        "child_organizations": [
+            68
+        ]
+    }
+}
+]
