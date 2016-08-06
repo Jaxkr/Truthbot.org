@@ -250,7 +250,6 @@ def organization_wiki_edit_history(request, organization_pk):
 
     return render(request, 'organizations/organization_wiki_edit_history.html', {'versions': versions, 'org': org})
 
-@login_required
 def organization_scrape(request):
     url = request.GET.get('url')
     if url:
