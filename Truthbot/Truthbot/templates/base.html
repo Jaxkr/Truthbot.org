@@ -52,7 +52,7 @@
     </nav>
     <div class="alert alert-warning"><i class="fa fa-wrench" aria-hidden="true"></i> Truthbot is in <b>alpha</b>! Things may not work, and key features may be missing. Please report any issues or suggestions on <a href="https://github.com/Jaxkr/Truthbot.org/issues">GitHub</a>.</div>
     {% if not user.is_authenticated %}
-    <div class="alert alert-success"><i class="fa fa-users" aria-hidden="true"></i> Truthbot needs you! In order to make the news better, we need help <a href="{% url 'postlist' %}">collecting articles</a> and gathering <a href="{% url 'organizationroot' %}">organization info</a>.</div>
+    <div class="alert alert-success"><i class="fa fa-users" aria-hidden="true"></i> Truthbot needs you! In order to make the news better, we need help <a href="{% url 'postlist' %}">collecting articles</a> and gathering <a href="{% url 'organizationroot' %}">organization info</a>. <a href="{% url 'register' %}">Register now!</a></div>
     {% endif %}
     {% block maincontent %}
     {% endblock %}
