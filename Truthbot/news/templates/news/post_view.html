@@ -12,6 +12,10 @@
     <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
       <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
     </button>
+    {% else %}
+    <a href="{% url 'login' %}" data-post-id="{{ post.pk }}" class="btn btn-lg btn-default pull-right">
+      <span class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
+    </a>
     {% endif %}
   </div>
   <div class="col-md-7">
@@ -46,6 +50,10 @@
         <button data-comment-voted-on="{% get_has_voted comment request.user 'comment' %}" data-comment-id="{{ comment.pk }}" class="comment-vote-button btn btn-lg btn-default pull-right">
           <span style="color:{% get_vote_color comment request.user 'comment' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ comment.score }}</span>
         </button>
+        {% else %}
+        <a href="{% url 'login' %}" data-post-id="{{ comment.pk }}" class="btn btn-lg btn-default pull-right">
+          <span class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ comment.score }}</span>
+        </a>
         {% endif %}
       </div>
       <div class="panel-footer">{{ comment.author.username }}, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a><button data-target="reply-{{ comment.pk }}" class="reply btn btn-xs btn-default pull-right">Reply</a></div>

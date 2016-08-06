@@ -20,6 +20,10 @@
             <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
               <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
             </button>
+            {% else %}
+            <a href="{% url 'login' %}" data-post-id="{{ post.pk }}" class="btn btn-lg btn-default pull-right">
+              <span class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
+            </a>
             {% endif %}
           </div>
         </div>
