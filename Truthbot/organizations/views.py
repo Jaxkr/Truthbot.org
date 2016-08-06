@@ -26,7 +26,7 @@ def organization_search(request):
 
 
 def organization_root(request):
-    organizations_list = Organization.objects.all()
+    organizations_list = Organization.objects.all().order_by('-pk')
     paginator = Paginator(organizations_list, 25)
     page = request.GET.get('page')
     search_form = OrganizationSearch()
