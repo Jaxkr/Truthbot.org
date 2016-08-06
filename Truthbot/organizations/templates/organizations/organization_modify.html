@@ -41,6 +41,13 @@ Editing organization
 				{% endif %}
 				{{ form.homepage }}
 			</div>
+			<div class="form-group">
+				<label for="{{ form.wikipedia_page.id_for_label }}">Organization Wikipedia Page (optional)</label>
+				{% if form.wikipedia_page.errors %}
+				<span class="form-error">{{ form.wikipedia_page.errors.as_text }}</span>
+				{% endif %}
+				{{ form.wikipedia_page }}
+			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>

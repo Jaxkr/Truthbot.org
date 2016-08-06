@@ -48,7 +48,7 @@ def organization_new(request):
 
         if form.is_valid():
             with reversion.create_revision():
-                org = Organization(name=form.cleaned_data['name'], homepage=form.cleaned_data['homepage'], description=form.cleaned_data['description'])
+                org = Organization(name=form.cleaned_data['name'], homepage=form.cleaned_data['homepage'], description=form.cleaned_data['description'], wikipedia_page=form.cleaned_data['wikipedia_page'])
                 org.save()
                 reversion.set_user(request.user)
 
@@ -119,11 +119,12 @@ def organization_modify(request, organization_pk):
         form = OrganizationForm(request.POST)
         if form.is_valid():
             #check if there are any changes
-            if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['homepage'] != org.homepage)):
+            if ((form.cleaned_data['name'] != org.name) or (form.cleaned_data['description'] != org.description) or (form.cleaned_data['homepage'] != org.homepage) or (form.cleaned_data['wikipedia_page'] != org.wikipedia_page)):
                 with reversion.create_revision():
                     org.name = form.cleaned_data['name']
                     org.description = form.cleaned_data['description']
                     org.homepage = form.cleaned_data['homepage']
+                    org.wikipedia_page = form.cleaned_data['wikipedia_page']
                     org.save()
                     reversion.set_user(request.user)
                 return HttpResponseRedirect(reverse('organizationinfo', args=[org.pk]))
@@ -134,7 +135,7 @@ def organization_modify(request, organization_pk):
 
 
 
-    form = OrganizationForm(initial={'name': org.name, 'description': org.description, 'homepage': org.homepage})
+    form = OrganizationForm(initial={'name': org.name, 'description': org.description, 'homepage': org.homepage, 'wikipedia_page': org.wikipedia_page})
 
     return render(request, 'organizations/organization_modify.html', {'form': form})
 

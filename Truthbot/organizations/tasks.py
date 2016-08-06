@@ -65,7 +65,8 @@ def get_organization_info(url, **kwargs):
 
         if not Organization.objects.filter(name=org_name).exists():
             with reversion.create_revision():
-                org = Organization(name=org_name, description=intro, homepage=web_address)
+                print('CREATING WITH WIKIPAGE ' + url)
+                org = Organization(name=org_name, description=intro, homepage=web_address, wikipedia_page=url)
                 org.save()
             if not 'wikilink' in kwargs:
                 for domain in n_domains:

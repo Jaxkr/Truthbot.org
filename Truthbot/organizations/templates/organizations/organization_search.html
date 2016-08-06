@@ -18,7 +18,9 @@ Search results for "{{ term }}"
 	<div class="row">
 		<div class="col-sm-6">
 			<h4>{{ organization.name }}</h4>
-			<p><a href="{{ organization.url }}" target="_blank">{{ organization.url }} <i class="fa fa-external-link"></i></a><br>{{ organization.description }}</p>
+			{% if organization.homepage %}
+			<p><a href="{{ organization.homepage }}" target="_blank">{{ organization.homepage }} <i class="fa fa-external-link"></i></a><br>{{ organization.description }}</p>
+			{% endif organization.homepage %}
 		</div>
 	</div>
 	<div class="row">

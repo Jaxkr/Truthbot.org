@@ -7,6 +7,8 @@ class OrganizationForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=300)
     description = forms.CharField(validators=[MaxLengthValidator(1000)], widget=forms.Textarea(attrs={'class': 'form-control'}), max_length=1000)
     homepage = forms.CharField(validators=[url_validator], widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=2083)
+    wikipedia_page = forms.CharField(validators=[url_validator], widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=2083, required=False)
+
 
 class AddDomain(forms.Form):
     domain = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'eg. "google.com"'}), max_length=150)
