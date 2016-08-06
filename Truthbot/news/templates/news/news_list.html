@@ -28,7 +28,8 @@
           </div>
         </div>
         <p>
-          <a href="{% url "postview" post.slug %}">{{ post.comment_set.count|add:post.commentreply_set.count }} comments</a>
+          <span>Submitted by {{ post.author.username }}.</span>
+          <a href="{% url "postview" post.slug %}">{{ post.comment_set.count|add:post.commentreply_set.count }} comment(s)</a>
         </p>
       </li>
       {% endfor %}

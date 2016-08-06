@@ -7,22 +7,17 @@
 {% block maincontent %}
 <div class="row">
   <div class="col-md-5">
-    <div class="row">
-      <div class="col-xs-10">
-        <h2><a href="{{ post.link }}">{{ post.title }}</a></h2>
-      </div>
-      <div class="col-xs-2">
-        {% if request.user.is_authenticated %}
-        <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
-          <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
-        </button>
-        {% else %}
-        <a href="{% url 'login' %}" data-post-id="{{ post.pk }}" class="btn btn-lg btn-default pull-right">
-          <span class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
-        </a>
-        {% endif %}
-      </div>
-    </div>
+    <span style="font-size: 29px"><a target="_blank" href="{{ post.link }}">{{ post.title }} <i class="fa fa-external-link"></i></a></span>
+    {% if request.user.is_authenticated %}
+    <button data-post-voted-on="{% get_has_voted post request.user 'post' %}" data-post-id="{{ post.pk }}" class="vote-button btn btn-lg btn-default pull-right">
+      <span style="color:{% get_vote_color post request.user 'post' %}" class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
+    </button>
+    {% else %}
+    <a href="{% url 'login' %}" data-post-id="{{ post.pk }}" class="btn btn-lg btn-default pull-right">
+      <span class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
+    </a>
+    {% endif %}
+    <p>Submitted by {{ post.author.username }}</p>
   </div>
   <div class="col-md-7">
     <div class="panel panel-default">
@@ -34,6 +29,7 @@
     <p>
       You are viewing the permanent page for a single comment.<br>
       <a href="{% url "postview" post.slug %}" class="btn btn-sm btn-default">View all comments</a>
+    </p>
   </div>
 </div>
 
