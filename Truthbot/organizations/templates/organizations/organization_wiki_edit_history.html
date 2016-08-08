@@ -12,7 +12,7 @@ Edit history for {{ org.name }}
 		<div class="panel panel-default">
 			<div class="panel-body">
         {{ version.field_dict.text|linebreaks }}
-				<p><i>Edited by {{ version.revision.user }}</i></p>
+				<p><i>Edited by <a href="profile/{{ version.revision.user.pk }}">{{ version.revision.user }}</a></i></p>
 				<a href="{% url "organizationconfirmrollback" version.pk %}" class="btn btn-default">Rollback to this version</a>
 			</div>
 		</div>

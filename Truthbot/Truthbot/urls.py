@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^', include('staticpages.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^', include('news.urls')),
+    url(r'^', include('contributors.urls')),
 ]

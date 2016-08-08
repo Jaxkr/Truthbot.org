@@ -6,3 +6,4 @@ from django.contrib.auth.models import User
 class Contributor(models.Model):
     user = models.OneToOneField(User)
     points = models.IntegerField()
+    bio = models.CharField(max_length=300)

@@ -57,7 +57,7 @@
         </a>
         {% endif %}
       </div>
-      <div class="panel-footer">{{ comment.author.username }}, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a><button data-target="reply-{{ comment.pk }}" class="reply btn btn-xs btn-default pull-right">Reply</a></div>
+      <div class="panel-footer"><a href="{% url 'profile' comment.author.pk %}">{{ comment.author.username }}</a>, <a href="{% url "commentperma" post.slug comment.pk %}">{{ comment.timestamp }}</a><button data-target="reply-{{ comment.pk }}" class="reply btn btn-xs btn-default pull-right">Reply</a></div>
       </div>
       <div id="reply-{{ comment.pk }}" style="display: none;">
         <form action="{% url 'commentreply' comment.pk %}" method="post">
@@ -87,7 +87,7 @@
             <div class="panel-body">
               {{ reply.text }}
             </div>
-            <div class="panel-footer">{{ reply.author.username }}, {{ reply.timestamp }}</div>
+            <div class="panel-footer"><a href="{% url 'profile' reply.author.pk %}">{{ reply.author.username }}</a>, {{ reply.timestamp }}</div>
           </div>
         </div>
       </div>

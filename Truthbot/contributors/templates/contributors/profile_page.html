@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% load get_user_vote %}
 
-{% block title %}Top Articles - Truthbot{% endblock %}
+{% block title %}{{ user.username }} - Truthbot{% endblock %}
 
 {% block maincontent %}
-<p>Sort by <a href="?sort=hot">Hot</a>, <a href="?sort=new">New</a></p>
-
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-5">
+    <h2>{{ user.username }}</h2>
+    <p style="font-size: 20px;">Contribution points: {{ contributor.points }}<br>
+      <span style="font-size: 10px">(score may be delayed)</span></p>
+  </div>
+  <div class="col-md-7">
+    <h3>Recent organization wiki edits:</h3>
+    <div class="list-group">
+      {% for wiki in recent_wiki_edits %}
+      <a href="{% url 'organizationinfo' wiki.organization.pk %}" class="list-group-item">{{ wiki.organization.name }}</a>
+      {% endfor %}
+    </div>
+    <h3>Recent news submissions:</h3>
     <ul class="list-group">
       {% for post in posts %}
       <li class="list-group-item">
@@ -28,50 +38,13 @@
           </div>
         </div>
         <p>
-          <span>Submitted by <a href="{% url 'profile' post.author.pk %}">{{ post.author.username }}</a>.</span>
+          <span>Submitted by {{ post.author.username }}.</span>
           <a href="{% url "postview" post.slug %}">{{ post.comment_set.count|add:post.commentreply_set.count }} comment(s)</a>
         </p>
       </li>
       {% endfor %}
     </ul>
   </div>
-  <div class="col-md-2">
-    <a href="{% url "submitpost" %}" class="btn btn-sm btn-default">Submit a news story</a>
-  </div>
 </div>
-
-
-<nav>
-	<ul class="pagination">
-		{% if posts.has_previous %}
-		<li>
-			<a href="?page={{ posts.previous_page_number }}">
-				<span aria-hidden="true">&laquo;</span>
-			</a>
-		</li>
-		{% else %}
-		<li class="disabled">
-			<a href="#">
-				<span aria-hidden="true">&laquo;</span>
-			</a>
-		</li>
-		{% endif %}
-		<li><a href="#">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</a></li>
-		{% if posts.has_next %}
-		<li>
-			<a href="?page={{ posts.next_page_number }}">
-				<span aria-hidden="true">&raquo;</span>
-			</a>
-		</li>
-		{% else %}
-		<li class="disabled">
-			<a href="#">
-				<span aria-hidden="true">&raquo;</span>
-			</a>
-		</li>
-		{% endif %}
-	</ul>
-</nav>
-
 
 {% endblock %}

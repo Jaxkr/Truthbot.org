@@ -17,14 +17,14 @@
       <span class="voteicon"><i class="fa fa-caret-up" aria-hidden="true"></i></span> <span class="postscore">{{ post.score }}</span>
     </a>
     {% endif %}
-    <p>Submitted by {{ post.author.username }}</p>
+    <p>Submitted by <a href="{% url 'profile' post.author.pk %}">"{{ post.author.username }}</a></p>
   </div>
   <div class="col-md-7">
     <div class="panel panel-default">
       <div class="panel-body">
         {{ comment.text|parsemarkdown|safe }}
       </div>
-      <div class="panel-footer">{{ comment.author.username }}, {{ comment.timestamp }}</div>
+      <div class="panel-footer"><a href="{% url 'profile' comment.author.pk %}">{{ comment.author.username }}</a>, {{ comment.timestamp }}</div>
     </div><br>
     <p>
       You are viewing the permanent page for a single comment.<br>

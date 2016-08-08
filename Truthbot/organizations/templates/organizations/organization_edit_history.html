@@ -19,7 +19,7 @@ Edit history for {{ org.name }}
 						<a href="{% url "organizationinfo" child.1 %}">{{ child.0 }}</a>{% if not forloop.last %}, {% endif %}
 					{% endfor %}
 				</p>
-				<p><i>Edited by {{ version.revision.user }}</i></p>
+				<p><i>Edited by <a href="profile/{{ version.revision.user.pk }}">{{ version.revision.user.username }}</a></i></p>
 				<a href="{% url "organizationconfirmrollback" version.pk %}" class="btn btn-default">Rollback to this version</a>
 			</div>
 		</div>
