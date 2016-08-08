@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load get_user_vote %}
 
-{% block title %}{{ user.username }} - Truthbot{% endblock %}
+{% block title %}{{ profile_user.username }} - Truthbot{% endblock %}
 
 {% block maincontent %}
 <div class="row">
   <div class="col-md-5">
-    <h2>{{ user.username }}</h2>
+    <h2>{{ profile_user.username }}</h2>
     <p style="font-size: 20px;">Contribution points: {{ contributor.points }}<br>
       <span style="font-size: 10px">(score may be delayed)</span></p>
   </div>

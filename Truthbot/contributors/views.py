@@ -24,4 +24,4 @@ def view_profile(request, user_pk):
 
 
 
-    return render(request, 'contributors/profile_page.html', {'user': u, 'contributor': c, 'posts': recent_posts, 'recent_wiki_edits': recent_wiki_edits})
+    return render(request, 'contributors/profile_page.html', {'profile_user': u, 'contributor': c, 'posts': recent_posts, 'recent_wiki_edits': recent_wiki_edits})

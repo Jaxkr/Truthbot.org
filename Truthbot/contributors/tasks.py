@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 @shared_task
 def compute_score(user):
     user = User.objects.get(pk=user)
-    post_score_sum = Post.objects.filter(author=user).aggregate(Sum('score'))['score__sum']
-    comment_score_sum = Comment.objects.filter(author=user).aggregate(Sum('score'))['score__sum']
+    post_score_sum = Post.objects.filter(author=user).aggregate(Sum('score'))['score__sum'] or 0
+    comment_score_sum = Comment.objects.filter(author=user).aggregate(Sum('score'))['score__sum'] or 0
     comment_replies_sum = CommentReply.objects.filter(author=user).count()
     wiki_edit_sum = OrganizationWiki.objects.filter(contributors=user).count() * 5
     reversion_sum = Revision.objects.filter(user=user).count()
