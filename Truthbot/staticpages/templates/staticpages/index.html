@@ -17,4 +17,25 @@
     <a href="https://github.com/Jaxkr/Truthbot.org" class="btn btn-default btn-md"><i class="fa fa-github" aria-hidden="true"></i> View the source code</a>
   </p>
 </div>
+<div class="row">
+  <div class="col-md-7">
+    <p class="lead">Currently serving information on <b>{{ organization_count }}</b> organizations associated with <b>{{ organization_domain_count }}</b> different domain names.</p>
+    <p class="lead"><b>{{ organization_wiki_count }}</b> wiki pages on different news organizations have been created.</p>
+  </div>
+  <div class="col-md-5">
+    <h4>Top contributors:</h4>
+    <table class="table">
+      <tr>
+        <th>Username</th>
+        <th>Points</th>
+      </tr>
+      {% for user in top_contributors %}
+      <tr>
+        <td><a href="{% url 'profile' user.user.pk %}">{{ user.user.username }}</a></td>
+        <td>{{ user.points }}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
 {% endblock %}

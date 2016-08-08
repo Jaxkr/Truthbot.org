@@ -33,6 +33,8 @@ def register(request):
                 user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password1'])
                 user_auth = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
                 auth_login(request, user_auth)
+                c = Contributor(user=user, points=0)
+                c.save()
                 return HttpResponseRedirect(reverse('organizationroot'))
             except:
                 form.add_error('username', 'Username already taken!')
