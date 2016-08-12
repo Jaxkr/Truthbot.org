@@ -13,12 +13,12 @@ from datetime import datetime, timedelta
 def post_list(request):
     sort = request.GET.get('sort')
     if sort == 'hot':
-        time_threshold = timezone.now() - timedelta(hours=12)
+        time_threshold = timezone.now() - timedelta(hours=20)
         posts = Post.objects.filter(timestamp__gt=time_threshold).order_by('-score')
     elif sort == 'new':
         posts = Post.objects.all().order_by('-timestamp')
     else:
-        time_threshold = timezone.now() - timedelta(hours=12)
+        time_threshold = timezone.now() - timedelta(hours=20)
         posts = Post.objects.filter(timestamp__gt=time_threshold).order_by('-score')
 
 

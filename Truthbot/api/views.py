@@ -27,7 +27,7 @@ def get_org_info(request):
 
 
 def get_posts(request):
-    time_threshold = timezone.now() - timedelta(hours=12)
+    time_threshold = timezone.now() - timedelta(hours=20)
     posts = Post.objects.filter(timestamp__gt=time_threshold).order_by('-score')[:5]
 
     posts_list = []
