@@ -14,6 +14,20 @@
 <div class="row">
 	<div class="col-md-5">
 		<h1>{{ org.name }}</h1>
+		{% if org.parent_organizations.all %}
+		<div class="well">
+			Owned by:
+			<a href="{% url 'organizationinfo' org.parent_organizations.all.0.pk %}">{{ org.parent_organizations.all.0 }}</a>
+		</div>
+		{% endif %}
+		{% if org.child_organizations.all %}
+		<div class="well">
+			Owns:<br>
+			{% for child in org.child_organizations.all %}
+				<a href="{% url 'organizationinfo' child.pk %}">{{ child }}</a>{% if not forloop.last %}, {% endif %}
+			{% endfor %}
+		</div>
+		{% endif %}
 		{% if org.homepage %}
 		<p><a href="{{ org.homepage }}" target="_blank">{{ org.homepage }} <i class="fa fa-external-link"></i></a></p>
 		{% endif %}
