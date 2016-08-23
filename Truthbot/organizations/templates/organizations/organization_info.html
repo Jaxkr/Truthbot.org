@@ -39,7 +39,7 @@
 			<a href="{% url "organizationedithistory" org.pk %}" class="btn btn-default btn-default">View Edit History</a>
 		</p>
 		<p class="lead">
-			{{ org.description }}
+			{{ org.description|parsemarkdown|safe }}
 		</p>
 	</div>
 	<div class="col-md-7">
